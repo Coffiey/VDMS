@@ -16,13 +16,14 @@ module.exports = {
     return id;
   },
  async getUserByEmail({email}) {
+  console.log(email)
     const [userObj] = await knex
      .select("*")
      .from('user')
      .where({
         email
      })
-
+     console.log(userObj)
      return userObj
  },
 

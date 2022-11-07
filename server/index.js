@@ -1,4 +1,4 @@
-// require("dotenv").config({ path: "./.env.local" });
+require("dotenv").config({ path: "./.env.local"});
 
 const express = require("express");
 const router = require('./router/router.js');
@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(router);
 
-app.get("/",async (req, res) => {
+app.get("/api",async (req, res) => {
 	console.log("Hello World");
 	await res.send("Hello This is adam");
 });

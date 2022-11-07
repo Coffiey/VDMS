@@ -17,7 +17,8 @@ router.post('/user', async (req, res) => {
 
 router.get('/user', async (req, res) => {
     try { 
-       const userobj = await getUserByEmail(req.body)
+       await console.log(req.query)
+       const userobj = await getUserByEmail(req.query)
        res.status(201).json(userobj)
     } catch (err) {
         res.status(500).json("something went wrong")
