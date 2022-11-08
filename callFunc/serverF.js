@@ -26,7 +26,7 @@ module.exports = {
      return userObj
  },
 
- async getMonsterList() {
+ async getMonsterList(search) {
    let monster = await fetch("https://www.dnd5eapi.co/api/monsters")
      .then((response) => {
         return response.json()
@@ -37,7 +37,9 @@ module.exports = {
 
      let monsterName = monster.results.map((object)=>{
         return object.name
-     }).filter((object) => object[0] === 'A')
+     }).filter((object) => {
+       return object.toLowerCase().includes(search.toLowerCase())
+        })
      return monsterName
  }
 };

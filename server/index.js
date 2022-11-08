@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(router);
 
 app.get("/api",async (req, res) => {
-	console.log("Hello World");
 	await res.send("Hello This is adam");
 });
 

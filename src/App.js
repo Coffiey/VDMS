@@ -1,27 +1,45 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import DropdownItem from './components/DropdownItem';
 
 function App() {
-  const [user, setuser] = useState([false])
+  const [search, setSearch] = useState('')
+  const [list, setList] = useState([])
+  const [seeList, setSeeList] = useState(true)
 
-  const clicker = () => {
-    setuser(!user)
+  
+  useEffect(()=>{
+  if (search === '') {
+    setList([])
+  } else {
+    axios.get(`/api/monster?search=${search}`)
+    .then((response) => {
+      setList(response.data) 
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
-
-useEffect(()=>{
-   axios.get('/monster')
-   .then((response) => console.log(response.data))   
-  .catch(function (error) {
-    console.log(error);
-  });
-},[user])
+},[search])
 
 
 
   return (
     <div className="App">
-      <button onClick={clicker}>click me</button>
+      <input 
+       type="text" 
+       onChange={(e) => {
+        setSearch(e.target.value)
+        }}
+        onBlur={() =>setSeeList(false)}
+        onFocus={() => setSeeList(true)}
+        ></input>
+      <ul>
+        {seeList && (<DropdownItem 
+          list={list}
+            />)}
+      </ul>
     </div>
   );
 }
