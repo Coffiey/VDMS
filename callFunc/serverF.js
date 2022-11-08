@@ -23,7 +23,6 @@ module.exports = {
      .where({
         email
      })
-     console.log(userObj)
      return userObj
  },
 
