@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 //build file
-app.use(express.static("public"));
+app.use("/", express.static(__dirname +"/.." + "/build"));
 
 // front end
 app.use(express.json());
