@@ -6,6 +6,10 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+//build file
+app.use(express.static("public"));
+
+// front end
 app.use(express.json());
 app.use(router);
 

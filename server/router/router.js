@@ -30,7 +30,7 @@ router.get('/monster', async (req, res) => {
     try { 
        const monsters = await getMonsterList()
        console.log(monsters)
-       res.json("confirmed")
+       res.status(200).json(monsters)
     } catch (err) {
         res.status(500).json("something went wrong")
     }

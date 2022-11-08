@@ -10,8 +10,8 @@ function App() {
   }
 
 useEffect(()=>{
-   axios.get('/user?email=adam@gmail.com')
-   .then((response) => console.log(response.data["first_name"]))   
+   axios.get('/monster')
+   .then((response) => console.log(response.data))   
   .catch(function (error) {
     console.log(error);
   });
