@@ -16,7 +16,6 @@ module.exports = {
     return id;
   },
  async getUserByEmail({email}) {
-  console.log(email)
     const [userObj] = await knex
      .select("*")
      .from('user')
@@ -25,21 +24,22 @@ module.exports = {
      })
      return userObj
  },
-
- async getMonsterList(search) {
-   let monster = await fetch("https://www.dnd5eapi.co/api/monsters")
+ async getMonsterList() {
+     return await fetch("https://www.dnd5eapi.co/api/monsters")
      .then((response) => {
         return response.json()
     })
      .then((data) => {
-       return data
+       return data.results
      })
-
-     let monsterName = monster.results.map((object)=>{
-        return object.name
-     }).filter((object) => {
-       return object.toLowerCase().includes(search.toLowerCase())
-        })
-     return monsterName
- }
+ },
+ async getMonsterByurl(url) {
+  return await fetch(`https://www.dnd5eapi.co${url}`)
+  .then((response) => {
+     return response.json()
+ })
+  .then((data) => {
+    return data
+  })
+}
 };

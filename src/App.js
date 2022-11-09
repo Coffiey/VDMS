@@ -2,44 +2,59 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import DropdownItem from './components/DropdownItem';
+import DisplayMonster from './components/DisplayMonster';
 
 function App() {
-  const [search, setSearch] = useState('')
   const [list, setList] = useState([])
-  const [seeList, setSeeList] = useState(true)
+  const [dropdown, setDropdown] = useState([])
+  const [search, setSearch] = useState('')
+  const [seeList, setSeeList] = useState(false)
+  const [monsterObj, setmonsterObj] = useState(null)
+  const [disableInput, setDisableInput] = useState(true)
 
-  
-  useEffect(()=>{
-  if (search === '') {
-    setList([])
-  } else {
-    axios.get(`/api/monster?search=${search}`)
+  useEffect(() =>{
+    axios.get(`/api/monster`)
     .then((response) => {
-      setList(response.data) 
+      setList(response.data)
+      setDisableInput(false)
     })
     .catch(function (error) {
       console.log(error);
     });
-  }
-},[search])
+  },[])
 
+  useEffect(() =>{
+    if (search === '') {
+          setSeeList(false)
+    } else {
+          setSeeList(true)
+       let monsterSearch = list.filter((object) => {
+               return object["name"].toLowerCase().includes(search.toLowerCase())
+                })
+          setDropdown(monsterSearch)
+        }
+  },[search])
 
 
   return (
     <div className="App">
       <input 
-       type="text" 
+       type="text"
+       disabled={disableInput} 
        onChange={(e) => {
-        setSearch(e.target.value)
+          setSearch(e.target.value)
         }}
-        onBlur={() =>setSeeList(false)}
-        onFocus={() => setSeeList(true)}
         ></input>
-      <ul>
-        {seeList && (<DropdownItem 
-          list={list}
-            />)}
-      </ul>
+      {seeList && (<ul>
+        <DropdownItem 
+          dropdown={dropdown}
+          setMonsterObj={setmonsterObj}
+          setSearch={setSearch}
+            />
+      </ul>)}
+      <DisplayMonster
+        monsterObj={monsterObj}
+      />
     </div>
   );
 }

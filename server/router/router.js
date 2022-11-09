@@ -2,7 +2,8 @@ const express = require('express');
 const {
     createUser,
     getUserByEmail,
-    getMonsterList
+    getMonsterList,
+    getMonsterByurl,
         } = require('../../callFunc/serverF')
 
 const router = express.Router();
@@ -26,10 +27,18 @@ router.get('/api/user', async (req, res) => {
 
 
 router.get('/api/monster', async (req, res) => {
-    console.log(req.query["search"])
     try {
-       const monsters = await getMonsterList(req.query["search"])
+       const monsters = await getMonsterList()
            res.status(200).json(monsters)
+    } catch (err) {
+        res.status(500).json("something went wrong")
+    }
+});
+
+router.get('/api/monster/object', async (req, res) => {
+    try {
+       const monster = await getMonsterByurl(req.query["url"])
+           res.status(200).json(monster)
     } catch (err) {
         res.status(500).json("something went wrong")
     }
