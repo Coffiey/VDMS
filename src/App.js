@@ -3,6 +3,8 @@ import './App.css';
 import axios from 'axios';
 import DropdownItem from './components/DropdownItem';
 import DisplayMonster from './components/DisplayMonster';
+import Enemy from './components/Enemy';
+import Createplayer from './components/CreatePlayer';
 
 function App() {
   const [list, setList] = useState([])
@@ -38,13 +40,11 @@ function App() {
 
   return (
     <div className="App">
-      <input 
-       type="text"
-       disabled={disableInput} 
-       onChange={(e) => {
-          setSearch(e.target.value)
-        }}
-        ></input>
+      <Createplayer />
+              <Enemy
+        setSearch={setSearch}
+        disableInput={disableInput}
+        monsterObj={monsterObj}/>
       {seeList && (<ul>
         <DropdownItem 
           dropdown={dropdown}
@@ -52,6 +52,7 @@ function App() {
           setSearch={setSearch}
             />
       </ul>)}
+
       <DisplayMonster
         monsterObj={monsterObj}
       />

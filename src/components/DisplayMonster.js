@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 
 
 const DisplayMonster = (props) => {
@@ -27,9 +27,11 @@ if (monsterObj) {
     {monsterObj.speed && 
         <div>
         <h2>movement:</h2>
-        {monsterObj.speed.fly && <p>flying: {monsterObj.speed.fly}</p>}
-        {monsterObj.speed.walk && <p>Walking: {monsterObj.speed.walk}</p>}
-        {monsterObj.speed.swim && <p>Swimming: {monsterObj.speed.swim}</p>}
+        <div>
+        {getArrayOfKeys(monsterObj.speed).map((key)=>{
+            return <p>{addSpace(key)}ing: {monsterObj.speed[key]}</p>
+        })}
+            </div>
         </div>
     }
     <h1>Ability Scores</h1>
@@ -70,7 +72,7 @@ if (monsterObj) {
             </div>
     )}
 {monsterObj.languages && <p>languages: {monsterObj.languages}</p>}
-{monsterObj.challenge_rating && <p>challenge rating: {monsterObj.challenge_rating}</p>}
+{typeof monsterObj.challenge_rating === "number" && <p>challenge rating: {monsterObj.challenge_rating}</p>}
 {monsterObj.xp && <p>xp: {monsterObj.xp}</p>}
 {monsterObj.special_abilities && (
         <div>
@@ -87,7 +89,82 @@ if (monsterObj) {
             </div>
     )}
 <h1>Actions</h1>
-<h1>THIS NEEDS TO BE CODED NEXT</h1>
+{monsterObj.actions && (
+    <div>
+        {monsterObj.actions[0].name === "Multiattack" ? (
+            <>
+            <h2>{monsterObj.actions[0].name}</h2>
+            <p>{monsterObj.actions[0].desc}</p>
+            {monsterObj.actions.slice(1).map((attack)=>{
+               return(
+                <>
+                   {attack.name && <h3>{attack.name}</h3>}
+                   {attack.desc && <p>{attack.desc}</p>}
+                   {attack.attack_bonus && <p>attack bonus: +{attack.attack_bonus}</p>}
+                   {attack.dc && (
+                    <>
+                    <p>saving throw:
+                        {attack.dc.dc_type.index === "wis" && <span> {attack.dc.dc_type.index}dom</span>}
+                        {attack.dc.dc_type.index === "int" && <span> {attack.dc.dc_type.index}elegence</span>}
+                        {attack.dc.dc_type.index === "cha" && <span> {attack.dc.dc_type.index}risma</span>}
+                        {attack.dc.dc_type.index === "str" && <span> {attack.dc.dc_type.index}ength</span>}
+                        {attack.dc.dc_type.index === "con" && <span> {attack.dc.dc_type.index}stitution</span>}
+                        {attack.dc.dc_type.index === "dex" && <span> {attack.dc.dc_type.index}terity</span>}<br/>
+                        save dc: {attack.dc.dc_value}</p>
+                   </>
+                )}
+                {attack.usage && (
+                <>
+                  <p>{attack.usage.type}<br/>
+                  {attack.usage.dice}: must role a {attack.usage.min_value} or higher</p>
+                </>
+                )}
+                </>
+               ) 
+            })}
+            </>
+        ):(
+            <>
+            {monsterObj.actions.map((attack)=>{
+               return(
+                <>
+                   {attack.name && <h3>{attack.name}</h3>}
+                   {attack.desc && <p>{attack.desc}</p>}
+                   {attack.attack_bonus && <p>attack bonus: +{attack.attack_bonus}</p>}
+                   {attack.dc && (
+                    <>
+                    <p>saving throw:
+                        {attack.dc.dc_type.index === "wis" && <span> {attack.dc.dc_type.index}dom</span>}
+                        {attack.dc.dc_type.index === "int" && <span> {attack.dc.dc_type.index}elegence</span>}
+                        {attack.dc.dc_type.index === "cha" && <span> {attack.dc.dc_type.index}risma</span>}
+                        {attack.dc.dc_type.index === "str" && <span> {attack.dc.dc_type.index}ength</span>}
+                        {attack.dc.dc_type.index === "con" && <span> {attack.dc.dc_type.index}stitution</span>}
+                        {attack.dc.dc_type.index === "dex" && <span> {attack.dc.dc_type.index}terity</span>}<br/>
+                        save dc: {attack.dc.dc_value}</p>
+                   </>
+                )}
+                {attack.usage && (
+                <>
+                  <p>{attack.usage.type}<br/>
+                  {attack.usage.dice}: must role a {attack.usage.min_value} or higher</p>
+                </>
+                )}
+                </>
+               ) 
+            })}
+            </>
+        )}
+    </div>
+)}
+{monsterObj.legendary_actions && (
+<>
+  <h2>Lengendary Actions</h2>
+  <p>{monsterObj.name}s can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature’s turn. Adult Black Dragon regains spent legendary actions at the start of their turn.</p>
+  {monsterObj.legendary_actions.map((action)=>{
+    return <p>{action.name}: {action.desc}</p>
+  })}
+</>
+)}
     </div>
 ) 
 }

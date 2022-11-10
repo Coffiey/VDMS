@@ -33,6 +33,7 @@ module.exports = {
        return data.results
      })
  },
+
  async getMonsterByurl(url) {
   return await fetch(`https://www.dnd5eapi.co${url}`)
   .then((response) => {
@@ -41,5 +42,6 @@ module.exports = {
   .then((data) => {
     return data
   })
-}
+},
+
 };
