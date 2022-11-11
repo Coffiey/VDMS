@@ -15,6 +15,7 @@ module.exports = {
 
     return id;
   },
+
  async getUserByEmail({email}) {
     const [userObj] = await knex
      .select("*")
@@ -24,6 +25,64 @@ module.exports = {
      })
      return userObj
  },
+
+ async createPc(playerInfo) {
+  const { 
+    name,
+    playerClass,
+    race,
+    level,
+    maxHp,
+    dex,
+    int,
+    cha,
+    str,
+    con,
+    wis
+   } = playerInfo;
+  return await knex("pc")
+    .insert({
+      name,
+      player_class: playerClass,
+      race,
+      level,
+      max_hp: maxHp,
+      dex,
+      int,
+      cha,
+      str,
+      con,
+      wis
+    })
+},
+
+async createMonsterDB(playerInfo) {
+  const {
+    monsterName,
+    health,
+   } = playerInfo;
+  return await knex("monster")
+    .insert({
+      monster_name: monsterName,
+      health,
+    })
+},
+
+async getMonsterDB() {
+  const monsterObj = await knex
+   .select("*")
+   .from('monster')
+   return monsterObj
+},
+
+async getPc() {
+  const PcObj = await knex
+   .select("*")
+   .from('pc')
+   return PcObj
+},
+
+
  async getMonsterList() {
      return await fetch("https://www.dnd5eapi.co/api/monsters")
      .then((response) => {
@@ -33,6 +92,26 @@ module.exports = {
        return data.results
      })
  },
+
+ async getRaceList() {
+  return await fetch("https://www.dnd5eapi.co/api/races")
+  .then((response) => {
+     return response.json()
+ })
+  .then((data) => {
+    return data.results
+  })
+},
+
+async getClassList() {
+  return await fetch("https://www.dnd5eapi.co/api/classes")
+  .then((response) => {
+     return response.json()
+ })
+  .then((data) => {
+    return data.results
+  })
+},
 
  async getMonsterByurl(url) {
   return await fetch(`https://www.dnd5eapi.co${url}`)

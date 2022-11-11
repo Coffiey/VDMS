@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react"
 
 const Enemy = (props) => {
@@ -7,10 +8,54 @@ const Enemy = (props) => {
     const [monster, setMonster] = useState(true);
     const [health, setHealth] = useState(0);
     const [Customhealth, setCustomhealth] = useState(0);
+    const [monsterArray, setMonsterArray] = useState([]);
+
+    const createMon = (monster, health) => {
+        const obj = {monsterName: monster,
+            health: health}
+        return obj
+    }
+
+    useEffect(() => {
+        axios.get('/api/enemy')
+        .then((response) => {
+            return response.data
+        }).then((data) => {
+            setMonsterArray(data)
+        })
+        .catch((error) =>{
+          console.log(error);
+        });
+    },[])
+
+    const postEnemy = (object) => {
+        return axios
+           .post('/api/enemy', object)
+           .then((response)=> {
+             console.log(response)
+           })
+           .catch((err) => console.log(err))
+       }
+
 
     return(
         <>
-        {selected ? (<div>
+        <div>{monsterArray.length !== 0 && monsterArray.map((info)=>{
+            return (
+                <div>
+                    <h1>{info.monsterName}</h1>
+                    <p>HP: {info.health}</p>
+                    <p>Damage: <input
+                       type="Number"></input><br/>
+                       Heal: <input
+                       type="Number"></input><br/>
+                    </p>
+                    <button>Delete Monster</button>
+                </div>)
+        })
+    }</div>
+        
+        {selected && (<div>
            {monsterObj === null ? <h1>Pick a monster</h1> : <h1>{monsterObj.name}</h1>} 
             <input 
        type="text"
@@ -35,7 +80,7 @@ const Enemy = (props) => {
         }}>custom</button>
         <button
         onClick={()=>{
-            setHealth(JSON.stringify(monsterObj.hit_points))
+            setHealth(monsterObj.hit_points)
             }}>defalt</button>
             </>
             ) : (
@@ -44,25 +89,17 @@ const Enemy = (props) => {
         </p>
         </>)}
             <button
+            disabled={!health}
               onClick={()=>{
                 setMonster()
-                setSelected(false)
+                setMonsterArray([...monsterArray, (createMon(monsterObj.name, health))])
+                postEnemy(createMon(monsterObj.name, health))
+                setHealth(0)
+                // setSelected(false)
                 }}>Create Monster</button>
-        </div>) : (
-            <div>
-                <h1>{monsterObj.name}</h1>
-                <p>HP: {health}</p>
-                <h1>Conditons</h1>
-                <p>Damage: <input
-                   type="Number"></input><br/>
-                   Heal: <input
-                   type="Number"></input><br/>
-                </p>
-                <button>Delete Monster</button>
-            </div>
-        )}
+        </div>)}
         </>
-            )
+        )
 }
 
 export default Enemy

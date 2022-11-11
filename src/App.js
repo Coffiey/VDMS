@@ -4,7 +4,7 @@ import axios from 'axios';
 import DropdownItem from './components/DropdownItem';
 import DisplayMonster from './components/DisplayMonster';
 import Enemy from './components/Enemy';
-import Createplayer from './components/CreatePlayer';
+import Players from './components/Players';
 
 function App() {
   const [list, setList] = useState([])
@@ -13,6 +13,7 @@ function App() {
   const [seeList, setSeeList] = useState(false)
   const [monsterObj, setmonsterObj] = useState(null)
   const [disableInput, setDisableInput] = useState(true)
+
 
   useEffect(() =>{
     axios.get(`/api/monster`)
@@ -24,6 +25,9 @@ function App() {
       console.log(error);
     });
   },[])
+  
+
+
 
   useEffect(() =>{
     if (search === '') {
@@ -40,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-      <Createplayer />
+    <Players/>
               <Enemy
         setSearch={setSearch}
         disableInput={disableInput}
