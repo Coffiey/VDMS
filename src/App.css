@@ -1,40 +1,51 @@
-.App {
-  text-align: center;
-  background-color: teal;
+body {
+  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/f17f2d94900513.5e8a7dade6408.jpg);
+   background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Player {
+  background-color: bisque;
+  width: 98%;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height:250px;
+  border-radius: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Enemy{
+  padding: 5px;
+  position: fixed;
+  background-color: bisque;
+  width: 48%;
+  margin-top: 20px;
+  margin-left: 1%;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  float: left;
+  border-radius: 25px;
+  height:70%;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.DisplayMonster {
+  position: fixed;
+  margin-top: 20px;
+  background-color: bisque;
+  width: 48%;
+  float: right;
+  margin-left: 51%;
+  display: flex;
+  border-radius: 25px;
+  height:70%;
+  overflow: scroll;
+  overflow-x: hidden;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-

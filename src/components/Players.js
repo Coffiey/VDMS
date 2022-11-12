@@ -2,11 +2,12 @@ import axios from "axios";
 
 import ClassDrop from "./CharachterDropDowns/ClassDrop";
 import RaceDrop from "./CharachterDropDowns/RaceDrop";
+import "./css/player.css"
 
 import { useState, useEffect } from "react";
 
 const Players = (props) => {
-    const {} = props
+    const {display} = props
 
     const [name, setName] = useState(undefined)
     const [playerClass, setPlayerClass] = useState("please Select")
@@ -128,31 +129,35 @@ const postPlayerObject = (object) => {
     return  (
     <>
     {player.map((item) => {
-        return (<>
-        <h1>{item.name}</h1>
-        <h2>HP: {item.max_hp}</h2>
-        <h2>Class: {item.player_class}</h2>
-        <h2>Race: {item.race}</h2>
-        <h2>Saving Throws</h2>
-        <div>
-        <span>DEX: +{item.dex}</span>
-        <span>INT: +{item.int}</span>
-        <span>CHA: +{item.cha}</span>
-        <span>STR: +{item.str}</span>
-        <span>CON: +{item.con}</span>
-        <span>WIS: +{item.wis}</span>
+        return (<div className="pc">
+        <div className="top">
+        <h2 className="pcName">{item.name}</h2>
+        <h2 className="pcHp">HP: <span className="hp">{item.max_hp}</span></h2>
         </div>
-        </>)}
+        <div className="mid">
+        <h2 className="pcClass">{item.player_class}<br/>Level {item.level} </h2>
+        <h2 className="pcRace">{item.race}</h2>
+        </div>
+        <h2 className="pcSave">Saving Throws</h2>
+        <div className="stats">
+        <span className="statsNum">DEX: +{item.dex}</span>
+        <span className="statsNum">INT: +{item.int}</span>
+        <span className="statsNum">CHA: +{item.cha}</span>
+        <span className="statsNum">STR: +{item.str}</span>
+        <span className="statsNum">CON: +{item.con}</span>
+        <span className="statsNum">WIS: +{item.wis}</span>
+        </div>
+        </div>)}
         )}
 
 
-
-
-
-    <div>
-    <h1>Create New Player</h1>
-    <h2>Character name: <input type="type" onChange={(e) => {setName(e.target.value)}}></input></h2>
-    <h2>Class: {<button 
+    {display && <div className="pc">
+    <div className="top">
+      <h2 className="pcName">Name: <input className="txt" type="text" onChange={(e) => {setName(e.target.value)}}></input></h2>
+      <h2 className="pcHp">hp: <input type="number" className="statinput" onChange={(e) => {setMaxHp(e.target.value)}}></input></h2>
+    </div>
+    <div className="mid">
+    <h2 className="pcClass">Class: {<button 
         onClick={() => setViewClass(true)}
         disabled={disableButonClass}
     >{playerClass}</button>}</h2>
@@ -162,7 +167,7 @@ const postPlayerObject = (object) => {
                     setViewClass={setViewClass}
                     />}
 
-    <h2>Race: <button 
+    <h2 className="pcRace">Race: <button 
                 onClick={() => setViewRace(true)}
                 disabled={disableButonRace}
                 >{race}</button></h2>
@@ -170,17 +175,20 @@ const postPlayerObject = (object) => {
                     raceList={raceList}
                     setRace={setRace}
                     setViewRace={setViewRace}/>}
+    <h2 className="pcRace">Level: <input className="statinput" type="number" onChange={(e) => {setLevel(e.target.value)}}></input></h2>
+    </div>
 
-    <h2>Level: <input type="type" onChange={(e) => {setLevel(e.target.value)}}></input></h2>
-    <h2>Max hp: <input type="number" onChange={(e) => {setMaxHp(e.target.value)}}></input></h2>
-    <h2>Saving throws</h2>
-    <p> DEX:<input type="number" onChange={(e) => {setDex(e.target.value)}}></input>
-        WIS:<input type="number" onChange={(e) => {setWis(e.target.value)}}></input>
-        CON:<input type="number" onChange={(e) => {setCon(e.target.value)}}></input>
-        INT:<input type="number" onChange={(e) => {setInt(e.target.value)}}></input>
-        STR:<input type="number" onChange={(e) => {setStr(e.target.value)}}></input>
-        CHA:<input type="number" onChange={(e) => {setCha(e.target.value)}}></input>
+    <h2 className="pcSave">Saving throws</h2>
+    <div className="statCreate">
+    <p 
+    className="inputP"> DEX:<input className="statinput" type="number" onChange={(e) => {setDex(e.target.value)}}></input>
+        WIS:<input className="statinput" type="number" onChange={(e) => {setWis(e.target.value)}}></input>
+        CON:<input className="statinput" type="number" onChange={(e) => {setCon(e.target.value)}}></input>
+        INT:<input className="statinput" type="number" onChange={(e) => {setInt(e.target.value)}}></input>
+        STR:<input className="statinput" type="number" onChange={(e) => {setStr(e.target.value)}}></input>
+        CHA:<input className="statinput" type="number" onChange={(e) => {setCha(e.target.value)}}></input>
     </p>
+    </div>
     <button
     disabled={disableCreate}
     onClick={()=>{
@@ -188,7 +196,7 @@ const postPlayerObject = (object) => {
         setPlayer([...player, createPlayerObject()])
     }}
     >Create Player</button>
-</div>
+</div>}
         
 </>
     )

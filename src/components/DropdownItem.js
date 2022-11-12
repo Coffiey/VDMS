@@ -17,12 +17,12 @@ useEffect(()=>{
 },[monsterID])
 
 return dropdown.map((monster) => {
-    return <li><button 
+    return <li><p 
                     className="monsterButton"
                     onClick={()=> {
                         setMonsterID(monster.url)
                         setSearch("")
-                    }}>{monster.name}</button></li>
+                    }}>{monster.name}</p></li>
 })
 }
 
