@@ -5,8 +5,11 @@ import DropdownItem from "./components/DropdownItem";
 import DisplayMonster from "./components/DisplayMonster";
 import Enemy from "./components/Enemy";
 import Players from "./components/Players";
+import CombatArray from "./components/CombatArray";
 
 function App() {
+
+  const [combatState, SetCombatState] = useState(true);
   const [list, setList] = useState([]);
   const [dropdown, setDropdown] = useState([]);
   const [search, setSearch] = useState("");
@@ -41,31 +44,37 @@ function App() {
 
   return (
     <div>
-      <div className="Player">
-        <Players display={display} />
-      </div>
+      <div><button
+      onClick={()=>{
+        SetCombatState(!combatState)
+        console.log(combatState)
+      }}
+      >{combatState ? "BEGIN COMBAT" : "END COMBAT" }</button></div>
+      {combatState && (<div className="Player">
+        <Players 
+        display={display} 
+        combatState={combatState}/>
+      </div>)}
       <div className="Enemy">
-      <Enemy
+      {combatState ? (<Enemy
+      combatState={combatState}
         display={display}
         setSearch={setSearch}
         disableInput={disableInput}
         monsterObj={monsterObj}
         setMonsterObj={setmonsterObj}
         list={list}
-        />
-        {seeList && (
-        <ul>
-          <DropdownItem
-            dropdown={dropdown}
-            setMonsterObj={setmonsterObj}
-            setSearch={setSearch}
-          />
-        </ul>
-      )}
+        dropdown={dropdown}
+        seeList={seeList}
+        />): (
+          <CombatArray/>
+        )}
       </div>
       
       <div className="DisplayMonster">
-      <DisplayMonster monsterObj={monsterObj} />
+      <DisplayMonster
+       monsterObj={monsterObj} 
+       combatState={combatState}/>
       </div>
       
       {/* <br />

@@ -32,7 +32,7 @@ router.post('/api/pc', async (req, res) => {
 });
 
 router.post('/api/enemy', async (req, res) => {
-    try { 
+    try {
        const id = await createMonsterDB(req.body)
        res.status(201).json("created monster")
     } catch (err) {
@@ -61,10 +61,13 @@ router.get('/api/pc', async (req, res) => {
 router.get('/api/enemy', async (req, res) => {
     try {
        const monster = await getMonsterDB()
+       console.log(monster)
         const monsterObj = await monster.map((item) => {
             return {
                 monsterName: item.monster_name,
-                health: item.health
+                health: item.health,
+                index: item.index,
+                monsterReference: item.monster_reference
             }
         }) 
        console.log(monsterObj)

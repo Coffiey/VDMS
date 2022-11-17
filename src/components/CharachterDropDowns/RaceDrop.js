@@ -1,3 +1,5 @@
+import "../css/classDrop.css"
+
 import { useEffect, useState } from "react";
 
 
@@ -6,9 +8,9 @@ const RaceDrop = (props) => {
 
   return (
     <>
-        <ul>
+        <ul className="list">
             {raceList.map((raceObj) => {
-                return <li onClick={()=> {
+                return <li className="classes" onClick={()=> {
                     setRace(raceObj.name)
                     setViewRace(false)
                 }}>{raceObj.name}</li>

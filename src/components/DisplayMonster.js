@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import "./css/displayMonster.css"
 
 const DisplayMonster = (props) => {
 const {monsterObj} = props
@@ -15,7 +15,7 @@ const addSpace = (string) => {
 console.log(monsterObj)
 if (monsterObj) {
     return (
-        <div>
+        <div className='div'>
     {monsterObj.name && <h1>{monsterObj.name}</h1>}
     {monsterObj.size && <h2>{monsterObj.size}</h2>}
     {monsterObj.type && <p>{monsterObj.type}</p>}

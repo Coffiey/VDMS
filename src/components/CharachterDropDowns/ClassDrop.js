@@ -1,3 +1,5 @@
+import "../css/classDrop.css"
+
 import { useEffect, useState } from "react";
 
 
@@ -6,9 +8,9 @@ const ClassDrop = (props) => {
 
       return (
         <>
-            <ul>
+            <ul className="list">
                 {classList.map((classObj) => {
-                    return <li onClick={()=> {
+                    return <li className="classes" onClick={()=> {
                         setPlayerClass(classObj.name)
                         setViewClass(false)
                     }}>{classObj.name}</li>

@@ -7,11 +7,11 @@ import "./css/player.css"
 import { useState, useEffect } from "react";
 
 const Players = (props) => {
-    const {display} = props
+    const {display, combatState} = props
 
     const [name, setName] = useState(undefined)
-    const [playerClass, setPlayerClass] = useState("please Select")
-    const [race, setRace] = useState("please Select")
+    const [playerClass, setPlayerClass] = useState("choose")
+    const [race, setRace] = useState("choose")
     const [level, setLevel] = useState(undefined)
     const [maxHp, setMaxHp] = useState(undefined)
     const [dex, setDex] = useState(undefined)
@@ -131,22 +131,27 @@ const postPlayerObject = (object) => {
     {player.map((item) => {
         return (<div className="pc">
         <div className="top">
-        <h2 className="pcName">{item.name}</h2>
-        <h2 className="pcHp">HP: <span className="hp">{item.max_hp}</span></h2>
-        </div>
-        <div className="mid">
-        <h2 className="pcClass">{item.player_class}<br/>Level {item.level} </h2>
-        <h2 className="pcRace">{item.race}</h2>
-        </div>
-        <h2 className="pcSave">Saving Throws</h2>
-        <div className="stats">
-        <span className="statsNum">DEX: +{item.dex}</span>
-        <span className="statsNum">INT: +{item.int}</span>
-        <span className="statsNum">CHA: +{item.cha}</span>
-        <span className="statsNum">STR: +{item.str}</span>
-        <span className="statsNum">CON: +{item.con}</span>
-        <span className="statsNum">WIS: +{item.wis}</span>
-        </div>
+          <h2 className="pcName">{item.name}</h2>
+          <h2 className="pcHp">HP: <span className="hp">{item.max_hp}</span></h2>
+          </div>
+
+          <div className="mid">
+              <div className="levelDiv">
+                <h1 className="level">Level {item.level}:</h1>
+              <h2 className="pcClass">{item.player_class} </h2>
+              </div>
+            <h2 className="pcRace">{item.race}</h2>
+          </div>
+
+          <div className="stats">
+            <p className="pcSave">Saving Throws</p>
+            <span className="statsNum">DEX: <br/>+{item.dex}</span>
+            <span className="statsNum">INT: <br/>+{item.int}</span>
+            <span className="statsNum">CHA: <br/>+{item.cha}</span>
+            <span className="statsNum">STR: <br/>+{item.str}</span>
+            <span className="statsNum">CON: <br/>+{item.con}</span>
+            <span className="statsNum">WIS: <br/>+{item.wis}</span>
+          </div>
         </div>)}
         )}
 
@@ -180,16 +185,15 @@ const postPlayerObject = (object) => {
 
     <h2 className="pcSave">Saving throws</h2>
     <div className="statCreate">
-    <p 
-    className="inputP"> DEX:<input className="statinput" type="number" onChange={(e) => {setDex(e.target.value)}}></input>
-        WIS:<input className="statinput" type="number" onChange={(e) => {setWis(e.target.value)}}></input>
-        CON:<input className="statinput" type="number" onChange={(e) => {setCon(e.target.value)}}></input>
-        INT:<input className="statinput" type="number" onChange={(e) => {setInt(e.target.value)}}></input>
-        STR:<input className="statinput" type="number" onChange={(e) => {setStr(e.target.value)}}></input>
-        CHA:<input className="statinput" type="number" onChange={(e) => {setCha(e.target.value)}}></input>
-    </p>
+    <p className="inputP">DEX: <input className="statinput" type="number" onChange={(e) => {setDex(e.target.value)}}></input></p>
+    <p className="inputP">WIS: <input className="statinput" type="number" onChange={(e) => {setWis(e.target.value)}}></input></p>
+    <p className="inputP">CON: <input className="statinput" type="number" onChange={(e) => {setCon(e.target.value)}}></input></p>
+    <p className="inputP">INT: <input className="statinput" type="number" onChange={(e) => {setInt(e.target.value)}}></input></p>
+    <p className="inputP">STR: <input className="statinput" type="number" onChange={(e) => {setStr(e.target.value)}}></input></p>
+    <p className="inputP">CHA: <input className="statinput" type="number" onChange={(e) => {setCha(e.target.value)}}></input></p>
     </div>
     <button
+    className="createPlayer"
     disabled={disableCreate}
     onClick={()=>{
         postPlayerObject(createPlayerObject())
