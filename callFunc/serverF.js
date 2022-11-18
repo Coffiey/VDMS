@@ -127,4 +127,14 @@ async getClassList() {
   })
 },
 
+async getMonsterByIndex(index) {
+  return await fetch(`https://www.dnd5eapi.co/api/${index}`)
+  .then((response) => {
+     return response.json()
+ })
+  .then((data) => {
+    return data
+  })
+},
+
 };

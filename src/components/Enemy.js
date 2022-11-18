@@ -41,7 +41,6 @@ const Enemy = (props) => {
         .then((response) => {
             return response.data
         }).then((data) => {
-            console.log(data)
             setMonsterArray(data)
         })
         .catch((error) =>{

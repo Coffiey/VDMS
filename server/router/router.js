@@ -4,6 +4,7 @@ const {
     getUserByEmail,
     getMonsterList,
     getMonsterByurl,
+    getMonsterByIndex,
     getRaceList,
     getClassList,
     createPc,
@@ -106,12 +107,23 @@ router.get('/api/classes', async (req, res) => {
 });
 
 router.get('/api/monster/object', async (req, res) => {
-    try {
-       const monster = await getMonsterByurl(req.query["url"])
-           res.status(200).json(monster)
-    } catch (err) {
-        res.status(500).json("something went wrong")
+    if (req.query["url"]) {
+        try {
+        const monster = await getMonsterByurl(req.query["url"])
+            res.status(200).json(monster)
+        } catch (err) {
+            res.status(500).json("something went wrong")
+        }
+    } else {
+        try {
+            const monster = await getMonsterByIndex(req.query["index"])
+                res.status(200).json(monster)
+        } catch (err) {
+            res.status(500).json("something went wrong")
+        }
     }
 });
+
+
 
 module.exports = router;

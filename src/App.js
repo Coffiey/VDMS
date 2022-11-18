@@ -57,17 +57,20 @@ function App() {
       </div>)}
       <div className="Enemy">
       {combatState ? (<Enemy
-      combatState={combatState}
+        combatState={combatState}
         display={display}
         setSearch={setSearch}
         disableInput={disableInput}
         monsterObj={monsterObj}
-        setMonsterObj={setmonsterObj}
+        setmonsterObj={setmonsterObj}
         list={list}
         dropdown={dropdown}
         seeList={seeList}
         />): (
-          <CombatArray/>
+          <CombatArray
+          setmonsterObj={setmonsterObj}
+          monsterObj={monsterObj}
+          />
         )}
       </div>
       

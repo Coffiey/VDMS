@@ -12,7 +12,6 @@ const addSpace = (string) => {
     return string.replace("_"," ")
 }
 
-console.log(monsterObj)
 if (monsterObj) {
     return (
         <div className='div'>
