@@ -10,7 +10,7 @@ import CombatArray from "./components/CombatArray";
 
 function App() {
 
-  const [authentication, setAuthentication] = useState(0);
+  const [authentication, setAuthentication] = useState(1);
 
   const [combatState, SetCombatState] = useState(true);
   const [list, setList] = useState([]);

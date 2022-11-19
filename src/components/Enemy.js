@@ -25,6 +25,7 @@ const Enemy = (props) => {
     const [updateMonsterArray, setUpdateMonsterArray] = useState([]);
     const [damage, setDamage] = useState(0);
     const [heal, setHeal] = useState(0);
+    const [monsterObj2, setMonsterObj2] = useState(0);
 
     const createMon = (monster, health, index, Reference) => {
         const obj = {
@@ -49,6 +50,12 @@ const Enemy = (props) => {
     },[])
 
     useEffect(()=>{
+        if (monsterObj2) {
+            setmonsterObj(monsterObj2)
+        }
+    },[monsterObj2])
+
+    useEffect(()=>{
         if (monsterArray.length !== 0) {
            let [item] = list.filter((monster) => {
               return monster.name === monsterArray[0].monsterName
@@ -62,7 +69,7 @@ const Enemy = (props) => {
             });
         }
     }, [disableInput])
-    
+
     const postEnemy = (object) => {
         console.log(object)
         return axios
@@ -95,7 +102,7 @@ const Enemy = (props) => {
            {monsterObj !== null && <h2>{monsterObj.name}</h2>}
             <p>Serach: <input 
        type="text"
-       disabled={disableInput}
+    //    disabled={disableInput}
        onChange={(e) => {
         setSearch(e.target.value)
         }}
@@ -106,7 +113,7 @@ const Enemy = (props) => {
               <DropdownItem
               combatState={combatState}
                 dropdown={dropdown}
-                setmonsterObj={setmonsterObj}
+                setMonsterObj2={setMonsterObj2}
                 setSearch={setSearch}
               />
             </ul>

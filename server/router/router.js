@@ -113,21 +113,12 @@ router.get('/api/classes', async (req, res) => {
 });
 
 router.get('/api/monster/object', async (req, res) => {
-    if (req.query["url"]) {
         try {
         const monster = await getMonsterByurl(req.query["url"])
             res.status(200).json(monster)
         } catch (err) {
             res.status(500).json("something went wrong")
         }
-    } else {
-        try {
-            const monster = await getMonsterByIndex(req.query["index"])
-                res.status(200).json(monster)
-        } catch (err) {
-            res.status(500).json("something went wrong")
-        }
-    }
 });
 
 
