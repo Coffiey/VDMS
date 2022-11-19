@@ -4,24 +4,23 @@ const fetch = (...args) =>
 
 module.exports = {
   async createUser(userInfo) {
-    const { firstName, lastName, email } = userInfo;
+    const { userName, password} = userInfo;
     const [id] = await knex("user")
       .insert({
-        first_name: firstName,
-        last_name: lastName,
-        email,
+        user_name: userName,
+        password
       })
       .returning("id");
 
     return id;
   },
 
- async getUserByEmail({email}) {
+ async getUserByEmail(userName) {
     const [userObj] = await knex
      .select("*")
      .from('user')
      .where({
-        email
+      user_name:userName
      })
      return userObj
  },

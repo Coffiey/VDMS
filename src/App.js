@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
-import DropdownItem from "./components/DropdownItem";
 import DisplayMonster from "./components/DisplayMonster";
+import Register from "./components/userAuthentication/Register";
+import Login from "./components/userAuthentication/Login";
 import Enemy from "./components/Enemy";
 import Players from "./components/Players";
 import CombatArray from "./components/CombatArray";
 
 function App() {
+
+  const [authentication, setAuthentication] = useState(0);
 
   const [combatState, SetCombatState] = useState(true);
   const [list, setList] = useState([]);
@@ -17,6 +20,9 @@ function App() {
   const [monsterObj, setmonsterObj] = useState(null);
   const [disableInput, setDisableInput] = useState(true);
   const [display, setDisplay] = useState(true);
+
+
+  const [register ,setRegister] = useState(true); 
 
   useEffect(() => {
     axios
@@ -44,14 +50,33 @@ function App() {
 
   return (
     <div>
-      <div><button
+      {!authentication ? (<div classname="basic">
+        {register ? <Register
+        setRegister={setRegister}
+        /> : <Login
+        setRegister={setRegister}
+        setAuthentication={setAuthentication}
+        />}
+      </div>
+
+
+      ):(
+        <div>
+      <div>
+        <button
       onClick={()=>{
         SetCombatState(!combatState)
         console.log(combatState)
       }}
-      >{combatState ? "BEGIN COMBAT" : "END COMBAT" }</button></div>
-      {combatState && (<div className="Player">
-        <Players 
+      >{combatState ? "BEGIN COMBAT" : "END COMBAT" }</button>
+      <button
+        onClick={()=>{
+          setAuthentication(0)
+        }}
+        >logOut</button>
+        </div>
+        {combatState && (<div className="Player">
+        <Players
         display={display} 
         combatState={combatState}/>
       </div>)}
@@ -79,13 +104,9 @@ function App() {
        monsterObj={monsterObj} 
        combatState={combatState}/>
       </div>
-      
-      {/* <br />
-      {display ? (
-        <button onClick={() => setDisplay(false)}>BEGIN COMBAT</button>
-      ) : (
-        <button onClick={() => setDisplay(true)}>COMBAT SETUP</button>
-      )} */}
+      </div>
+      )}
+
     </div>
   );
 }

@@ -42,9 +42,15 @@ router.post('/api/enemy', async (req, res) => {
 });
 
 router.get('/api/user', async (req, res) => {
+    console.log(req.query["userName"])
+    console.log(req.query["password"])
     try {
-       const userobj = await getUserByEmail(req.query)
-       res.status(201).json(userobj)
+       const userobj = await getUserByEmail(req.query["userName"])
+        if (req.query["password"] === userobj.password) {
+            res.status(201).json(userobj.id)
+        } else {
+            res.status(403).json("access denied")
+        }
     } catch (err) {
         res.status(500).json("something went wrong")
     }

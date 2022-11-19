@@ -62,6 +62,7 @@ const Enemy = (props) => {
             });
         }
     }, [disableInput])
+    
     const postEnemy = (object) => {
         console.log(object)
         return axios
