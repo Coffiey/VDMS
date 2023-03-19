@@ -68,7 +68,6 @@ router.get('/api/pc', async (req, res) => {
 router.get('/api/enemy', async (req, res) => {
     try {
        const monster = await getMonsterDB()
-       console.log(monster)
         const monsterObj = await monster.map((item) => {
             return {
                 monsterName: item.monster_name,
@@ -77,7 +76,6 @@ router.get('/api/enemy', async (req, res) => {
                 monsterReference: item.monster_reference
             }
         }) 
-       console.log(monsterObj)
        res.status(201).json(monsterObj)
     } catch (err) {
         res.status(500).json("something went wrong")

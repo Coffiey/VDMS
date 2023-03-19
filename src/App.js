@@ -36,6 +36,21 @@ function App() {
       });
   }, []);
 
+  // useEffect(() =>{
+  //   axios.get('http://127.0.0.1:8000/drinks/', {
+  //     headers: {
+  //       "x-apikey": 'django-insecure-fp81ram!*ic_gr5_#@krr&9^)c62#wu&30cdy-f@0hpb$h5%j^',
+  //     },
+  //     responseType: "json",
+  //   })
+  //   .then((response) => {
+  //   console.log(response.data)
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // },[])
+
   useEffect(() => {
     if (search === "") {
       setSeeList(false);

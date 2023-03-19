@@ -37,6 +37,8 @@ const Enemy = (props) => {
         return obj
     }
 
+
+
     useEffect(() => {
         axios.get('/api/enemy')
         .then((response) => {

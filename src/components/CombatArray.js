@@ -165,9 +165,19 @@ const {setmonsterObj, monsterObj} = props
                 <h1 className="enemyName">{object.name}</h1>
                 <p>{object.player_class}</p>
                 <p>{object.race}</p>
+                
                 {object.max_hp > 0 ? <h1 className="enemyHp">HP: <span className="health">{object.max_hp}</span></h1> : <h1>You Dead</h1>}
               </div>
             <div className="enemyBot">
+            <div className="stats">
+            <p className="pcSave">Saving Throws</p>
+            <span className="statsNum">DEX: <br/>+{object.dex}</span>
+            <span className="statsNum">INT: <br/>+{object.int}</span>
+            <span className="statsNum">CHA: <br/>+{object.cha}</span>
+            <span className="statsNum">STR: <br/>+{object.str}</span>
+            <span className="statsNum">CON: <br/>+{object.con}</span>
+            <span className="statsNum">WIS: <br/>+{object.wis}</span>
+          </div>
               <div>
                 <button
                     onClick={() => {
