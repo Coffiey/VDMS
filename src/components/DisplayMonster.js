@@ -235,8 +235,8 @@ const DisplayMonster = (props) => {
             <p>
               {monsterObj.name}s can take 3 legendary actions, choosing from the
               options below. Only one legendary action option can be used at a
-              time and only at the end of another creature’s turn. Adult Black
-              Dragon regains spent legendary actions at the start of their turn.
+              time and only at the end of another creature’s turn. {monsterObj.name} 
+              regains spent legendary actions at the start of their turn.
             </p>
             {monsterObj.legendary_actions.map((action) => {
               return (
