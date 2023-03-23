@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+<p align="center">
+  <a href="https://github.com/tokyo-traders/koukan">
+    <img src="https://user-images.githubusercontent.com/67497636/217703956-9a1c7261-930a-4fd4-a536-388541d7ed85.png" alt="Logo" width="480" height="250">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+   <p align="center">
+    A combat tracker for DnD 5E
+    <br/>
+<!--     <br/>
+    <a href="https://github.com/tokyo-traders/koukan"><strong>Explore the docs »</strong></a>
+    <br/> -->
+    <br/>
+    <a href="https://VDSM.onrender.com/">Go to deployed version >>></a>
 
-## Available Scripts
+  </p>
+</p>
 
-In the project directory, you can run:
+## Table Of Contents
 
-### `npm start`
+* [About the Project](#about-the-project)
+* [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+<!-- * [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license) -->
+* [Authors](#authors)
+<!-- * [Acknowledgements](#acknowledgements) -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## About The Project
 
-### `npm test`
+This is designed for new and experenced players to have a dynamic and streamed line combat experence while still maintatining that customisation and freedom that DnD creates.
+<br/>
+How to use it:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Have the dungeon master load Player Character stats into the PC section.
+Search which moster from the 5E monster manual you would like to use.
+Edit the monster HP to your preference for the encounter.
+When its time, select the 'Begin Combat' button.
+Input the iniative roles and the app will auto assign intiative order.
+From here just play, The app tracks HP and it will rotate through the combat order through the next turn button.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started
 
-### `npm run eject`
+If you are a developer and want to use our application, follow the steps below.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
