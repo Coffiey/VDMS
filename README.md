@@ -6,9 +6,6 @@
    <p align="center">
     A combat tracker for DnD 5E
     <br/>
-<!--     <br/>
-    <a href="https://github.com/tokyo-traders/koukan"><strong>Explore the docs »</strong></a>
-    <br/> -->
     <br/>
     <a href="https://VDSM.onrender.com/">Go to deployed version >>></a>
 
@@ -26,7 +23,7 @@
 <!-- * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license) -->
-* [Authors](#authors)
+* [Author](#author)
 <!-- * [Acknowledgements](#acknowledgements) -->
 
 
@@ -44,7 +41,60 @@ Input the iniative roles and the app will auto assign intiative order.
 From here just play, The app tracks HP and it will rotate through the combat order through the next turn button.
 
 
+## Built With
 
+The application has been built using React in the frontend. node with Express have been used for the backend.
+Finally.
+</br>
+
+
+
+<table align="center">
+  <tr>
+    <th>Languages</th>
+    <th>Libraries</th>
+    <th>Framework</th>
+    <th>Database</th>
+  </tr>
+  <tr>
+    <td align="center">
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
+    </td>
+    <td align="center">
+    <a href="https://https://mui.com//" target="_blank" rel="noreferrer"> 
+      <img src="https://user-images.githubusercontent.com/67497636/217686777-1302937e-51e8-4d8b-8905-8796c4911b88.png" alt="react" width="40" height="40"/> </a>
+    </td>
+    <td align="center">
+      <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a>
+    </td>
+    <td align="center">
+      <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+    <a href="https://www.python.org" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>
+    </td>
+    <td align="center">
+      <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    </td>
+    <td align="center">
+    <a href="https://jwt.io/" target="_blank" rel="noreferrer"> <img src="https://user-images.githubusercontent.com/67497636/217804934-d450c024-a02d-4649-bc7d-d606788afe29.png" alt="jwt" width="70" height="40"/> </a>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+  </tr>
+<table>
 
 ## Getting Started
 
@@ -90,7 +140,7 @@ install postgreSQL, if you need help with this follow the guide here:
   
 6. Enjoy the app! Please play around all you want and any bugs you find let me know.
 
-### Deployment
+## Deployment
 
 You can find a up to date version of the app already deployed at ###### so feel free to sign up there and enjoy the website there. However if you want to deploy it yourself as a test or to have a private server for you own game I have no problem with doing that. Please just dont try to sell this service, it is against the licencing agreement and also just a bad faith thing to do. But if you just like a fast response time, or a just really really really far away from singapore I want users to have that option.
 
@@ -116,3 +166,28 @@ You can find a up to date version of the app already deployed at ###### so feel 
     npm run serve
     (the static build file is served by the root directory of the server, so running the command will load both front and backend.)
     ``` 
+
+
+## Author
+<table align="center">
+  <tr>
+    <th>
+      <a href="https://github.com/Coffiey"> Adam Burrough </a>
+    </th>
+  </tr>
+  <tr>
+  <td>
+    <a href="https://github.com/Coffiey" target="_blank" rel="noreferrer">
+    <img src="https://user-images.githubusercontent.com/67497636/217795795-7a3869b0-6373-4b43-bacf-ed5f08b046ea.jpeg" alt="javascript" width="150" height="150"/> </a>
+
+  </td>
+  </tr>
+  </table>
+
+<p align="center">
+    <h3>Checkout some of my other work.</h3>
+    <p>Tokyo Traders</p>
+    <a href="https://tokyotraders.onrender.com/">Tokyo Traders Website</a>
+    <a href="https://tokyotraders.onrender.com/">Tokyo Traders Git Hub</a>
+  </p>
+</p>
