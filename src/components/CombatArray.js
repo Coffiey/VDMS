@@ -83,6 +83,15 @@ const {setmonsterObj, monsterObj} = props
         }));
       };
 
+
+    const nextTurn = () => {
+        let obj = combatArray.shift()
+        console.log(obj)
+        console.log(combatArray)
+        combatArray.push(obj)
+        SetCombatArray([...combatArray])
+    }
+
     useEffect(()=>{
         axios.get('/api/pc')
         .then((response) => {
@@ -123,7 +132,7 @@ const {setmonsterObj, monsterObj} = props
    
 
    const setIntiative = () => {
-    combatArray.sort((a,b)=> {
+    let combat = combatArray.sort((a,b)=> {
         if (a.initative > b.initative) {
             return -1
         }
@@ -132,7 +141,7 @@ const {setmonsterObj, monsterObj} = props
         }
         return 0
     })
-    SetCombatArray([...combatArray])
+    SetCombatArray([...combat])
     setSorted(false)
    }
 
@@ -145,8 +154,8 @@ const {setmonsterObj, monsterObj} = props
       >Set Initative</button>
       ) : (
         <button
-            onclick={()=>{
-                setMonsterRef("cultist")
+            onClick={()=>{
+                nextTurn()
             }}
         >Next Turn</button>
       )}
