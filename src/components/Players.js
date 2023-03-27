@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import ClassDrop from "./CharachterDropDowns/ClassDrop";
-import RaceDrop from "./CharachterDropDowns/RaceDrop";
+import ClassDrop from "./CharacterDropDowns/ClassDrop";
+import RaceDrop from "./CharacterDropDowns/RaceDrop";
 import "./css/player.css"
 
 import { useState, useEffect } from "react";

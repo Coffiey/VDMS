@@ -7,7 +7,7 @@
     A combat tracker for DnD 5E
     <br/>
     <br/>
-    <a href="https://VDSM.onrender.com/">Go to deployed version >>></a>
+    <a href="https://VDSM.onrender.com/">Go to Website</a>
 
   </p>
 </p>
@@ -134,7 +134,7 @@ install postgreSQL, if you need help with this follow the guide here:
     ```
 5. In a new Terminal start the React Virtial DOM
     ```sh
-    npm react-scripts start
+    npX react-scripts start
     (this allows for hot reloading on the frontend)
     ```
   
