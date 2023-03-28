@@ -1,7 +1,7 @@
 <p align="center">
-  <a href="https://github.com/tokyo-traders/koukan">
+  <!-- <a href="https://github.com/tokyo-traders/koukan">
     <img src="https://user-images.githubusercontent.com/67497636/217703956-9a1c7261-930a-4fd4-a536-388541d7ed85.png" alt="Logo" width="480" height="250">
-  </a>
+  </a> -->
 
    <p align="center">
     A combat tracker for DnD 5E
