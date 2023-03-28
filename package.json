@@ -24,6 +24,8 @@
   },
   "scripts": {
     "migrate-latest": "npx knex migrate:latest --knexfile db/knexfile.js",
+    "migrate-create": "npx knex migrate:make %npm_config_name% --migrations-directory ./db/migrations",
+    "fun": "echo The value of --foo is %npm_config_foo%",
     "serve": "nodemon ./server/index.js",
     "start": "react-scripts start",
     "build": "npm install && npx react-scripts build && npx knex migrate:latest --knexfile db/knexfile.js",

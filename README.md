@@ -110,6 +110,8 @@ install postgreSQL, if you need help with this follow the guide here:
 1. clone the app 
     ```sh 
     git clone https://github.com/coffiey/VDSM
+    create migration command
+    npm run migrate-create --name=<migration Name>
     ```
 2. install all the packages
     ```sh
