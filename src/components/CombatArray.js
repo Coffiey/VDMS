@@ -10,7 +10,7 @@ const {setmonsterObj, monsterObj} = props
     const [monsterArray,setMonsterArray] = useState([]);
     const [combatArray, SetCombatArray] = useState([]);
     const [sorted, setSorted] = useState(true);
-    const [monsterRef, setMonsterRef] = useState('');
+    const [monsterUrl, setMonsterUrl] = useState(null);
 
     const [hpChange, setHpchange] = useState(0);
 
@@ -88,6 +88,11 @@ const {setmonsterObj, monsterObj} = props
         let obj = combatArray.shift()
         combatArray.push(obj)
         console.log(obj)
+        if (combatArray[0].monsterName) {
+            setMonsterUrl(combatArray[0].url)
+        } else {
+            console.log("its a player")
+        }
         SetCombatArray([...combatArray])
     }
 
@@ -130,6 +135,21 @@ const {setmonsterObj, monsterObj} = props
     },[])
    
 
+    useEffect(()=>{
+        if (monsterUrl) {
+            axios.get(`/api/monster/object?url=${monsterUrl}`)
+            .then((response) => {
+                return response.data
+            }).then((data) => {
+                setmonsterObj(data) 
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+    }, [monsterUrl])
+
+
    const setIntiative = () => {
     let combat = combatArray.sort((a,b)=> {
         if (a.initative > b.initative) {
@@ -142,6 +162,11 @@ const {setmonsterObj, monsterObj} = props
     })
     SetCombatArray([...combat])
     setSorted(false)
+    if (combatArray[0].monsterName) {
+        console.log('Its a monster')
+    } else {
+        console.log("its a player")
+    }
    }
 
 
