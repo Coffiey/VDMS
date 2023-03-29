@@ -86,9 +86,8 @@ const {setmonsterObj, monsterObj} = props
 
     const nextTurn = () => {
         let obj = combatArray.shift()
-        console.log(obj)
-        console.log(combatArray)
         combatArray.push(obj)
+        console.log(obj)
         SetCombatArray([...combatArray])
     }
 

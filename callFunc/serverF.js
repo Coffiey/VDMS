@@ -67,7 +67,8 @@ async createMonsterDB(playerInfo) {
       monster_name: monsterName,
       health,
       monster_reference: monsterReference,
-      index
+      index,
+      url
     })
 },
 

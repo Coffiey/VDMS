@@ -61,6 +61,7 @@ function App() {
       });
       setDropdown(monsterSearch);
     }
+    console.log(dropdown)
   }, [search]);
 
   return (

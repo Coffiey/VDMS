@@ -27,14 +27,16 @@ const Enemy = (props) => {
     const [heal, setHeal] = useState(0);
     const [monsterObj2, setMonsterObj2] = useState(0);
 
-    const createMon = (monster, health, index, Reference) => {
+    const createMon = (monster, health, index, Reference, url) => {
         const obj = {
             monsterName: monster,
             health: health,
             index,
-            monsterReference: Reference
+            monsterReference: Reference,
+            url
         }
-        return obj
+        console.log('MO backend:',obj)
+        return obj;
     }
 
 
@@ -156,12 +158,13 @@ const Enemy = (props) => {
               onClick={()=>{
                 setMonster()
                 setMonsterArray([...monsterArray, (createMon(monsterObj.name, health,monsterObj.index,
-                    monsterReference))])
+                    monsterReference, monsterObj.url))])
                 postEnemy(createMon(
                     monsterObj.name,
                     health,
                     monsterObj.index,
-                    monsterReference
+                    monsterReference,
+                    monsterObj.url
                     ))
 
                 }}>Create Monster</button></p>
