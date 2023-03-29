@@ -60,7 +60,8 @@ async createMonsterDB(playerInfo) {
     monsterName,
     health,
     monsterReference,
-    index
+    index,
+    url
    } = playerInfo;
   return await knex("monster")
     .insert({
