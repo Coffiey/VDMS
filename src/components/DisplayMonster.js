@@ -103,7 +103,7 @@ const DisplayMonster = (props) => {
         {monsterObj.xp && <p>xp: {monsterObj.xp}</p>}
         {monsterObj.special_abilities && (
           <div>
-            <h1>Sspecial abilities</h1>
+            <h1>Special abilities</h1>
             {monsterObj.special_abilities.map((object) => {
               return (
                 <div>
