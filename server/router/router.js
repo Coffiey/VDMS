@@ -1,7 +1,5 @@
 const express = require('express');
 const {
-    createUser,
-    getUserByEmail,
     getMonsterList,
     getMonsterByurl,
     getMonsterByIndex,
@@ -13,6 +11,14 @@ const {
     getMonsterDB
         } = require('../../callFunc/serverF')
 
+const {
+    createUser
+     } = require('../../callFunc/register')
+
+const {
+    getUserByUsername
+     } = require('../../callFunc/authentication')
+
 const router = express.Router();
 router.post('/api/user', async (req, res) => {
     try { 
@@ -23,8 +29,24 @@ router.post('/api/user', async (req, res) => {
     }
 });
 
+router.get('/api/user', async (req, res) => {
+    console.log(req.query["userName"])
+    console.log(req.query["password"])
+    try {
+       const userobj = await getUserByUsername(req.query["userName"],req.query["password"])
+        if (userobj[0]) {
+            res.status(201).json(userobj[1])
+        } else {
+            res.status(403).json("access denied")
+        }
+    } catch (err) {
+        res.status(500).json("something went wrong")
+    }
+});
+
 router.post('/api/pc', async (req, res) => {
     try { 
+        console.log(req.body)
        const id = await createPc(req.body)
        res.status(201).json("created player Character")
     } catch (err) {
@@ -42,20 +64,6 @@ router.post('/api/enemy', async (req, res) => {
     }
 });
 
-router.get('/api/user', async (req, res) => {
-    console.log(req.query["userName"])
-    console.log(req.query["password"])
-    try {
-       const userobj = await getUserByEmail(req.query["userName"])
-        if (req.query["password"] === userobj.password) {
-            res.status(201).json(userobj.id)
-        } else {
-            res.status(403).json("access denied")
-        }
-    } catch (err) {
-        res.status(500).json("something went wrong")
-    }
-});
 
 router.get('/api/pc', async (req, res) => {
     try {

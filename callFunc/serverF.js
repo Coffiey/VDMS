@@ -3,28 +3,6 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 module.exports = {
-  async createUser(userInfo) {
-    const { userName, password} = userInfo;
-    const [id] = await knex("user")
-      .insert({
-        user_name: userName,
-        password
-      })
-      .returning("id");
-
-    return id;
-  },
-
- async getUserByEmail(userName) {
-    const [userObj] = await knex
-     .select("*")
-     .from('user')
-     .where({
-      user_name:userName
-     })
-     return userObj
- },
-
  async createPc(playerInfo) {
   const { 
     name,
