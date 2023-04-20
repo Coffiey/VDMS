@@ -1,0 +1,50 @@
+.DisplayMonster {
+    z-index: 1;
+    position: fixed;
+    margin-top: 20px;
+    background-color: bisque;
+    width: 48%;
+    float: right;
+    margin-left: 51%;
+    display: flex;
+    /* border-radius: 25px; */
+    height:70%;
+    overflow: scroll;
+    overflow-x: hidden;
+    border-style: solid;
+    border-color: orange;
+    border-left: 0px;
+    border-right: 0px;
+    border-width: 12px;
+  }
+
+.break {
+    border-style: solid;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+}
+
+#ability_score {
+    display: flex;
+    flex-direction: row;
+}
+
+.abil {
+    width: 18%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#name {
+    color: red;
+  }
+
+#size {}
+#type {}
+#allignment {}
+#armor_class {}
+#hp {}
+#hit_dice {}
+#hit_points_roll {}

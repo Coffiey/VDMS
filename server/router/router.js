@@ -34,9 +34,11 @@ router.get('/api/user', async (req, res) => {
     console.log(req.query["password"])
     try {
        const userobj = await getUserByUsername(req.query["userName"],req.query["password"])
+       console.log('😍',userobj)
         if (userobj[0]) {
             res.status(201).json(userobj[1])
         } else {
+            console.log(userobj[0])
             res.status(403).json("access denied")
         }
     } catch (err) {

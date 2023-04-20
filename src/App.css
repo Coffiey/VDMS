@@ -35,21 +35,6 @@ body {
   overflow-x: hidden;
 }
 
-.DisplayMonster {
-  z-index: 1;
-  position: fixed;
-  margin-top: 20px;
-  background-color: bisque;
-  width: 48%;
-  float: right;
-  margin-left: 51%;
-  display: flex;
-  border-radius: 25px;
-  height:70%;
-  overflow: scroll;
-  overflow-x: hidden;
-}
-
 .basic{
   background-color: bisque;
 }

@@ -156,6 +156,8 @@ You can find a up to date version of the app already deployed at ###### so feel 
     ```sh
     DB_URL = [Provided by Deployment]
     NODE_ENV = deployment
+    generate random key
+    require("crypto").randomBytes(64).toString('hex')
     ```
 3. Run deployment setup command
     ```sh

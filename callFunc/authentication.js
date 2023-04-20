@@ -3,43 +3,10 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const bcrypt = require("bcrypt")
 
+const jwt = require("jsonwebtoken");
+// requre("dotenv").config();
+
 module.exports = {
-    // async createUser(userInfo) {
-    //     const { userName, password} = userInfo;
-    //     console.log(userInfo)
-    //     console.log("😍")
-    //     if (!userName || !password) {
-    //         console.log("😁")
-    //         return {
-    //             status: "400",
-    //             message: "Username and Password are Required"
-    //         }
-    //     }
-    //     const userList = await knex
-    //     .select("*")
-    //     .from('user')
-    //     .where({
-    //      user_name:userName
-    //     })
-    //     if (userList.length === 0) {
-    //         const hashPwd = await bcrypt.hash(password, 10)
-
-    //         const [user] = await knex("user")
-    //         .insert({
-    //           user_name: userName,
-    //           password: hashPwd,
-
-    //         })
-    //         .returning("*");
-    //         console.log()
-    //       return user;
-    //     }  else {
-            
-    //     }
-        
-
-    //   },
-
       async getUserByUsername(userName, password) {
         const [userObj] = await knex
          .select("*")
@@ -49,10 +16,28 @@ module.exports = {
          })
          console.log("😴",userObj)
          const match = await bcrypt.compare(password, userObj.password)
-         console.log(match)
+        //  console.log(process.env.ACCESS_SECRET_TOKEN)
          if (match) {
-             return [match, userObj]
+            const accessToken = jwt.sign(
+                {
+                 userName: userObj.user_name,
+                 id: userObj.id  
+                },
+                process.env.ACCESS_SECRET_TOKEN,
+                {expiresIn: '30s'}
+                )
+
+            const refreshToken = jwt.sign(
+                {
+                 userName: userObj.user_name,
+                 id: userObj.id  
+                },
+                process.env.REFRESH_SECRET_TOKEN,
+                {expiresIn: '1d'})
+                let repsonse = [match, accessToken]
+             return repsonse
          } else {
+            console.log('🤯',match)
             return [match]
          }
         },

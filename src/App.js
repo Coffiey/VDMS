@@ -117,6 +117,7 @@ function App() {
       
       <div className="DisplayMonster">
       <DisplayMonster
+      setmonsterObj={setmonsterObj}
        monsterObj={monsterObj} 
        combatState={combatState}/>
       </div>
