@@ -23,30 +23,33 @@ const DisplayMonster = (props) => {
     console.log(monsterObj);
     return (
       <div className="div">
+        <div id="top"></div>
         <div class="break">
-          {monsterObj.name && <h1 id="name">{monsterObj.name}</h1>}
+          {monsterObj.name && <h1 class="name">{monsterObj.name}</h1>}
           {monsterObj.size && (
-            <p id="size">
+            <p class="info">
               {monsterObj?.size} {monsterObj?.type}, {monsterObj?.alignment}
             </p>
           )}
         </div>
         <div class="break">
           {monsterObj.armor_class && (
-            <p id="armor_class">
-              Armor class: {monsterObj.armor_class[0].value} (
+            <p class="info">
+              <span class="bold">Armor class:</span>{" "}
+              {monsterObj.armor_class[0].value} (
               {monsterObj.armor_class[0].type})
             </p>
           )}
           {monsterObj.hit_points && (
-            <p id="hp">
+            <p class="info">
               {" "}
-              HP: {monsterObj.hit_points} ({monsterObj?.hit_points_roll})
+              <span class="bold">HP:</span> {monsterObj.hit_points} (
+              {monsterObj?.hit_points_roll})
             </p>
           )}
           {monsterObj.speed && (
-            <p>
-              <span>speed:</span> {monsterObj?.speed.walk}
+            <p class="info">
+              <span class="bold">speed:</span> {monsterObj?.speed.walk}
               {monsterObj?.speed?.fly && (
                 <span> fly {monsterObj?.speed?.fly},</span>
               )}
@@ -59,8 +62,10 @@ const DisplayMonster = (props) => {
         <div class="break" id="ability_score">
           {monsterObj.strength && (
             <div class="abil">
-              <div>STR:</div>
-              <div>
+              <div class="info">
+                <span class="bold">STR:</span>
+              </div>
+              <div class="info">
                 {" "}
                 {monsterObj.strength} (
                 {Math.floor((monsterObj.strength - 10) / 2) > 0 && (
@@ -72,8 +77,10 @@ const DisplayMonster = (props) => {
           )}
           {monsterObj.dexterity && (
             <div class="abil">
-              <div>DEX:</div>
-              <div>
+              <div class="info">
+                <span class="bold">DEX:</span>
+              </div>
+              <div class="info">
                 {" "}
                 {monsterObj.dexterity} (
                 {Math.floor((monsterObj.dexterity - 10) / 2) > 0 && (
@@ -85,8 +92,10 @@ const DisplayMonster = (props) => {
           )}
           {monsterObj.constitution && (
             <div class="abil">
-              <div>CON:</div>
-              <div>
+              <div class="info">
+                <span class="bold">CON:</span>
+              </div>
+              <div class="info">
                 {" "}
                 {monsterObj.constitution} (
                 {Math.floor((monsterObj.constitution - 10) / 2) > 0 && (
@@ -98,8 +107,10 @@ const DisplayMonster = (props) => {
           )}
           {monsterObj.intelligence && (
             <div class="abil">
-              <div>INT:</div>
-              <div>
+              <div class="info">
+                <span class="bold">INT:</span>
+              </div>
+              <div class="info">
                 {" "}
                 {monsterObj.intelligence} (
                 {Math.floor((monsterObj.intelligence - 10) / 2) > 0 && (
@@ -111,8 +122,10 @@ const DisplayMonster = (props) => {
           )}
           {monsterObj.wisdom && (
             <div class="abil">
-              <div>WIS:</div>
-              <div>
+              <div class="info">
+                <span class="bold">WIS:</span>
+              </div>
+              <div class="info">
                 {" "}
                 {monsterObj.wisdom} (
                 {Math.floor((monsterObj.wisdom - 10) / 2) > 0 && <span>+</span>}
@@ -122,8 +135,10 @@ const DisplayMonster = (props) => {
           )}
           {monsterObj.charisma && (
             <div class="abil">
-              <div>CHA:</div>
-              <div>
+              <div class="info">
+                <span class="bold">CHA:</span>
+              </div>
+              <div class="info">
                 {" "}
                 {monsterObj.charisma} (
                 {Math.floor((monsterObj.charisma - 10) / 2) > 0 && (
@@ -135,8 +150,8 @@ const DisplayMonster = (props) => {
           )}
         </div>
         <div class="break">
-          <p>
-            Saving Throws:{" "}
+          <p class="info">
+            <span class="bold">Saving Throws: </span>
             {monsterObj?.proficiencies.map((item) => {
               return (
                 <span>
@@ -153,8 +168,8 @@ const DisplayMonster = (props) => {
               );
             })}
           </p>
-          <p>
-            Skills:{" "}
+          <p class="info">
+            <span class="bold">Skills: </span>
             {monsterObj?.proficiencies.map((item) => {
               return (
                 <span>
@@ -169,40 +184,40 @@ const DisplayMonster = (props) => {
           </p>
 
           {monsterObj.damage_vulnerabilities.length !== 0 && (
-            <p>
-              damage vulnerabilities:
+            <p class="info">
+              <span class="bold">damage vulnerabilities:</span>
               {monsterObj?.damage_vulnerabilities.map((item) => {
                 return <span> {item}</span>;
               })}
             </p>
           )}
           {monsterObj.damage_resistances.length !== 0 && (
-            <p>
-              damage resistances:
+            <p class="info">
+              <span class="bold">damage resistances:</span>
               {monsterObj?.damage_resistances.map((item) => {
                 return <span> {item}</span>;
               })}
             </p>
           )}
           {monsterObj.damage_immunities.length !== 0 && (
-            <p>
-              damage immunities:
+            <p class="info">
+              <span class="bold">damage immunities:</span>
               {monsterObj?.damage_immunities.map((item) => {
                 return <span> {item}</span>;
               })}
             </p>
           )}
           {monsterObj.condition_immunities.length !== 0 && (
-            <p>
-              condition immunities:
+            <p class="info">
+              <span class="bold">condition immunities:</span>
               {monsterObj?.condition_immunities.map((item) => {
                 return <span> {item}</span>;
               })}
             </p>
           )}
           {monsterObj.senses && (
-            <p>
-              Senses:
+            <p class="info">
+              <span class="bold">Senses:</span>
               {getArrayOfKeys(monsterObj?.senses).map((key) => {
                 return (
                   <span>
@@ -213,10 +228,16 @@ const DisplayMonster = (props) => {
               })}
             </p>
           )}
-          {monsterObj.languages && <p>languages: {monsterObj?.languages}</p>}
+          {monsterObj.languages && (
+            <p class="info">
+              <span class="bold">languages: </span>
+              {monsterObj?.languages}
+            </p>
+          )}
           {typeof monsterObj.challenge_rating === "number" && (
-            <p>
-              challenge rating: {monsterObj.challenge_rating} ({monsterObj.xp})
+            <p class="info">
+              <span class="bold">challenge rating: </span>
+              {monsterObj.challenge_rating} ({monsterObj.xp})
             </p>
           )}
         </div>
@@ -226,7 +247,7 @@ const DisplayMonster = (props) => {
               {monsterObj.special_abilities.map((object) => {
                 return (
                   <p>
-                    {object.name}{" "}
+                    <span class="bold">{object.name}{" "}</span>
                     {object.usage && (
                       <span>
                         ({object.usage.times}
@@ -240,22 +261,20 @@ const DisplayMonster = (props) => {
             </div>
           )}
         </div>
-        <div class="break">
-          <h3>Actions</h3>
-        </div>
+        <h3 class="name">Actions</h3>
         <div class="attacks">
           {monsterObj.actions && (
             <div>
               {monsterObj.actions[0].name === "Multiattack" ? (
                 <>
                   <p>
-                    {monsterObj.actions[0].name}: {monsterObj.actions[0].desc}
+                  <span class="bold">{monsterObj.actions[0].name}:</span> {monsterObj.actions[0].desc}
                   </p>
                   {monsterObj.actions.slice(1).map((attack) => {
                     return (
                       <p>
                         {attack.name && (
-                          <span>
+                          <span class="bold">
                             {attack.name}
                             {attack.attack_bonus && (
                               <span> (+{attack.attack_bonus})</span>
@@ -294,7 +313,7 @@ const DisplayMonster = (props) => {
                     return (
                       <p>
                         {attack.name && (
-                          <span>
+                          <span class="bold">
                             {attack.name}
                             {attack.attack_bonus && (
                               <span> (+{attack.attack_bonus})</span>
@@ -331,27 +350,28 @@ const DisplayMonster = (props) => {
             </div>
           )}
         </div>
-        <h2>Lengendary Actions</h2>
-        <div class="attacks">
+        <h3 class="name">Lengendary Actions</h3>
+        <div class="attacks" id="legendary_actions">
           {monsterObj.legendary_actions && (
             <>
-              <p>
+              <p id="legendary_actions">
                 {monsterObj.name}s can take 3 legendary actions, choosing from
                 the options below. Only one legendary action option can be used
                 at a time and only at the end of another creature’s turn.{" "}
-                {monsterObj.name}{" "}
-                regains spent legendary actions at the start of their turn.
+                {monsterObj.name} regains spent legendary actions at the start
+                of their turn.
               </p>
               {monsterObj.legendary_actions.map((action) => {
                 return (
                   <p>
-                    {action.name}: {action.desc}
+                    <span class="bold">{action.name}:</span> {action.desc}
                   </p>
                 );
               })}
             </>
           )}
         </div>
+        <div id="bottom"></div>
       </div>
     );
   }
