@@ -25,6 +25,14 @@
     border-bottom: 0px;
 }
 
+.attacks {
+    border-style: solid;
+    border-color: coral;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+}
+
 #ability_score {
     display: flex;
     flex-direction: row;

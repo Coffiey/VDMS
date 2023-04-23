@@ -169,16 +169,18 @@ const DisplayMonster = (props) => {
           </p>
 
           {monsterObj.damage_vulnerabilities.length !== 0 && (
-            <p>damage vulnerabilities:
+            <p>
+              damage vulnerabilities:
               {monsterObj?.damage_vulnerabilities.map((item) => {
-                return <span>  {item}</span>;
+                return <span> {item}</span>;
               })}
             </p>
           )}
           {monsterObj.damage_resistances.length !== 0 && (
-              <p>damage resistances:
+            <p>
+              damage resistances:
               {monsterObj?.damage_resistances.map((item) => {
-                return <span>  {item}</span>;
+                return <span> {item}</span>;
               })}
             </p>
           )}
@@ -213,158 +215,143 @@ const DisplayMonster = (props) => {
           )}
           {monsterObj.languages && <p>languages: {monsterObj?.languages}</p>}
           {typeof monsterObj.challenge_rating === "number" && (
-            <p>challenge rating: {monsterObj.challenge_rating} ({monsterObj.xp})</p>
+            <p>
+              challenge rating: {monsterObj.challenge_rating} ({monsterObj.xp})
+            </p>
           )}
         </div>
         <div class="break">
           {monsterObj.special_abilities && (
             <div>
-              <h1>Special abilities</h1>
               {monsterObj.special_abilities.map((object) => {
                 return (
-                  <div>
-                    <h2>{object.name}</h2>
-                    <p>{object.desc}</p>
+                  <p>
+                    {object.name}{" "}
                     {object.usage && (
-                      <p>
-                        {object.usage.times} times {object.usage.type}
-                      </p>
+                      <span>
+                        ({object.usage.times}
+                        {object.usage.type.slice(4)})
+                      </span>
                     )}
-                  </div>
+                    : {object.desc}
+                  </p>
                 );
               })}
-          </div>
-        )}
+            </div>
+          )}
         </div>
-        <h1>Actions</h1>
-        {monsterObj.actions && (
-          <div>
-            {monsterObj.actions[0].name === "Multiattack" ? (
-              <>
-                <h2>{monsterObj.actions[0].name}</h2>
-                <p>{monsterObj.actions[0].desc}</p>
-                {monsterObj.actions.slice(1).map((attack) => {
-                  return (
-                    <>
-                      {attack.name && <h3>{attack.name}</h3>}
-                      {attack.desc && <p>{attack.desc}</p>}
-                      {attack.attack_bonus && (
-                        <p>attack bonus: +{attack.attack_bonus}</p>
-                      )}
-                      {attack.dc && (
-                        <>
-                          <p>
-                            saving throw:
-                            {attack.dc.dc_type.index === "wis" && (
-                              <span> {attack.dc.dc_type.index}dom</span>
+        <div class="break">
+          <h3>Actions</h3>
+        </div>
+        <div class="attacks">
+          {monsterObj.actions && (
+            <div>
+              {monsterObj.actions[0].name === "Multiattack" ? (
+                <>
+                  <p>
+                    {monsterObj.actions[0].name}: {monsterObj.actions[0].desc}
+                  </p>
+                  {monsterObj.actions.slice(1).map((attack) => {
+                    return (
+                      <p>
+                        {attack.name && (
+                          <span>
+                            {attack.name}
+                            {attack.attack_bonus && (
+                              <span> (+{attack.attack_bonus})</span>
                             )}
-                            {attack.dc.dc_type.index === "int" && (
-                              <span> {attack.dc.dc_type.index}elegence</span>
+                            {attack.dc && (
+                              <span>
+                                {" "}
+                                ({attack.dc.dc_type.index}: {attack.dc.dc_value}
+                                )
+                              </span>
                             )}
-                            {attack.dc.dc_type.index === "cha" && (
-                              <span> {attack.dc.dc_type.index}risma</span>
-                            )}
-                            {attack.dc.dc_type.index === "str" && (
-                              <span> {attack.dc.dc_type.index}ength</span>
-                            )}
-                            {attack.dc.dc_type.index === "con" && (
-                              <span> {attack.dc.dc_type.index}stitution</span>
-                            )}
-                            {attack.dc.dc_type.index === "dex" && (
-                              <span> {attack.dc.dc_type.index}terity</span>
-                            )}
+                            :
+                          </span>
+                        )}
+                        {attack.desc && (
+                          <span>
                             <br />
-                            save dc: {attack.dc.dc_value}
-                          </p>
-                        </>
-                      )}
-                      {attack.usage && (
-                        <>
-                          <p>
-                            {attack.usage.type}
+                            {attack.desc}
+                          </span>
+                        )}
+                        {attack.usage && (
+                          <>
+                            <p>
+                              {attack.usage.type} ({attack.usage.dice}):{" "}
+                              {attack.usage.min_value} or higher
+                            </p>
+                          </>
+                        )}
+                      </p>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {monsterObj.actions.map((attack) => {
+                    return (
+                      <p>
+                        {attack.name && (
+                          <span>
+                            {attack.name}
+                            {attack.attack_bonus && (
+                              <span> (+{attack.attack_bonus})</span>
+                            )}
+                            {attack.dc && (
+                              <span>
+                                {" "}
+                                ({attack.dc.dc_type.index}: {attack.dc.dc_value}
+                                )
+                              </span>
+                            )}
+                            :
+                          </span>
+                        )}
+                        {attack.desc && (
+                          <span>
                             <br />
-                            {attack.usage.dice}: must role a{" "}
-                            {attack.usage.min_value} or higher
-                          </p>
-                        </>
-                      )}
-                    </>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {monsterObj.actions.map((attack) => {
-                  return (
-                    <>
-                      {attack.name && <h3>{attack.name}</h3>}
-                      {attack.desc && <p>{attack.desc}</p>}
-                      {attack.attack_bonus && (
-                        <p>attack bonus: +{attack.attack_bonus}</p>
-                      )}
-                      {attack.dc && (
-                        <>
-                          <p>
-                            saving throw:
-                            {attack.dc.dc_type.index === "wis" && (
-                              <span> {attack.dc.dc_type.index}dom</span>
-                            )}
-                            {attack.dc.dc_type.index === "int" && (
-                              <span> {attack.dc.dc_type.index}elegence</span>
-                            )}
-                            {attack.dc.dc_type.index === "cha" && (
-                              <span> {attack.dc.dc_type.index}risma</span>
-                            )}
-                            {attack.dc.dc_type.index === "str" && (
-                              <span> {attack.dc.dc_type.index}ength</span>
-                            )}
-                            {attack.dc.dc_type.index === "con" && (
-                              <span> {attack.dc.dc_type.index}stitution</span>
-                            )}
-                            {attack.dc.dc_type.index === "dex" && (
-                              <span> {attack.dc.dc_type.index}terity</span>
-                            )}
-                            <br />
-                            save dc: {attack.dc.dc_value}
-                          </p>
-                        </>
-                      )}
-                      {attack.usage && (
-                        <>
-                          <p>
-                            {attack.usage.type}
-                            <br />
-                            {attack.usage.dice}: must role a{" "}
-                            {attack.usage.min_value} or higher
-                          </p>
-                        </>
-                      )}
-                    </>
-                  );
-                })}
-              </>
-            )}
-          </div>
-        )}
-        {monsterObj.legendary_actions && (
-          <>
-            <h2>Lengendary Actions</h2>
-            <p>
-              {monsterObj.name}s can take 3 legendary actions, choosing from the
-              options below. Only one legendary action option can be used at a
-              time and only at the end of another creature’s turn.{" "}
-              {monsterObj.name}
-              regains spent legendary actions at the start of their turn.
-            </p>
-            {monsterObj.legendary_actions.map((action) => {
-              return (
-                <p>
-                  {action.name}: {action.desc}
-                </p>
-              );
-            })}
-          </>
-        )}
+                            {attack.desc}
+                          </span>
+                        )}
+                        {attack.usage && (
+                          <>
+                            <p>
+                              {attack.usage.type} ({attack.usage.dice}):{" "}
+                              {attack.usage.min_value} or higher
+                            </p>
+                          </>
+                        )}
+                      </p>
+                    );
+                  })}
+                </>
+              )}
+            </div>
+          )}
+        </div>
+        <h2>Lengendary Actions</h2>
+        <div class="attacks">
+          {monsterObj.legendary_actions && (
+            <>
+              <p>
+                {monsterObj.name}s can take 3 legendary actions, choosing from
+                the options below. Only one legendary action option can be used
+                at a time and only at the end of another creature’s turn.{" "}
+                {monsterObj.name}{" "}
+                regains spent legendary actions at the start of their turn.
+              </p>
+              {monsterObj.legendary_actions.map((action) => {
+                return (
+                  <p>
+                    {action.name}: {action.desc}
+                  </p>
+                );
+              })}
+            </>
+          )}
+        </div>
       </div>
     );
   }
