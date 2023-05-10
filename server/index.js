@@ -12,7 +12,6 @@ app.use("/", express.static(__dirname +"/.." + "/build"));
 // front end
 app.use(express.json());
 app.use(router);
-
 app.get("/api",async (req, res) => {
 	await res.send("Hello This is adam");
 });

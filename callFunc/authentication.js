@@ -5,14 +5,12 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 // requre("dotenv").config();
-
-module.exports = {
-  async getUserByUsername(userName, password) {
+const getUserByUsername = async (req, res) => {
+  try {
     const [userObj] = await knex.select("*").from("user").where({
-      user_name: userName,
+      user_name: req.query["userName"],
     });
-    console.log("😴", userObj);
-    const match = await bcrypt.compare(password, userObj.password);
+    const match = await bcrypt.compare(req.query["password"], userObj.password);
     if (match) {
       const accessToken = jwt.sign(
         {
@@ -31,15 +29,22 @@ module.exports = {
         process.env.REFRESH_SECRET_TOKEN,
         { expiresIn: "1d" }
       );
-      await knex("user")
-        .where('user_name', '=', userName)
-        .update({
-          refresh_token: refreshToken
-        })
-      let repsonse = [match, accessToken, refreshToken];
-      return repsonse;
+      await knex("user").where("user_name", "=", userName).update({
+        refresh_token: refreshToken,
+      });
+      res.status(201).json(accessToken);
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
     } else {
-      return [match];
+      res.status(403).json("access denied");
     }
-  },
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
+
+module.exports = {
+  getUserByUsername,
 };
