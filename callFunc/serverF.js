@@ -2,23 +2,22 @@ const knex = require("../db/knex");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-module.exports = {
- async createPc(playerInfo) {
-  const { 
-    name,
-    playerClass,
-    race,
-    level,
-    maxHp,
-    dex,
-    int,
-    cha,
-    str,
-    con,
-    wis
-   } = playerInfo;
-  return await knex("pc")
-    .insert({
+const createPc = async (req, res) => {
+  try {
+    const {
+      name,
+      playerClass,
+      race,
+      level,
+      maxHp,
+      dex,
+      int,
+      cha,
+      str,
+      con,
+      wis,
+    } = req.body;
+    await knex("pc").insert({
       name,
       player_class: playerClass,
       race,
@@ -29,91 +28,134 @@ module.exports = {
       cha,
       str,
       con,
-      wis
-    })
-},
+      wis,
+    });
+    res.status(201).json("created player Character");
+  } catch {
+    res.status(500).json("something went wrong");
+  }
+};
 
-async createMonsterDB(playerInfo) {
-  const {
-    monsterName,
-    health,
-    monsterReference,
-    index,
-    url
-   } = playerInfo;
-  return await knex("monster")
-    .insert({
+const createMonsterDB = async (req, res) => {
+  try {
+    const { monsterName, health, monsterReference, index, url } = req.body;
+    await knex("monster").insert({
       monster_name: monsterName,
       health,
       monster_reference: monsterReference,
       index,
-      url
-    })
-},
+      url,
+    });
+    res.status(201).json("created monster");
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
 
-async getMonsterDB() {
-  const monsterObj = await knex
-   .select("*")
-   .from('monster')
-   return monsterObj
-},
+const getMonsterDB = async (req, res) => {
+  try {
+    const monster = await knex.select("*").from("monster");
+    const monsterObj = await monster.map((item) => {
+      return {
+        monsterName: item.monster_name,
+        health: item.health,
+        index: item.index,
+        monsterReference: item.monster_reference,
+        url: item.url,
+      };
+    });
+    res.status(201).json(monsterObj);
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
 
-async getPc() {
-  const PcObj = await knex
-   .select("*")
-   .from('pc')
-   return PcObj
-},
+const getPc = async (req, res) => {
+  try {
+    const pcObj = await knex.select("*").from("pc");
+    res.status(201).json(pcObj);
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
 
+const getMonsterList = async (req, res) => {
+  try {
+    const monsters = await fetch("https://www.dnd5eapi.co/api/monsters")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data.results;
+      });
+    res.status(200).json(monsters);
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
 
- async getMonsterList() {
-     return await fetch("https://www.dnd5eapi.co/api/monsters")
-     .then((response) => {
-        return response.json()
-    })
-     .then((data) => {
-       return data.results
-     })
- },
+const getRaceList = async (req, res) => {
+  try {
+    const races = await fetch("https://www.dnd5eapi.co/api/races")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data.results;
+      });
+    res.status(200).json(races);
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
 
- async getRaceList() {
-  return await fetch("https://www.dnd5eapi.co/api/races")
-  .then((response) => {
-     return response.json()
- })
-  .then((data) => {
-    return data.results
-  })
-},
+const getClassList = async (req, res) => {
+  try {
+    const classList = await fetch("https://www.dnd5eapi.co/api/classes")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data.results;
+      });
+    res.status(200).json(classList);
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
 
-async getClassList() {
-  return await fetch("https://www.dnd5eapi.co/api/classes")
-  .then((response) => {
-     return response.json()
- })
-  .then((data) => {
-    return data.results
-  })
-},
+const getMonsterByurl = async (req, res) => {
+  try {
+    const monster = await fetch(`https://www.dnd5eapi.co${url}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data;
+      });
+    res.status(200).json(monster);
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
 
- async getMonsterByurl(url) {
-  return await fetch(`https://www.dnd5eapi.co${url}`)
-  .then((response) => {
-     return response.json()
- })
-  .then((data) => {
-    return data
-  })
-},
+module.exports = {
+  createPc,
+  createMonsterDB,
+  getMonsterDB,
+  getPc,
+  getMonsterList,
+  getRaceList,
+  getClassList,
+  getMonsterByurl,
 
-async getMonsterByIndex(index) {
-  return await fetch(`https://www.dnd5eapi.co/api/${index}`)
-  .then((response) => {
-     return response.json()
- })
-  .then((data) => {
-    return data
-  })
-},
-
+  async getMonsterByIndex(index) {
+    return await fetch(`https://www.dnd5eapi.co/api/${index}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        return data;
+      });
+  },
 };
