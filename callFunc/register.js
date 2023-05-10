@@ -6,10 +6,7 @@ const bcrypt = require("bcrypt")
 module.exports = {
     async createUser(userInfo) {
         const { userName, password} = userInfo;
-        console.log(userInfo)
-        console.log("😍")
         if (!userName || !password) {
-            console.log("😁")
             return {
                 status: "400",
                 message: "Username and Password are Required"
@@ -31,7 +28,6 @@ module.exports = {
 
             })
             .returning("*");
-            console.log()
           return user;
         }  else {
             

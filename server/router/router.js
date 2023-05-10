@@ -36,7 +36,8 @@ router.get('/api/user', async (req, res) => {
        const userobj = await getUserByUsername(req.query["userName"],req.query["password"])
        console.log('😍',userobj)
         if (userobj[0]) {
-            res.status(201).json(userobj[1])
+            res.status(201).json(userobj[1]);
+            res.cookie("jwt", userobj[2], {httpOnly:true, maxAge: 24*60*60*1000});
         } else {
             console.log(userobj[0])
             res.status(403).json("access denied")
