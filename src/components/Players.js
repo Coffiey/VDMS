@@ -1,4 +1,6 @@
 import axios from "axios";
+import useAxiosPrivate from "./hooks/useAxiosPrivate";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import ClassDrop from "./CharacterDropDowns/ClassDrop";
 import RaceDrop from "./CharacterDropDowns/RaceDrop";
@@ -33,18 +35,30 @@ const Players = (props) => {
 
   const [player, setPlayer] = useState([]);
 
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
-    axios
-      .get("/api/pc")
-      .then((response) => {
-        return response.data;
-      })
-      .then((data) => {
-        setPlayer(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    let isMounted = true;
+    const controller = new AbortController();
+    const getPlayers = async () => {
+      try {
+        const response = await axiosPrivate.get("/db/pc", {
+          signal: controller.signal,
+        });
+        console.log(response.data);
+        isMounted && setPlayer(response.data);
+      } catch (err) {
+        console.error("🤢", err);
+        navigate("/login", { state: { from: location }, replace: true });
+      }
+      controller.abort();
+    };
+    getPlayers();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {

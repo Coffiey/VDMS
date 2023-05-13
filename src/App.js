@@ -27,6 +27,7 @@ function App() {
     axios
       .get(`/api/monster`)
       .then((response) => {
+        console.log(response.data);
         setList(response.data);
         setDisableInput(false);
       })

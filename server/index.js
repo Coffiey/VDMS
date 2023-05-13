@@ -28,7 +28,7 @@ app.use("/logout", logout);
 app.use("/refresh", refresh);
 app.use("/api", router);
 app.use(verifyJWT);
-app.use("/api/db", authRouter);
+app.use("/db", authRouter);
 
 app.listen(PORT, () => {
   console.log(`listening on port : ${PORT}`);

@@ -1,6 +1,8 @@
 import "./css/enemy.css";
 import DropdownItem from "./DropdownItem";
 import axios from "axios";
+import useAxiosPrivate from "./hooks/useAxiosPrivate";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Enemy = (props) => {
@@ -28,6 +30,10 @@ const Enemy = (props) => {
   const [heal, setHeal] = useState(0);
   const [monsterObj2, setMonsterObj2] = useState(0);
 
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const createMon = (monster, health, index, Reference, url) => {
     const obj = {
       monsterName: monster,
@@ -41,17 +47,37 @@ const Enemy = (props) => {
   };
 
   useEffect(() => {
-    axios
-      .get("/api/enemy")
-      .then((response) => {
-        return response.data;
-      })
-      .then((data) => {
-        setMonsterArray(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    let isMounted = true;
+    const controller = new AbortController();
+    const getEnemy = async () => {
+      try {
+        const response = await axiosPrivate.get("/db/enemy", {
+          signal: controller.signal,
+        });
+        console.log(response.data);
+        isMounted && setMonsterArray(response.data);
+      } catch (err) {
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
+        controller.abort();
+      }
+    };
+    getEnemy();
+    return () => {
+      isMounted = false;
+    };
+
+    // axios
+    //   .get("/api/enemy")
+    //   .then((response) => {
+    //     return response.data;
+    //   })
+    //   .then((data) => {
+    //     setMonsterArray(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }, []);
 
   useEffect(() => {

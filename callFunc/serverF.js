@@ -80,13 +80,13 @@ const getPc = async (req, res) => {
 };
 
 const getMonsterList = async (req, res) => {
-  console.log("hello this is a test 🤑");
   try {
     const monsters = await fetch("https://www.dnd5eapi.co/api/monsters")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
+        console.log(data.results);
         return data.results;
       });
     res.status(200).json(monsters);
