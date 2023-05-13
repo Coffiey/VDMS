@@ -36,42 +36,48 @@ const createUser = async (req, res) => {
 };
 
 const getUserByUsername = async (req, res) => {
+  console.log(req.body);
+  const { userName, password } = req.body;
   try {
-    const [userObj] = await knex.select("*").from("user").where({
-      user_name: req.query["userName"],
+    const userObj = await knex.select("*").from("user").where({
+      user_name: userName,
     });
-    const match = await bcrypt.compare(req.query["password"], userObj.password);
-    if (match) {
-      const accessToken = jwt.sign(
-        {
-          userName: userObj.user_name,
-          id: userObj.id,
-        },
-        process.env.ACCESS_SECRET_TOKEN,
-        { expiresIn: "5m" }
-      );
 
-      const refreshToken = jwt.sign(
-        {
-          userName: userObj.user_name,
-          id: userObj.id,
-        },
-        process.env.REFRESH_SECRET_TOKEN,
-        { expiresIn: "1d" }
-      );
-      await knex("user").where("user_name", "=", userName).update({
-        refresh_token: refreshToken,
-      });
-      res.status(201).json(accessToken);
-      res.cookie("jwt", refreshToken, {
-        httpOnly: true,
-        sameSite: true,
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-    } else {
-      res.status(403).json("access denied");
+    if (userObj.length === 0) {
+      return res.status(403).json("User Name or Password Incorrect");
     }
+
+    const match = await bcrypt.compare(password, userObj[0].password);
+
+    if (!match) {
+      return res.status(403).json("User Name or Password Incorrect");
+    }
+    const accessToken = jwt.sign(
+      {
+        userName: userObj[0].user_name,
+        id: userObj[0].id,
+      },
+      process.env.ACCESS_SECRET_TOKEN,
+      { expiresIn: "30s" }
+    );
+    const refreshToken = jwt.sign(
+      {
+        userName: userObj[0].user_name,
+        id: userObj[0].id,
+      },
+      process.env.REFRESH_SECRET_TOKEN,
+      { expiresIn: "1d" }
+    );
+    await knex("user").where("user_name", "=", userObj[0].user_name).update({
+      refresh_token: refreshToken,
+    });
+    res.cookie("jwt", refreshToken, {
+      httpOnly: true,
+      sameSite: "None",
+      // secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+    res.status(201).json(accessToken);
   } catch (err) {
     res.status(500).json("something went wrong");
   }

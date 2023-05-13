@@ -13,7 +13,7 @@ const {
 
 const router = express.Router();
 router.route("/pc").get(getPc).post(createPc);
-router.route.get(getMonsterDB)("/enemy").post(createMonsterDB);
+router.route("/enemy").get(getMonsterDB).post(createMonsterDB);
 router.route("/monster").get(getMonsterList);
 router.route("/races").get(getRaceList);
 router.route("/classes").get(getClassList);

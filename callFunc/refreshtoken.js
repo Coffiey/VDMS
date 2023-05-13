@@ -1,23 +1,23 @@
 const knex = require("../db/knex");
 
 const jwt = require("jsonwebtoken");
-requre("dotenv").config();
 
 const handleRefreshToken = async (req, res) => {
   try {
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(401);
-    console.log(cookies.jwt);
     const refreshToken = cookies.jwt;
     const user = await knex.select("*").from("user").where({
       refresh_token: refreshToken,
     });
-    if (user.length === 0) {
+    console.log(user);
+    if (user.length !== 0) {
       jwt.verify(
         refreshToken,
         process.env.REFRESH_SECRET_TOKEN,
         (err, decoded) => {
-          if (err || user.user_name !== decoded.user_name) {
+          console.log(decoded);
+          if (err || user[0].user_name !== decoded.userName) {
             return res.sendStatus(403);
           }
           const accessToken = jwt.sign(
@@ -26,13 +26,13 @@ const handleRefreshToken = async (req, res) => {
               id: decoded.id,
             },
             process.env.ACCESS_SECRET_TOKEN,
-            { expiresIn: "5m" }
+            { expiresIn: "30s" }
           );
           res.json(accessToken);
         }
       );
     } else {
-      res.status(403).json("access denied");
+      res.sendStatus(403);
     }
   } catch (err) {
     res.status(500).json("something went wrong");
