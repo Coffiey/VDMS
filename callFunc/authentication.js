@@ -58,7 +58,7 @@ const getUserByUsername = async (req, res) => {
         id: userObj[0].id,
       },
       process.env.ACCESS_SECRET_TOKEN,
-      { expiresIn: "30s" }
+      { expiresIn: "10m" }
     );
     const refreshToken = jwt.sign(
       {
@@ -74,7 +74,7 @@ const getUserByUsername = async (req, res) => {
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      // secure: true,
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
     res.status(201).json({ accessToken });

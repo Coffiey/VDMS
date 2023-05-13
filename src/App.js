@@ -7,6 +7,7 @@ import Register from "./components/userAuthentication/Register";
 import Login from "./components/userAuthentication/Login";
 import Enemy from "./components/Enemy";
 import Players from "./components/Players";
+import RequireAuth from "./components/RequireAuth";
 import CombatArray from "./components/CombatArray";
 import { Routes, Route } from "react-router-dom";
 
@@ -52,6 +53,31 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* needs to be protected */}
+        <Route element={<RequireAuth />}>
+          <Route
+            path="/game"
+            element={[
+              <Players display={display} combatState={combatState} />,
+              <Enemy
+                combatState={combatState}
+                display={display}
+                setSearch={setSearch}
+                disableInput={disableInput}
+                monsterObj={monsterObj}
+                setmonsterObj={setmonsterObj}
+                list={list}
+                dropdown={dropdown}
+                seeList={seeList}
+              />,
+              <DisplayMonster
+                setmonsterObj={setmonsterObj}
+                monsterObj={monsterObj}
+                combatState={combatState}
+              />,
+            ]}
+          />
+        </Route>
       </Route>
     </Routes>
 
@@ -61,7 +87,7 @@ function App() {
     //       <button
     //         onClick={() => {
     //           SetCombatState(!combatState);
-    //           console.log(combatState);
+
     //         }}
     //       >
     //         {combatState ? "BEGIN COMBAT" : "END COMBAT"}
@@ -74,11 +100,7 @@ function App() {
     //         logOut
     //       </button>
     //     </div>
-    //     {combatState && (
-    //       <div className="Player">
-    //         <Players display={display} combatState={combatState} />
-    //       </div>
-    //     )}
+    //
     //     <div className="Enemy">
     //       {combatState ? (
     //         <Enemy
@@ -98,14 +120,6 @@ function App() {
     //           monsterObj={monsterObj}
     //         />
     //       )}
-    //     </div>
-
-    //     <div className="DisplayMonster">
-    //       <DisplayMonster
-    //         setmonsterObj={setmonsterObj}
-    //         monsterObj={monsterObj}
-    //         combatState={combatState}
-    //       />
     //     </div>
     //   </div>
     // </div>

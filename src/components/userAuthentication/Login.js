@@ -1,28 +1,31 @@
-import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import "./register.css";
 
 import axios from "axios";
 const LOGIN_URL = "/auth/user";
 
-const Login = (props) => {
-  const { setRegister, setAuthentication } = props;
-  const { setAuth } = useContext(AuthContext);
+const Login = () => {
+  const { setAuth } = useAuth();
   const userRef = useRef();
   const errRef = useRef();
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
-  //   const login = useCallback(
-  //     () => navigate("/login", { replace: true }),
-  //     [navigate]
-  //   );
+  const from = location.state?.from?.pathname || "/game";
+
+  const game = () => {
+    if (from !== "/register") {
+      navigate(from, { replace: true });
+    } else {
+      navigate("/game", { replace: true });
+    }
+  };
 
   useEffect(() => {
     userRef.current.focus();
@@ -49,7 +52,7 @@ const Login = (props) => {
       setAuth({ user, pwd, accessToken });
       setUser("");
       setPwd("");
-      setSuccess(true);
+      game();
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const corsOptions = require("../config/corsOptions");
 const router = require("./router/router.js");
+const authRouter = require("./router/authRouter.js");
 const refresh = require("./router/refresh.js");
 const logout = require("./router/logoutroute.js");
 const auth = require("./router/auth.js");
@@ -25,8 +26,9 @@ app.use(cookieParser());
 app.use("/auth", auth);
 app.use("/logout", logout);
 app.use("/refresh", refresh);
-app.use(verifyJWT);
 app.use("/api", router);
+app.use(verifyJWT);
+app.use("/api/db", authRouter);
 
 app.listen(PORT, () => {
   console.log(`listening on port : ${PORT}`);
