@@ -11,19 +11,12 @@ const {
   getMonsterDB,
 } = require("../../callFunc/serverF");
 
-const { createUser } = require("../../callFunc/register");
-
-const { getUserByUsername } = require("../../callFunc/authentication");
-
-const verifyJWT = require("../../middleware/verifyJWT");
-
 const router = express.Router();
-router.route("/api/user").get(getUserByUsername).post(createUser);
-router.route("/api/pc").post(createPc).get(getPc);
-router.route("/api/enemy").post(createMonsterDB).get(getMonsterDB);
-router.route("/api/monster").get(getMonsterList);
-router.route("/api/races").get(getRaceList);
-router.route("/api/classes").get(getClassList);
-router.route("/api/monster/object").get(getMonsterByurl);
+router.route("/pc").get(getPc).post(createPc);
+router.route.get(getMonsterDB)("/enemy").post(createMonsterDB);
+router.route("/monster").get(getMonsterList);
+router.route("/races").get(getRaceList);
+router.route("/classes").get(getClassList);
+router.route("/monster/object").get(getMonsterByurl);
 
 module.exports = router;

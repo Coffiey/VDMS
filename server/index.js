@@ -1,21 +1,33 @@
-require("dotenv").config({ path: "./.env.local"});
+require("dotenv").config({ path: "./.env.local" });
 
 const express = require("express");
-const router = require('./router/router.js');
+const cors = require("cors");
+const corsOptions = require("../config/corsOptions");
+const router = require("./router/router.js");
+const refresh = require("./router/refresh.js");
+const logout = require("./router/logout.js");
+const auth = require("./router/auth.js");
+const credentials = require("../middleware/credentials.js");
+const cookieParser = require("cookie-parser");
+const verifyJWT = require("../middleware/verifyJWT");
 const app = express();
 
 const PORT = process.env.PORT || 8080;
 
 //build file
-app.use("/", express.static(__dirname +"/.." + "/build"));
+app.use("/", express.static(__dirname + "/.." + "/build"));
 
 // front end
+app.use(credentials);
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(router);
-app.get("/api",async (req, res) => {
-	await res.send("Hello This is adam");
-});
+app.use(cookieParser());
+app.use("/auth", auth);
+app.use("/logout", logout);
+app.use("/refresh", refresh);
+app.use(verifyJWT);
+app.use("/api", router);
 
 app.listen(PORT, () => {
-	console.log(`listening on port : ${PORT}`);
+  console.log(`listening on port : ${PORT}`);
 });
