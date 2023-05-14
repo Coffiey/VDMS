@@ -1,57 +1,56 @@
 .enemyDiv {
-    border-color: black;
-    border-style: solid;
-    margin: 5px;
-    border-radius: 10px;
-    background-color: rgb(216, 135, 14);
-    opacity: 80%;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-
+  padding: 5px 5px 5px 5px;
+  border-color: black;
+  border-style: solid;
+  margin: 5px 10px 2px 5px;
+  border-radius: 10px;
+  background-color: rgb(216, 135, 14);
+  opacity: 80%;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 97%;
 }
 
 .playerDiv {
-    border-color: black;
-    border-style: solid;
-    margin: 5px;
-    border-radius: 10px;
-    background-color: rgb(139, 88, 11);
-    opacity: 80%;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-
+  border-color: black;
+  border-style: solid;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: rgb(139, 88, 11);
+  opacity: 80%;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
 }
 
-.enemyTop{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 0%;
-    padding:0%;
+.enemyTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 0%;
+  padding: 0%;
 }
 
-.enemyBot{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 0%;
-    padding:0%;
+.enemyBot {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 1%;
+  padding: 0% 5% 0.5% 5%;
 }
 
-.enemyName{
-    font-size: 2vw;
-    margin-top: 0%;
-    margin-bottom: 0%;
+.enemyName {
+  font-size: 2vw;
+  margin-top: 0%;
+  margin-bottom: 0%;
 }
 
-.enemyHp{
-    font-size: 2vw;
-    margin-top: 0%;
-    margin-bottom: 0%;
+.enemyHp {
+  font-size: 2vw;
+  margin-top: 0%;
+  margin-bottom: 0%;
 }
 
-.health{
-    color: green;
+.health {
+  color: green;
 }

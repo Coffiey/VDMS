@@ -1,6 +1,6 @@
 body {
   background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/f17f2d94900513.5e8a7dade6408.jpg);
-   background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -13,28 +13,40 @@ body {
   margin-right: auto;
   display: flex;
   flex-direction: row;
-  height:250px;
-  border-radius: 25px;
+  height: 250px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 
-.Enemy{
-  padding: 5px;
+.Enemy {
+  padding: 5px 5px 5px 5px;
   position: fixed;
   background-color: bisque;
-  width: 48%;
-  margin-top: 20px;
+  width: 48.6%;
+  margin-top: 5px;
   margin-left: 1%;
   margin-right: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  float: left;
-  border-radius: 25px;
-  height:70%;
+  height: 60%;
   overflow: scroll;
   overflow-x: hidden;
 }
 
-.basic{
+.DisplayMonster {
+  z-index: 1;
+  position: fixed;
+  margin-top: 5px;
+  background-color: bisque;
+  width: 48.6%;
+  float: right;
+  margin-left: 50.5%;
+  display: flex;
+  height: 61%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.basic {
   background-color: bisque;
 }

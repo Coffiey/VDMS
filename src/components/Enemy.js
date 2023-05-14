@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 const Enemy = (props) => {
   const {
     setSearch,
+    search,
     disableInput,
     monsterObj,
     setmonsterObj,
@@ -19,21 +20,26 @@ const Enemy = (props) => {
     setList,
   } = props;
 
-  const [selected, setSelected] = useState(true);
   const [monster, setMonster] = useState(true);
   const [health, setHealth] = useState(0);
   const [monsterReference, setMonsterReference] = useState("");
   const [Customhealth, setCustomhealth] = useState(0);
   const [monsterArray, setMonsterArray] = useState([]);
-  const [updateMonsterArray, setUpdateMonsterArray] = useState([]);
-  const [damage, setDamage] = useState(0);
-  const [heal, setHeal] = useState(0);
   const [monsterObj2, setMonsterObj2] = useState(0);
 
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const reset = () => {
+    setSearch("");
+    setmonsterObj(null);
+    setHealth(0);
+    setMonsterReference("");
+    setCustomhealth(0);
+    setMonsterObj2(0);
+    setMonsterArray([]);
+  };
   const createMon = (monster, health, index, Reference, url) => {
     const obj = {
       monsterName: monster,
@@ -42,7 +48,6 @@ const Enemy = (props) => {
       monsterReference: Reference,
       url,
     };
-    console.log("MO backend:", obj);
     return obj;
   };
 
@@ -54,7 +59,6 @@ const Enemy = (props) => {
         const response = await axiosPrivate.get("/db/enemy", {
           signal: controller.signal,
         });
-        console.log(response.data);
         isMounted && setMonsterArray(response.data);
       } catch (err) {
         console.error(err);
@@ -63,10 +67,40 @@ const Enemy = (props) => {
       }
     };
     getEnemy();
+    reset();
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [monster]);
+
+  const postEnemy = async (object) => {
+    const controller = new AbortController();
+    try {
+      await axiosPrivate.post(`/db/enemy`, object, {
+        signal: controller.signal,
+      });
+      setMonster(!monster);
+    } catch (err) {
+      console.error(err);
+      controller.abort();
+    }
+  };
+
+  const deleteEnemy = async (index) => {
+    const controller = new AbortController();
+    try {
+      await axiosPrivate.delete(
+        `/db/enemy?monsterReference=${index.monsterReference}`,
+        {
+          signal: controller.signal,
+        }
+      );
+      setMonster(!monster);
+    } catch (err) {
+      console.error(err);
+      controller.abort();
+    }
+  };
 
   useEffect(() => {
     if (monsterObj2) {
@@ -84,77 +118,33 @@ const Enemy = (props) => {
         .then((response) => {
           setmonsterObj(response.data);
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+        .catch(function (error) {});
     }
   }, [disableInput]);
 
-  const postEnemy = (object) => {
-    console.log(object);
-    return axios
-      .post("/api/enemy", object)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const newMonsterAray = (damage, info) => {
-    return monsterArray.map((item) => {
-      if (monsterArray.indexOf(item) === monsterArray.indexOf(info)) {
-        console.log(item);
-        item.health += damage;
-        console.log(item);
-        return item;
-      } else {
-        return item;
-      }
-    });
-  };
-
   return (
     <>
-      <div className="Enemy">
+      <div className='Enemy'>
         {combatState && (
           <div>
             {display && (
-              <div className="enemyDiv">
+              <div className='enemyDiv'>
                 {monsterReference === "" ? (
                   <h1>Create an enemy</h1>
                 ) : (
                   <h1>{monsterReference}</h1>
                 )}
-                {monsterObj !== null && <h2>{monsterObj.name}</h2>}
-                <p>
-                  Serach:{" "}
-                  <input
-                    type="text"
-                    //    disabled={disableInput}
-                    onChange={(e) => {
-                      setSearch(e.target.value);
-                    }}
-                  ></input>
-                  {seeList && (
-                    <ul>
-                      <DropdownItem
-                        setList={setList}
-                        combatState={combatState}
-                        dropdown={dropdown}
-                        setMonsterObj2={setMonsterObj2}
-                        setSearch={setSearch}
-                      />
-                    </ul>
-                  )}
-                </p>
-                {monsterObj !== null && (
+                {monsterObj !== null ? (
                   <>
+                    <h2 onClick={() => setmonsterObj(null)}>
+                      {monsterObj.name}
+                    </h2>
                     <p>
                       HP:{" "}
                       {!health ? (
                         <>
                           <input
-                            type="number"
+                            type='number'
                             onChange={(e) => {
                               setCustomhealth(e.target.value);
                             }}
@@ -178,72 +168,91 @@ const Enemy = (props) => {
                         <span>{health}</span>
                       )}
                     </p>
+                    <p>
+                      Set Name:
+                      <input
+                        value={monsterReference}
+                        onChange={(e) => {
+                          setMonsterReference(e.target.value);
+                        }}
+                      />
+                      <button
+                        disabled={!health}
+                        onClick={() => {
+                          setMonster();
+                          setMonsterArray([
+                            ...monsterArray,
+                            createMon(
+                              monsterObj?.name,
+                              health,
+                              monsterObj?.index,
+                              monsterReference,
+                              monsterObj?.url
+                            ),
+                          ]);
+                          postEnemy(
+                            createMon(
+                              monsterObj?.name,
+                              health,
+                              monsterObj?.index,
+                              monsterReference,
+                              monsterObj?.url
+                            )
+                          );
+                        }}
+                      >
+                        Create Monster
+                      </button>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      Serach:{" "}
+                      <input
+                        value={search}
+                        type='text'
+                        onChange={(e) => {
+                          setSearch(e.target.value);
+                        }}
+                      ></input>
+                      {seeList && (
+                        <ul>
+                          <DropdownItem
+                            setList={setList}
+                            combatState={combatState}
+                            dropdown={dropdown}
+                            setMonsterObj2={setMonsterObj2}
+                            setSearch={setSearch}
+                          />
+                        </ul>
+                      )}
+                    </p>
                   </>
                 )}
-                <p>
-                  Set Name:
-                  <input
-                    onChange={(e) => {
-                      setMonsterReference(e.target.value);
-                    }}
-                  />
-                  <button
-                    disabled={!health}
-                    onClick={() => {
-                      setMonster();
-                      setMonsterArray([
-                        ...monsterArray,
-                        createMon(
-                          monsterObj.name,
-                          health,
-                          monsterObj.index,
-                          monsterReference,
-                          monsterObj.url
-                        ),
-                      ]);
-                      postEnemy(
-                        createMon(
-                          monsterObj.name,
-                          health,
-                          monsterObj.index,
-                          monsterReference,
-                          monsterObj.url
-                        )
-                      );
-                    }}
-                  >
-                    Create Monster
-                  </button>
-                </p>
               </div>
             )}
           </div>
         )}
 
         <div>
-          {monsterArray.map((info) => {
+          {monsterArray.map((info, index) => {
             return (
-              <div className="enemyDiv">
-                <div className="enemyTop">
+              <div className='enemyDiv'>
+                <div className='enemyTop'>
                   <h1>{info.monsterReference}</h1>
-                  <h6 className="enemyName">{info.monsterName}</h6>
-                  <h1 className="enemyHp">
-                    HP: <span className="health">{info.health}</span>
+                  <h6 className='enemyName'>{info.monsterName}</h6>
+                  <h1 className='enemyHp'>
+                    HP: <span className='health'>{info.health}</span>
                   </h1>
                 </div>
-                <div className="enemyBot">
-                  <p onClick={() => console.log(newMonsterAray(damage, info))}>
-                    Damage:{" "}
-                    <input
-                      onChange={(e) => {
-                        setHeal(Number(e.target.value));
-                      }}
-                      type="Number"
-                    ></input>
-                  </p>
-                  <p>
-                    Heal: <input type="Number"></input>
-                  </p>
+                <div className='enemyBot'>
+                  {/* <button onClick={() => console.log(info)}>
+                    Edit Monster
+                  </button> */}
+                  <button onClick={() => deleteEnemy(info)}>
+                    Delete Monster
+                  </button>
                 </div>
               </div>
             );

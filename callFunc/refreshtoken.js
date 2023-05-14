@@ -10,13 +10,11 @@ const handleRefreshToken = async (req, res) => {
     const user = await knex.select("*").from("user").where({
       refresh_token: refreshToken,
     });
-    console.log(user);
     if (user.length !== 0) {
       jwt.verify(
         refreshToken,
         process.env.REFRESH_SECRET_TOKEN,
         (err, decoded) => {
-          console.log(decoded);
           if (err || user[0].user_name !== decoded.userName) {
             return res.sendStatus(403);
           }

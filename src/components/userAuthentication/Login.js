@@ -47,7 +47,6 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       setAuth({ user, pwd, accessToken });
       setUser("");
@@ -68,42 +67,42 @@ const Login = () => {
   };
 
   return (
-    <section class="login">
+    <section class='login'>
       <p
         ref={errRef}
         className={errMsg ? "errmsg" : "offscreen"}
-        aria-live="assertive"
+        aria-live='assertive'
       >
         {errMsg}
       </p>
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
+        <label htmlFor='username'>Username:</label>
         <input
-          type="text"
-          id="username"
+          type='text'
+          id='username'
           ref={userRef}
-          autoComplete="off"
+          autoComplete='off'
           onChange={(e) => setUser(e.target.value)}
           value={user}
           required
         />
 
-        <label htmlFor="password">Password:</label>
+        <label htmlFor='password'>Password:</label>
         <input
-          type="password"
-          id="password"
+          type='password'
+          id='password'
           onChange={(e) => setPwd(e.target.value)}
           value={pwd}
           required
         />
-        <button className="regButton">Sign In</button>
+        <button className='regButton'>Sign In</button>
       </form>
       <p>
         It is your First time?
         <br />
-        <span className="line">
-          <Link to="/register">Sign Up</Link>
+        <span className='line'>
+          <Link to='/register'>Sign Up</Link>
         </span>
       </p>
     </section>

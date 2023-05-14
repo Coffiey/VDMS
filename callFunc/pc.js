@@ -80,7 +80,7 @@ const editPc = async (req, res) => {
 const deletePc = async (req, res) => {
   try {
     await knex("pc")
-      .where("name", "=", req.query["name"])
+      .where("id", "=", req.query["id"])
       .delete([
         "name",
         "player_class",

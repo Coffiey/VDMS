@@ -8,16 +8,12 @@ const DropdownItem = (props) => {
 
   useEffect(() => {
     if (monsterID) {
-      console.log("🤬", monsterID);
       axios
         .get(`/api/monster/object?url=${monsterID}`)
         .then((response) => {
-          console.log(response.data);
           setMonsterObj2(response.data);
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+        .catch(function (error) {});
     }
   }, [monsterID]);
 
@@ -25,9 +21,8 @@ const DropdownItem = (props) => {
     return (
       <li>
         <p
-          className="monsterButton"
+          className='monsterButton'
           onClick={() => {
-            console.log(monster.url);
             setMonsterID(monster.url);
             setSearch("");
           }}

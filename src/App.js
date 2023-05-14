@@ -27,13 +27,10 @@ function App() {
     axios
       .get(`/api/monster`)
       .then((response) => {
-        console.log(response.data);
         setList(response.data);
         setDisableInput(false);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   }, []);
 
   useEffect(() => {
@@ -46,24 +43,36 @@ function App() {
       });
       setDropdown(monsterSearch);
     }
-    console.log(dropdown);
   }, [search]);
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      <Route
+        path='/'
+        element={<Layout />}
+      >
+        <Route
+          path='/login'
+          element={<Login />}
+        />
+        <Route
+          path='/register'
+          element={<Register />}
+        />
         {/* needs to be protected */}
         <Route element={<RequireAuth />}>
           <Route
-            path="/game"
+            path='/game'
             element={[
-              <Players display={display} combatState={combatState} />,
+              <Players
+                display={display}
+                combatState={combatState}
+              />,
               <Enemy
                 combatState={combatState}
                 display={display}
                 setSearch={setSearch}
+                search={search}
                 disableInput={disableInput}
                 monsterObj={monsterObj}
                 setmonsterObj={setmonsterObj}
@@ -71,11 +80,13 @@ function App() {
                 dropdown={dropdown}
                 seeList={seeList}
               />,
-              <DisplayMonster
-                setmonsterObj={setmonsterObj}
-                monsterObj={monsterObj}
-                combatState={combatState}
-              />,
+              <div className='DisplayMonster'>
+                <DisplayMonster
+                  setmonsterObj={setmonsterObj}
+                  monsterObj={monsterObj}
+                  combatState={combatState}
+                />
+              </div>,
             ]}
           />
         </Route>

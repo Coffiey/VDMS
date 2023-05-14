@@ -9,7 +9,6 @@ const getMonsterList = async (req, res) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data.results);
         return data.results;
       });
     res.status(200).json(monsters);
@@ -50,7 +49,6 @@ const getClassList = async (req, res) => {
 
 const getMonsterByurl = async (req, res) => {
   const url = req.query["url"];
-  console.log(url);
   try {
     const monster = await fetch(`https://www.dnd5eapi.co${url}`)
       .then((response) => {
