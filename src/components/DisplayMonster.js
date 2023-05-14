@@ -18,7 +18,6 @@ const DisplayMonster = (props) => {
   };
 
   if (monsterObj) {
-    console.log(monsterObj);
     return (
       <div className="DisplayMonster">
         <div className="div">

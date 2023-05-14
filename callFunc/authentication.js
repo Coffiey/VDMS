@@ -58,7 +58,7 @@ const getUserByUsername = async (req, res) => {
         id: userObj[0].id,
       },
       process.env.ACCESS_SECRET_TOKEN,
-      { expiresIn: "10m" }
+      { expiresIn: "1h" }
     );
     const refreshToken = jwt.sign(
       {

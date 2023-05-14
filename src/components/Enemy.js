@@ -66,18 +66,6 @@ const Enemy = (props) => {
     return () => {
       isMounted = false;
     };
-
-    // axios
-    //   .get("/api/enemy")
-    //   .then((response) => {
-    //     return response.data;
-    //   })
-    //   .then((data) => {
-    //     setMonsterArray(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }, []);
 
   useEffect(() => {
