@@ -122,9 +122,22 @@ const Enemy = (props) => {
     }
   }, [disableInput]);
 
+  const navigateToCombat = () => {
+    console.log("click");
+    navigate("/combat", { replace: true });
+  };
   return (
     <>
       <div className='Enemy'>
+        <div className='combatBanner'>
+          <button onClick={console.log("setIntiative")}>Set Initative</button>
+          <p onClick={console.log("setIntiative")}>Initative Set</p>
+          <button onClick={console.log("setIntiative")}>Next Turn</button>
+          <p>
+            <strong>Round: 9</strong>
+          </p>
+          <button onClick={navigateToCombat}>Begin Combat</button>
+        </div>
         {combatState && (
           <div>
             {display && (

@@ -17,13 +17,13 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/game";
+  const from = location.state?.from?.pathname || "/combat";
 
   const game = () => {
     if (from !== "/register") {
       navigate(from, { replace: true });
     } else {
-      navigate("/game", { replace: true });
+      navigate("/combat", { replace: true });
     }
   };
 

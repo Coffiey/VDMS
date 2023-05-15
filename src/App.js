@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Layout from "./components/layout/Layout";
+import CombatPlayers from "./components/CombatPlayer";
 import DisplayMonster from "./components/DisplayMonster";
 import Register from "./components/userAuthentication/Register";
 import Login from "./components/userAuthentication/Login";
@@ -12,8 +13,6 @@ import CombatArray from "./components/CombatArray";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [authentication, setAuthentication] = useState(0);
-
   const [combatState, SetCombatState] = useState(true);
   const [list, setList] = useState([]);
   const [dropdown, setDropdown] = useState([]);
@@ -79,6 +78,26 @@ function App() {
                 list={list}
                 dropdown={dropdown}
                 seeList={seeList}
+              />,
+              <div className='DisplayMonster'>
+                <DisplayMonster
+                  setmonsterObj={setmonsterObj}
+                  monsterObj={monsterObj}
+                  combatState={combatState}
+                />
+              </div>,
+            ]}
+          />
+          <Route
+            path='/combat'
+            element={[
+              <CombatPlayers
+                display={display}
+                combatState={combatState}
+              />,
+              <CombatArray
+                setmonsterObj={setmonsterObj}
+                monsterObj={monsterObj}
               />,
               <div className='DisplayMonster'>
                 <DisplayMonster
