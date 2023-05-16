@@ -6,11 +6,13 @@ import CombatPlayers from "./components/CombatPlayer";
 import DisplayMonster from "./components/DisplayMonster";
 import Register from "./components/userAuthentication/Register";
 import Login from "./components/userAuthentication/Login";
+import NavBar from "./components/NavBar";
 import Enemy from "./components/Enemy";
 import Players from "./components/Players";
 import RequireAuth from "./components/RequireAuth";
 import CombatArray from "./components/CombatArray";
 import { Routes, Route } from "react-router-dom";
+import PersistLogin from "./components/userAuthentication/PersistLogin";
 
 function App() {
   const [combatState, SetCombatState] = useState(true);
@@ -48,7 +50,7 @@ function App() {
     <Routes>
       <Route
         path='/'
-        element={<Layout />}
+        element={[<NavBar />, <Layout />]}
       >
         <Route
           path='/login'
@@ -58,56 +60,58 @@ function App() {
           path='/register'
           element={<Register />}
         />
-        {/* needs to be protected */}
-        <Route element={<RequireAuth />}>
-          <Route
-            path='/game'
-            element={[
-              <Players
-                display={display}
-                combatState={combatState}
-              />,
-              <Enemy
-                combatState={combatState}
-                display={display}
-                setSearch={setSearch}
-                search={search}
-                disableInput={disableInput}
-                monsterObj={monsterObj}
-                setmonsterObj={setmonsterObj}
-                list={list}
-                dropdown={dropdown}
-                seeList={seeList}
-              />,
-              <div className='DisplayMonster'>
-                <DisplayMonster
+        {/*  protected */}
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route
+              path='/game'
+              element={[
+                <Players
+                  display={display}
+                  combatState={combatState}
+                />,
+                <Enemy
+                  combatState={combatState}
+                  display={display}
+                  setSearch={setSearch}
+                  search={search}
+                  disableInput={disableInput}
+                  monsterObj={monsterObj}
+                  setmonsterObj={setmonsterObj}
+                  list={list}
+                  dropdown={dropdown}
+                  seeList={seeList}
+                />,
+                <div className='DisplayMonster'>
+                  <DisplayMonster
+                    setmonsterObj={setmonsterObj}
+                    monsterObj={monsterObj}
+                    combatState={combatState}
+                  />
+                </div>,
+              ]}
+            />
+            <Route
+              path='/combat'
+              element={[
+                <CombatPlayers
+                  display={display}
+                  combatState={combatState}
+                />,
+                <CombatArray
                   setmonsterObj={setmonsterObj}
                   monsterObj={monsterObj}
-                  combatState={combatState}
-                />
-              </div>,
-            ]}
-          />
-          <Route
-            path='/combat'
-            element={[
-              <CombatPlayers
-                display={display}
-                combatState={combatState}
-              />,
-              <CombatArray
-                setmonsterObj={setmonsterObj}
-                monsterObj={monsterObj}
-              />,
-              <div className='DisplayMonster'>
-                <DisplayMonster
-                  setmonsterObj={setmonsterObj}
-                  monsterObj={monsterObj}
-                  combatState={combatState}
-                />
-              </div>,
-            ]}
-          />
+                />,
+                <div className='DisplayMonster'>
+                  <DisplayMonster
+                    setmonsterObj={setmonsterObj}
+                    monsterObj={monsterObj}
+                    combatState={combatState}
+                  />
+                </div>,
+              ]}
+            />
+          </Route>
         </Route>
       </Route>
     </Routes>

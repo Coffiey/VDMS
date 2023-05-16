@@ -7,7 +7,7 @@ import axios from "axios";
 const LOGIN_URL = "/auth/user";
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const { setAuth, persist, setPersist, auth } = useAuth();
   const userRef = useRef();
   const errRef = useRef();
 
@@ -35,6 +35,12 @@ const Login = () => {
     setErrMsg("");
   }, [user, pwd]);
 
+  useEffect(() => {
+    if (auth?.accessToken) {
+      game();
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,7 +54,7 @@ const Login = () => {
         }
       );
       const accessToken = response?.data?.accessToken;
-      setAuth({ user, pwd, accessToken });
+      setAuth({ user, accessToken });
       setUser("");
       setPwd("");
       game();
@@ -65,6 +71,14 @@ const Login = () => {
       errRef.current.focus();
     }
   };
+
+  const togglePersist = () => {
+    setPersist((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", persist);
+  }, [persist]);
 
   return (
     <section class='login'>
@@ -97,6 +111,15 @@ const Login = () => {
           required
         />
         <button className='regButton'>Sign In</button>
+        <div>
+          <input
+            type='checkbox'
+            id='persist'
+            onChange={togglePersist}
+            checked={persist}
+          />
+          <label htmlFor='persist'>Keep me Logged in</label>
+        </div>
       </form>
       <p>
         It is your First time?

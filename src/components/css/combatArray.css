@@ -3,7 +3,7 @@
   margin: 0px 0px 0px 0px;
   padding: 5px;
   width: 100%;
-  border-style: solid;
+  border-bottom-style: solid;
   border-bottom-color: black;
   display: flex;
   flex-direction: row;

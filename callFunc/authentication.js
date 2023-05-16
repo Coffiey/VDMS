@@ -54,16 +54,14 @@ const getUserByUsername = async (req, res) => {
     }
     const accessToken = jwt.sign(
       {
-        userName: userObj[0].user_name,
-        id: userObj[0].id,
+        info: { userName: userObj[0].user_name, id: userObj[0].id },
       },
       process.env.ACCESS_SECRET_TOKEN,
-      { expiresIn: "1h" }
+      { expiresIn: "10m" }
     );
     const refreshToken = jwt.sign(
       {
-        userName: userObj[0].user_name,
-        id: userObj[0].id,
+        info: { userName: userObj[0].user_name, id: userObj[0].id },
       },
       process.env.REFRESH_SECRET_TOKEN,
       { expiresIn: "1d" }

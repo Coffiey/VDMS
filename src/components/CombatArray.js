@@ -183,7 +183,7 @@ const CombatArray = (props) => {
         console.log(monster);
         if (i === index) {
           if (typeof object?.max_hp === "number") {
-            if (object.max_hp + Number(hpChange[index] > player.max_hp)) {
+            if (object.max_hp + Number(hpChange[index]) > player.max_hp) {
               object.max_hp = player.max_hp;
               return object;
             }
@@ -192,7 +192,7 @@ const CombatArray = (props) => {
             // }
           }
           if (typeof object?.health === "number") {
-            if (object.health + Number(hpChange[index] > monster.health)) {
+            if (object.health + Number(hpChange[index]) > monster.health) {
               object.health = monster.health;
               return object;
             }
@@ -269,9 +269,13 @@ const CombatArray = (props) => {
           <p onClick={resetIntiative}>Initative Set</p>
         )}
         <button onClick={nextTurn}>Next Turn</button>
-        <p>
-          <strong>Round: {round}</strong>
-        </p>
+        {sorted ? (
+          <p>intiative Order</p>
+        ) : (
+          <p>
+            <strong>Round: {round}</strong>
+          </p>
+        )}
         <button onClick={navigateToGame}>End Combat</button>
       </div>
       {combatArray.map((object, index) => {
