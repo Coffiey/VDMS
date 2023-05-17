@@ -45,7 +45,7 @@ body {
   display: flex;
   float: left;
   flex-direction: column;
-  max-height: 63vh;
+  height: 63vh;
   min-height: 400px;
   overflow: scroll;
   overflow-x: hidden;

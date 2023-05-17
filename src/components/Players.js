@@ -38,27 +38,27 @@ const Players = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    axios
-      .get("/api/classes")
-      .then((response) => {
-        setClassList(response.data);
-        setDisableButonClass(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .get("/api/classes")
+    //   .then((response) => {
+    //     setClassList(response.data);
+    //     setDisableButonClass(false);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }, []);
 
   useEffect(() => {
-    axios
-      .get("/api/races")
-      .then((response) => {
-        setRaceList(response.data);
-        setDisableButonRace(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .get("/api/races")
+    //   .then((response) => {
+    //     setRaceList(response.data);
+    //     setDisableButonRace(false);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }, []);
 
   useEffect(() => {
@@ -95,65 +95,64 @@ const Players = (props) => {
 
   //get request
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    const getPlayers = async () => {
-      try {
-        const response = await axiosPrivate.get("/db/pc", {
-          signal: controller.signal,
-        });
-        isMounted && setPlayer(response.data);
-      } catch (err) {
-        navigate("/login", { state: { from: location }, replace: true });
-      }
-      controller.abort();
-    };
-    getPlayers();
-    return () => {
-      isMounted = false;
-      resetInputs();
-    };
+    // let isMounted = true;
+    // const controller = new AbortController();
+    // const getPlayers = async () => {
+    //   try {
+    //     const response = await axiosPrivate.get("/db/pc", {
+    //       signal: controller.signal,
+    //     });
+    //     isMounted && setPlayer(response.data);
+    //   } catch (err) {
+    //     navigate("/login", { state: { from: location }, replace: true });
+    //   }
+    //   controller.abort();
+    // };
+    // getPlayers();
+    // return () => {
+    //   isMounted = false;
+    //   resetInputs();
+    // };
   }, [playerSwitch]);
 
   //post request
   const postPlayerObject = async () => {
-    const controller = new AbortController();
-    const playerObject = {
-      name,
-      playerClass,
-      race,
-      level: Number(level),
-      maxHp: Number(maxHp),
-      dex: Number(dex),
-      int: Number(int),
-      cha: Number(cha),
-      str: Number(str),
-      con: Number(con),
-      wis: Number(wis),
-    };
-
-    try {
-      await axiosPrivate.post(`/db/pc`, playerObject, {
-        signal: controller.signal,
-      });
-      setPlayerSwitch(!playerSwitch);
-    } catch (err) {
-      console.error(err);
-      controller.abort();
-    }
+    // const controller = new AbortController();
+    // const playerObject = {
+    //   name,
+    //   playerClass,
+    //   race,
+    //   level: Number(level),
+    //   maxHp: Number(maxHp),
+    //   dex: Number(dex),
+    //   int: Number(int),
+    //   cha: Number(cha),
+    //   str: Number(str),
+    //   con: Number(con),
+    //   wis: Number(wis),
+    // };
+    // try {
+    //   await axiosPrivate.post(`/db/pc`, playerObject, {
+    //     signal: controller.signal,
+    //   });
+    //   setPlayerSwitch(!playerSwitch);
+    // } catch (err) {
+    //   console.error(err);
+    //   controller.abort();
+    // }
   };
 
   const deletePlayerObject = async (item) => {
-    const controller = new AbortController();
-    try {
-      await axiosPrivate.delete(`/db/pc?id=${item.id}`, {
-        signal: controller.signal,
-      });
-      setPlayerSwitch(!playerSwitch);
-    } catch (err) {
-      console.error(err);
-      controller.abort();
-    }
+    // const controller = new AbortController();
+    // try {
+    //   await axiosPrivate.delete(`/db/pc?id=${item.id}`, {
+    //     signal: controller.signal,
+    //   });
+    //   setPlayerSwitch(!playerSwitch);
+    // } catch (err) {
+    //   console.error(err);
+    //   controller.abort();
+    // }
   };
 
   return (

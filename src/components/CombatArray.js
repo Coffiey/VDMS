@@ -31,82 +31,81 @@ const CombatArray = (props) => {
   }, [combatArray]);
 
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    const getPlayers = async () => {
-      try {
-        const response = await axiosPrivate.get("/db/pc", {
-          signal: controller.signal,
-        });
-        isMounted && setPlayerArray(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-      controller.abort();
-    };
-    getPlayers();
-    return () => {
-      isMounted = false;
-    };
+    // let isMounted = true;
+    // const controller = new AbortController();
+    // const getPlayers = async () => {
+    //   try {
+    //     const response = await axiosPrivate.get("/db/pc", {
+    //       signal: controller.signal,
+    //     });
+    //     isMounted && setPlayerArray(response.data);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+    // getPlayers();
+    // return () => {
+    //   isMounted = false;
+    // };
   }, []);
 
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    const getEnemy = async () => {
-      try {
-        const response = await axiosPrivate.get("/db/enemy", {
-          signal: controller.signal,
-        });
-        isMounted && setMonsterArray(response.data);
-      } catch (err) {
-        console.error(err);
-        controller.abort();
-      }
-    };
-    getEnemy();
-    return () => {
-      isMounted = false;
-    };
+    // let isMounted = true;
+    // const controller = new AbortController();
+    // const getEnemy = async () => {
+    //   try {
+    //     const response = await axiosPrivate.get("/db/enemy", {
+    //       signal: controller.signal,
+    //     });
+    //     isMounted && setMonsterArray(response.data);
+    //   } catch (err) {
+    //     console.error(err);
+    //     controller.abort();
+    //   }
+    // };
+    // getEnemy();
+    // return () => {
+    //   isMounted = false;
+    // };
   }, []);
 
   useEffect(() => {
-    if (playerArray.length > 0 && monsterArray.length > 0) {
-      const combat = playerArray.concat(monsterArray);
-      const combat2 = JSON.parse(JSON.stringify(combat));
-      SetCombatArray(combat2);
-      setHpchange(
-        combatArray.map((x) => {
-          return "";
-        })
-      );
-    }
+    // if (playerArray.length > 0 && monsterArray.length > 0) {
+    //   const combat = playerArray.concat(monsterArray);
+    //   const combat2 = JSON.parse(JSON.stringify(combat));
+    //   SetCombatArray(combat2);
+    //   setHpchange(
+    //     combatArray.map((x) => {
+    //       return "";
+    //     })
+    //   );
+    // }
   }, [playerArray, monsterArray]);
 
   useEffect(() => {
-    if (combatArray.length !== 0) {
-      setHpchange(
-        combatArray.map((x) => {
-          return "";
-        })
-      );
-    }
+    // if (combatArray.length !== 0) {
+    //   setHpchange(
+    //     combatArray.map((x) => {
+    //       return "";
+    //     })
+    //   );
+    // }
   }, [combatArray]);
 
   useEffect(() => {
-    if (monsterUrl) {
-      axios
-        .get(`/api/monster/object?url=${monsterUrl}`)
-        .then((response) => {
-          return response.data;
-        })
-        .then((data) => {
-          setmonsterObj(data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+    // if (monsterUrl) {
+    //   axios
+    //     .get(`/api/monster/object?url=${monsterUrl}`)
+    //     .then((response) => {
+    //       return response.data;
+    //     })
+    //     .then((data) => {
+    //       setmonsterObj(data);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // }
   }, [monsterUrl]);
 
   useEffect(() => {
@@ -256,7 +255,6 @@ const CombatArray = (props) => {
     setSorted(true);
   };
   const navigateToGame = () => {
-    console.log("click");
     navigate("/game", { replace: true });
   };
 

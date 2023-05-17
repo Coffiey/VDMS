@@ -9,7 +9,6 @@ const PersistLogin = () => {
   const { auth, persist } = useAuth();
 
   useEffect(() => {
-    console.log(persist);
     if (persist) {
       const verifyRefreshtoken = async () => {
         try {
@@ -25,11 +24,6 @@ const PersistLogin = () => {
       setIsLoading(false);
     }
   }, []);
-
-  useEffect(() => {
-    console.log(`isLoading: ${isLoading}`);
-    console.log(`at: ${JSON.stringify(auth?.accessToken)}`);
-  }, [isLoading]);
 
   return <>{isLoading ? <div></div> : <Outlet />}</>;
 };

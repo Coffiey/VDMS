@@ -7,14 +7,14 @@ const DropdownItem = (props) => {
   const [monsterID, setMonsterID] = useState();
 
   useEffect(() => {
-    if (monsterID) {
-      axios
-        .get(`/api/monster/object?url=${monsterID}`)
-        .then((response) => {
-          setMonsterObj2(response.data);
-        })
-        .catch(function (error) {});
-    }
+    // if (monsterID) {
+    //   axios
+    //     .get(`/api/monster/object?url=${monsterID}`)
+    //     .then((response) => {
+    //       setMonsterObj2(response.data);
+    //     })
+    //     .catch(function (error) {});
+    // }
   }, [monsterID]);
 
   return dropdown.map((monster) => {

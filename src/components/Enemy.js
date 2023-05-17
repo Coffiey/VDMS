@@ -52,38 +52,38 @@ const Enemy = (props) => {
   };
 
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    const getEnemy = async () => {
-      try {
-        const response = await axiosPrivate.get("/db/enemy", {
-          signal: controller.signal,
-        });
-        isMounted && setMonsterArray(response.data);
-      } catch (err) {
-        console.error(err);
-        navigate("/login", { state: { from: location }, replace: true });
-        controller.abort();
-      }
-    };
-    getEnemy();
-    reset();
-    return () => {
-      isMounted = false;
-    };
+    // let isMounted = true;
+    // const controller = new AbortController();
+    // const getEnemy = async () => {
+    //   try {
+    //     const response = await axiosPrivate.get("/db/enemy", {
+    //       signal: controller.signal,
+    //     });
+    //     isMounted && setMonsterArray(response.data);
+    //   } catch (err) {
+    //     console.error(err);
+    //     navigate("/login", { state: { from: location }, replace: true });
+    //     controller.abort();
+    //   }
+    // };
+    // getEnemy();
+    // reset();
+    // return () => {
+    //   isMounted = false;
+    // };
   }, [monster]);
 
   const postEnemy = async (object) => {
-    const controller = new AbortController();
-    try {
-      await axiosPrivate.post(`/db/enemy`, object, {
-        signal: controller.signal,
-      });
-      setMonster(!monster);
-    } catch (err) {
-      console.error(err);
-      controller.abort();
-    }
+    // const controller = new AbortController();
+    // try {
+    //   await axiosPrivate.post(`/db/enemy`, object, {
+    //     signal: controller.signal,
+    //   });
+    //   setMonster(!monster);
+    // } catch (err) {
+    //   console.error(err);
+    //   controller.abort();
+    // }
   };
 
   const deleteEnemy = async (index) => {
@@ -103,36 +103,35 @@ const Enemy = (props) => {
   };
 
   useEffect(() => {
-    if (monsterObj2) {
-      setmonsterObj(monsterObj2);
-    }
+    // if (monsterObj2) {
+    //   setmonsterObj(monsterObj2);
+    // }
   }, [monsterObj2]);
 
   useEffect(() => {
-    if (monsterArray.length !== 0) {
-      let [item] = list.filter((monster) => {
-        return monster.name === monsterArray[0].monsterName;
-      });
-      axios
-        .get(`/api/monster/object?url=${item.url}`)
-        .then((response) => {
-          setmonsterObj(response.data);
-        })
-        .catch(function (error) {});
-    }
+    // if (monsterArray.length !== 0) {
+    //   let [item] = list.filter((monster) => {
+    //     return monster.name === monsterArray[0].monsterName;
+    //   });
+    //   axios
+    //     .get(`/api/monster/object?url=${item.url}`)
+    //     .then((response) => {
+    //       setmonsterObj(response.data);
+    //     })
+    //     .catch(function (error) {});
+    // }
   }, [disableInput]);
 
   const navigateToCombat = () => {
-    console.log("click");
     navigate("/combat", { replace: true });
   };
   return (
     <>
       <div className='Enemy'>
         <div className='combatBanner'>
-          <button onClick={console.log("setIntiative")}>Set Initative</button>
-          <p onClick={console.log("setIntiative")}>Initative Set</p>
-          <button onClick={console.log("setIntiative")}>Next Turn</button>
+          <button>Set Initative</button>
+          <p>Initative Set</p>
+          <button>Next Turn</button>
           <p>
             <strong>Round: 9</strong>
           </p>

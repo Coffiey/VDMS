@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import "./register.css";
+import jwt_decode from "jwt-decode";
 
 import axios from "axios";
 const LOGIN_URL = "/auth/user";
@@ -54,10 +55,17 @@ const Login = () => {
         }
       );
       const accessToken = response?.data?.accessToken;
-      setAuth({ user, accessToken });
-      setUser("");
-      setPwd("");
-      game();
+      const decoded = accessToken
+        ? jwt_decode(response?.data?.accessToken)
+        : undefined;
+      if (decoded) {
+        const userName = decoded.info.userName;
+        const id = decoded.info.id;
+        setAuth({ user: userName, accessToken, id });
+        setUser("");
+        setPwd("");
+        game();
+      }
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

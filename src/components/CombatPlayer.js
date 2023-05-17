@@ -22,6 +22,14 @@ const CombatPlayers = () => {
   const [str, setStr] = useState(undefined);
   const [cha, setCha] = useState(undefined);
 
+  const [viewClass, setViewClass] = useState(false);
+  const [viewRace, setViewRace] = useState(false);
+  const [disableButonClass, setDisableButonClass] = useState(true);
+  const [disableButonRace, setDisableButonRace] = useState(true);
+
+  const [classList, setClassList] = useState(null);
+  const [raceList, setRaceList] = useState(null);
+
   const [player, setPlayer] = useState([]);
   const [playerSwitch, setPlayerSwitch] = useState(true);
 
@@ -30,27 +38,27 @@ const CombatPlayers = () => {
   const location = useLocation();
 
   useEffect(() => {
-    axios
-      .get("/api/classes")
-      .then((response) => {
-        setClassList(response.data);
-        setDisableButonClass(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .get("/api/classes")
+    //   .then((response) => {
+    //     setClassList(response.data);
+    //     setDisableButonClass(false);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }, []);
 
   useEffect(() => {
-    axios
-      .get("/api/races")
-      .then((response) => {
-        setRaceList(response.data);
-        setDisableButonRace(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .get("/api/races")
+    //   .then((response) => {
+    //     setRaceList(response.data);
+    //     setDisableButonRace(false);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }, []);
 
   useEffect(() => {
@@ -67,7 +75,6 @@ const CombatPlayers = () => {
       con &&
       wis
     ) {
-      setDisableCreate(false);
     }
   }, [name, playerClass, race, level, maxHp, dex, int, cha, str, con, wis]);
 
@@ -87,24 +94,24 @@ const CombatPlayers = () => {
 
   //get request
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    const getPlayers = async () => {
-      try {
-        const response = await axiosPrivate.get("/db/pc", {
-          signal: controller.signal,
-        });
-        isMounted && setPlayer(response.data);
-      } catch (err) {
-        navigate("/login", { state: { from: location }, replace: true });
-      }
-      controller.abort();
-    };
-    getPlayers();
-    return () => {
-      isMounted = false;
-      resetInputs();
-    };
+    // let isMounted = true;
+    // const controller = new AbortController();
+    // const getPlayers = async () => {
+    //   try {
+    //     const response = await axiosPrivate.get("/db/pc", {
+    //       signal: controller.signal,
+    //     });
+    //     isMounted && setPlayer(response.data);
+    //   } catch (err) {
+    //     navigate("/login", { state: { from: location }, replace: true });
+    //   }
+    //   controller.abort();
+    // };
+    // getPlayers();
+    // return () => {
+    //   isMounted = false;
+    //   resetInputs();
+    // };
   }, [playerSwitch]);
 
   //post request
@@ -124,15 +131,15 @@ const CombatPlayers = () => {
       wis: Number(wis),
     };
 
-    try {
-      await axiosPrivate.post(`/db/pc`, playerObject, {
-        signal: controller.signal,
-      });
-      setPlayerSwitch(!playerSwitch);
-    } catch (err) {
-      console.error(err);
-      controller.abort();
-    }
+    // try {
+    //   await axiosPrivate.post(`/db/pc`, playerObject, {
+    //     signal: controller.signal,
+    //   });
+    //   setPlayerSwitch(!playerSwitch);
+    // } catch (err) {
+    //   console.error(err);
+    //   controller.abort();
+    // }
   };
 
   return (

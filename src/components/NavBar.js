@@ -22,9 +22,12 @@ const NavBar = () => {
       <button onClick={() => navigate("/")}>Home</button>
       <button>My games</button>
       <p>Combat Dragon</p>
-      <button onClick={() => navigate("/game")}>Combat</button>
+      <button onClick={() => navigate("/campaign")}>Combat</button>
       {auth.user ? (
-        <p>{auth.user}</p>
+        <>
+          <p>{auth.user}</p>
+          <p>{auth.id}</p>
+        </>
       ) : (
         <button onClick={() => navigate("/login")}>login</button>
       )}
