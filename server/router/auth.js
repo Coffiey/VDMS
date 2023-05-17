@@ -1,11 +1,8 @@
 const express = require("express");
-const {
-  createUser,
-  getUserByUsername,
-} = require("../../callFunc/authentication");
+const authenticationController = require("../../Controllers/authenticationController");
 
 const router = express.Router();
-router.route("/register").post(createUser);
-router.route("/user").post(getUserByUsername);
+router.route("/register").post(authenticationController.createUser);
+router.route("/user").post(authenticationController.getUserByUsername);
 
 module.exports = router;

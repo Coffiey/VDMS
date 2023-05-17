@@ -1,16 +1,10 @@
 const express = require("express");
-const {
-  getMonsterList,
-  getMonsterByurl,
-  getMonsterByIndex,
-  getRaceList,
-  getClassList,
-} = require("../../callFunc/serverF");
+const apiController = require("../../Controllers/apiController");
 
 const router = express.Router();
-router.route("/monster").get(getMonsterList);
-router.route("/races").get(getRaceList);
-router.route("/classes").get(getClassList);
-router.route("/monster/object").get(getMonsterByurl);
+router.route("/monster").get(apiController.getMonsterList);
+router.route("/races").get(apiController.getRaceList);
+router.route("/classes").get(apiController.getClassList);
+router.route("/monster/object").get(apiController.getMonsterByurl);
 
 module.exports = router;
