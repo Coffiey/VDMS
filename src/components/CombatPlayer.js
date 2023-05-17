@@ -9,9 +9,7 @@ import "../App.css";
 
 import { useState, useEffect } from "react";
 
-const CombatPlayers = (props) => {
-  const { display, combatState } = props;
-
+const CombatPlayers = () => {
   const [name, setName] = useState(undefined);
   const [playerClass, setPlayerClass] = useState("choose");
   const [race, setRace] = useState("choose");
@@ -23,15 +21,6 @@ const CombatPlayers = (props) => {
   const [int, setInt] = useState(undefined);
   const [str, setStr] = useState(undefined);
   const [cha, setCha] = useState(undefined);
-  const [disableCreate, setDisableCreate] = useState(true);
-
-  const [viewClass, setViewClass] = useState(false);
-  const [viewRace, setViewRace] = useState(false);
-  const [disableButonClass, setDisableButonClass] = useState(true);
-  const [disableButonRace, setDisableButonRace] = useState(true);
-
-  const [classList, setClassList] = useState(null);
-  const [raceList, setRaceList] = useState(null);
 
   const [player, setPlayer] = useState([]);
   const [playerSwitch, setPlayerSwitch] = useState(true);

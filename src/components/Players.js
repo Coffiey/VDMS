@@ -9,8 +9,6 @@ import "./css/player.css";
 import { useState, useEffect } from "react";
 
 const Players = (props) => {
-  const { display, combatState } = props;
-
   const [name, setName] = useState(undefined);
   const [playerClass, setPlayerClass] = useState("choose");
   const [race, setRace] = useState("choose");
@@ -210,160 +208,157 @@ const Players = (props) => {
           </div>
         );
       })}
-
-      {display && (
-        <div className='pc'>
-          <div className='top'>
-            <h2 className='pcName'>
-              Name:{" "}
-              <input
-                className='txt'
-                type='text'
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              ></input>
-            </h2>
-            <h2 className='pcHp'>
-              hp:{" "}
-              <input
-                value={maxHp}
-                type='number'
-                className='statinput'
-                onChange={(e) => {
-                  setMaxHp(e.target.value);
-                }}
-              ></input>
-            </h2>
-          </div>
-          <div className='mid'>
-            <h2 className='pcClass'>
-              Class:{" "}
-              {
-                <button
-                  onClick={() => setViewClass(true)}
-                  disabled={disableButonClass}
-                >
-                  {playerClass}
-                </button>
-              }
-            </h2>
-            {viewClass && (
-              <ClassDrop
-                classList={classList}
-                setPlayerClass={setPlayerClass}
-                setViewClass={setViewClass}
-              />
-            )}
-
-            <h2 className='pcRace'>
-              Race:{" "}
-              <button
-                onClick={() => setViewRace(true)}
-                disabled={disableButonRace}
-              >
-                {race}
-              </button>
-            </h2>
-            {viewRace && (
-              <RaceDrop
-                raceList={raceList}
-                setRace={setRace}
-                setViewRace={setViewRace}
-              />
-            )}
-            <h2 className='pcRace'>
-              Level:{" "}
-              <input
-                value={level}
-                className='statinput'
-                type='number'
-                onChange={(e) => {
-                  setLevel(e.target.value);
-                }}
-              ></input>
-            </h2>
-          </div>
-
-          <h2 className='pcSave'>Saving throws</h2>
-          <div className='statCreate'>
-            <p className='inputP'>
-              DEX:{" "}
-              <input
-                value={dex}
-                className='statinput'
-                type='number'
-                onChange={(e) => {
-                  setDex(e.target.value);
-                }}
-              ></input>
-            </p>
-            <p className='inputP'>
-              WIS:{" "}
-              <input
-                value={wis}
-                className='statinput'
-                type='number'
-                onChange={(e) => {
-                  setWis(e.target.value);
-                }}
-              ></input>
-            </p>
-            <p className='inputP'>
-              CON:{" "}
-              <input
-                value={con}
-                className='statinput'
-                type='number'
-                onChange={(e) => {
-                  setCon(e.target.value);
-                }}
-              ></input>
-            </p>
-            <p className='inputP'>
-              INT:{" "}
-              <input
-                value={int}
-                className='statinput'
-                type='number'
-                onChange={(e) => {
-                  setInt(e.target.value);
-                }}
-              ></input>
-            </p>
-            <p className='inputP'>
-              STR:{" "}
-              <input
-                value={str}
-                className='statinput'
-                type='number'
-                onChange={(e) => {
-                  setStr(e.target.value);
-                }}
-              ></input>
-            </p>
-            <p className='inputP'>
-              CHA:{" "}
-              <input
-                value={cha}
-                className='statinput'
-                type='number'
-                onChange={(e) => {
-                  setCha(e.target.value);
-                }}
-              ></input>
-            </p>
-          </div>
-          <button
-            className='createPlayer'
-            disabled={disableCreate}
-            onClick={postPlayerObject}
-          >
-            Create Player
-          </button>
+      <div className='pc'>
+        <div className='top'>
+          <h2 className='pcName'>
+            Name:{" "}
+            <input
+              className='txt'
+              type='text'
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            ></input>
+          </h2>
+          <h2 className='pcHp'>
+            hp:{" "}
+            <input
+              value={maxHp}
+              type='number'
+              className='statinput'
+              onChange={(e) => {
+                setMaxHp(e.target.value);
+              }}
+            ></input>
+          </h2>
         </div>
-      )}
+        <div className='mid'>
+          <h2 className='pcClass'>
+            Class:{" "}
+            {
+              <button
+                onClick={() => setViewClass(true)}
+                disabled={disableButonClass}
+              >
+                {playerClass}
+              </button>
+            }
+          </h2>
+          {viewClass && (
+            <ClassDrop
+              classList={classList}
+              setPlayerClass={setPlayerClass}
+              setViewClass={setViewClass}
+            />
+          )}
+
+          <h2 className='pcRace'>
+            Race:{" "}
+            <button
+              onClick={() => setViewRace(true)}
+              disabled={disableButonRace}
+            >
+              {race}
+            </button>
+          </h2>
+          {viewRace && (
+            <RaceDrop
+              raceList={raceList}
+              setRace={setRace}
+              setViewRace={setViewRace}
+            />
+          )}
+          <h2 className='pcRace'>
+            Level:{" "}
+            <input
+              value={level}
+              className='statinput'
+              type='number'
+              onChange={(e) => {
+                setLevel(e.target.value);
+              }}
+            ></input>
+          </h2>
+        </div>
+
+        <h2 className='pcSave'>Saving throws</h2>
+        <div className='statCreate'>
+          <p className='inputP'>
+            DEX:{" "}
+            <input
+              value={dex}
+              className='statinput'
+              type='number'
+              onChange={(e) => {
+                setDex(e.target.value);
+              }}
+            ></input>
+          </p>
+          <p className='inputP'>
+            WIS:{" "}
+            <input
+              value={wis}
+              className='statinput'
+              type='number'
+              onChange={(e) => {
+                setWis(e.target.value);
+              }}
+            ></input>
+          </p>
+          <p className='inputP'>
+            CON:{" "}
+            <input
+              value={con}
+              className='statinput'
+              type='number'
+              onChange={(e) => {
+                setCon(e.target.value);
+              }}
+            ></input>
+          </p>
+          <p className='inputP'>
+            INT:{" "}
+            <input
+              value={int}
+              className='statinput'
+              type='number'
+              onChange={(e) => {
+                setInt(e.target.value);
+              }}
+            ></input>
+          </p>
+          <p className='inputP'>
+            STR:{" "}
+            <input
+              value={str}
+              className='statinput'
+              type='number'
+              onChange={(e) => {
+                setStr(e.target.value);
+              }}
+            ></input>
+          </p>
+          <p className='inputP'>
+            CHA:{" "}
+            <input
+              value={cha}
+              className='statinput'
+              type='number'
+              onChange={(e) => {
+                setCha(e.target.value);
+              }}
+            ></input>
+          </p>
+        </div>
+        <button
+          className='createPlayer'
+          disabled={disableCreate}
+          onClick={postPlayerObject}
+        >
+          Create Player
+        </button>
+      </div>
     </div>
   );
 };

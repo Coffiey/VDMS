@@ -15,14 +15,12 @@ import { Routes, Route } from "react-router-dom";
 import PersistLogin from "./components/userAuthentication/PersistLogin";
 
 function App() {
-  const [combatState, SetCombatState] = useState(true);
   const [list, setList] = useState([]);
   const [dropdown, setDropdown] = useState([]);
   const [search, setSearch] = useState("");
   const [seeList, setSeeList] = useState(false);
   const [monsterObj, setmonsterObj] = useState(null);
   const [disableInput, setDisableInput] = useState(true);
-  const [display, setDisplay] = useState(true);
 
   useEffect(() => {
     axios
@@ -66,13 +64,9 @@ function App() {
             <Route
               path='/game'
               element={[
-                <Players
-                  display={display}
-                  combatState={combatState}
-                />,
+                <Players />,
                 <Enemy
                   combatState={combatState}
-                  display={display}
                   setSearch={setSearch}
                   search={search}
                   disableInput={disableInput}
@@ -94,10 +88,7 @@ function App() {
             <Route
               path='/combat'
               element={[
-                <CombatPlayers
-                  display={display}
-                  combatState={combatState}
-                />,
+                <CombatPlayers />,
                 <CombatArray
                   setmonsterObj={setmonsterObj}
                   monsterObj={monsterObj}
@@ -106,7 +97,6 @@ function App() {
                   <DisplayMonster
                     setmonsterObj={setmonsterObj}
                     monsterObj={monsterObj}
-                    combatState={combatState}
                   />
                 </div>,
               ]}
