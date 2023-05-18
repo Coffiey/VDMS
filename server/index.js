@@ -27,7 +27,7 @@ app.use("/auth", auth);
 app.use("/logout", logout);
 app.use("/refresh", refresh);
 app.use("/api", router);
-// app.use(verifyJWT);
+app.use(verifyJWT);
 app.use("/db", authRouter);
 
 app.listen(PORT, () => {

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "../App.css";
-import useAuth from "./hooks/useAuth";
+import "../../App.css";
+import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
 const NavBar = () => {

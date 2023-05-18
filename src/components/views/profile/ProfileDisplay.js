@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../../App.css";
+import "../../../App.css";
 import CombatPlayers from "../Combat/CombatPlayer";
 import CampaignList from "./CampaignList";
 import CombatLists from "./CombatsList";
@@ -7,7 +7,7 @@ import CombatLists from "./CombatsList";
 const ProfileDisplay = () => {
   const [text, setText] = useState("");
   const [name, setName] = useState("");
-  const [campaignFocus, setCampaignFocus] = useState({});
+  const [campaignFocus, setCampaignFocus] = useState(null);
   const [campaignList, setCampaignList] = useState([]);
   const [campaignSwitch, setCampaignSwitch] = useState(true);
   return (
@@ -23,6 +23,7 @@ const ProfileDisplay = () => {
         setCampaignFocus={setCampaignFocus}
         setCampaignSwitch={setCampaignSwitch}
         campaignSwitch={campaignSwitch}
+        campaignFocus={campaignFocus}
       />
       <div className='DisplayMonster'>
         <CombatLists

@@ -31,7 +31,6 @@ const createPc = async (req, res) => {
         str,
         con,
         wis,
-        campaignsId,
       } = req.body;
       await knex("pc").insert({
         name,
@@ -45,7 +44,7 @@ const createPc = async (req, res) => {
         str,
         con,
         wis,
-        campaigns_id: campaignsId,
+        campaigns_id: req.params["campaigns"],
       });
       res.status(201).json("created player Character");
     } else {

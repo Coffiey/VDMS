@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "../../App.css";
-import CombatPlayers from "../Combat/CombatPlayer";
+import "../../../App.css";
+import Players from "./Players";
 import CampaignList from "../profile/CampaignList";
 import CombatLists from "../profile/CombatsList";
 
@@ -12,7 +12,7 @@ const CampaignDisplay = () => {
   const [campaignSwitch, setCampaignSwitch] = useState(true);
   return (
     <>
-      <CombatPlayers />
+      <Players />
       <CampaignList
         text={text}
         setText={setText}

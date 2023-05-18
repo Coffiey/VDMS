@@ -1,23 +1,23 @@
-import "../../css/classDrop.css";
+import "./classDrop.css";
 
 import { useEffect, useState } from "react";
 
-const RaceDrop = (props) => {
-  const { raceList, setRace, setViewRace } = props;
+const ClassDrop = (props) => {
+  const { classList, setPlayerClass, setViewClass } = props;
 
   return (
     <>
       <ul className='list'>
-        {raceList.map((raceObj) => {
+        {classList.map((classObj) => {
           return (
             <li
               className='classes'
               onClick={() => {
-                setRace(raceObj.name);
-                setViewRace(false);
+                setPlayerClass(classObj.name);
+                setViewClass(false);
               }}
             >
-              {raceObj.name}
+              {classObj.name}
             </li>
           );
         })}
@@ -26,4 +26,4 @@ const RaceDrop = (props) => {
   );
 };
 
-export default RaceDrop;
+export default ClassDrop;

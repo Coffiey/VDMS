@@ -5,6 +5,7 @@ const encountersController = require("../../Controllers/encountersController");
 const campaignsController = require("../../Controllers/campaignsController");
 
 const router = express.Router();
+router.route("/:user/campaigns").get(campaignsController.getCampaignById);
 router
   .route("/:user/:campaigns/pc")
   .post(pcController.createPc)

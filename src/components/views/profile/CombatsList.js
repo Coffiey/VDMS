@@ -1,6 +1,6 @@
 import { useState } from "react";
-import useAuth from "../hooks/useAuth";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const CombatLists = (props) => {
   const { text, setText, campaignFocus, setCampaignSwitch, campaignSwitch } =

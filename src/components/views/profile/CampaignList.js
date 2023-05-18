@@ -1,7 +1,7 @@
-import "../css/enemy.css";
-import "../../App.css";
-import useAuth from "../hooks/useAuth";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import "../Encounter/enemy.css";
+import "../../../App.css";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -16,6 +16,7 @@ const CampaignList = (props) => {
     setCampaignFocus,
     setCampaignSwitch,
     campaignSwitch,
+    campaignFocus,
   } = props;
   const { auth } = useAuth();
   const id = auth?.id;
@@ -26,13 +27,9 @@ const CampaignList = (props) => {
 
   useEffect(() => {
     let isMounted = true;
-    const controller = new AbortController();
     const getCampaign = async () => {
       try {
-        const response = await axiosPrivate.get(`/db/${id}`, {
-          signal: controller.signal,
-        });
-        console.log(response.data);
+        const response = await axiosPrivate.get(`/db/${id}`);
         let sorted = await response.data.sort((a, b) => {
           if (a.id > b.id) {
             return -1;
@@ -103,9 +100,21 @@ const CampaignList = (props) => {
     }
   };
 
-  const navigateToEncounters = () => {
-    navigate("/campaign", { replace: true });
+  const navigateToEncounters = (object) => {
+    if (object) {
+      auth.campaign = { id: object.id, name: object.campaignName };
+      navigate(`/profile/${object.id}`);
+    } else {
+      console.log(typeof campaignFocus);
+      if (campaignFocus) {
+        auth.campaign = { id: object.id, name: object.campaignName };
+        navigate(`/profile/${campaignFocus.id}`);
+      } else {
+        window.alert("please select a Campaign");
+      }
+    }
   };
+
   return (
     <>
       <div className='Enemy'>
@@ -113,13 +122,15 @@ const CampaignList = (props) => {
           <p>
             <strong>Round: 9</strong>
           </p>
-          <button onClick={navigateToEncounters}>Encounters</button>
+          <button onClick={() => navigateToEncounters(false)}>
+            Encounters
+          </button>
         </div>
         <div
           className='enemyDiv'
           onClick={() => {
             setText("");
-            setCampaignFocus({});
+            setCampaignFocus(null);
           }}
         >
           {name.length > 0 ? <h1>{name}</h1> : <h1>Create A Campaign</h1>}
@@ -138,6 +149,7 @@ const CampaignList = (props) => {
               <div
                 className='enemyDiv'
                 onClick={() => setNotes(campaign)}
+                onDoubleClick={() => navigateToEncounters(campaign)}
               >
                 <h1>{campaign.campaignName}</h1>
                 <p>Add some Campaign notes on the left</p>

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
-import Layout from "./components/layout/Layout";
-import Register from "./components/userAuthentication/Register";
-import Login from "./components/userAuthentication/Login";
-import NavBar from "./components/NavBar";
-import CampaignDisplay from "./components/campaign/CampaignDisplay";
-import CombatDisplay from "./components/Combat/CombatDisplay";
-import EncounterDisplay from "./components/Encounter/EncounterDisplay";
-import ProfileDisplay from "./components/profile/ProfileDisplay";
-import RequireAuth from "./components/userAuthentication/RequireAuth";
+import Layout from "./components/views/layout/Layout";
+import Register from "./components/views/userAuthentication/Register";
+import Login from "./components/views/userAuthentication/Login";
+import NavBar from "./components/views/NavBar";
+import CampaignDisplay from "./components/views/campaign/CampaignDisplay";
+import CombatDisplay from "./components/views/Combat/CombatDisplay";
+import EncounterDisplay from "./components/views/Encounter/EncounterDisplay";
+import ProfileDisplay from "./components/views/profile/ProfileDisplay";
+import RequireAuth from "./components/views/userAuthentication/RequireAuth";
 import { Routes, Route } from "react-router-dom";
-import PersistLogin from "./components/userAuthentication/PersistLogin";
+import PersistLogin from "./components/views/userAuthentication/PersistLogin";
 
 function App() {
   const [list, setList] = useState([]);

@@ -54,6 +54,33 @@ const getCampaigns = async (req, res) => {
   }
 };
 
+const getCampaignById = async (req, res) => {
+  console.log("test");
+  try {
+    const verify = await verifyUser(req.params["user"]);
+    if (verify) {
+      const campaigns = await knex
+        .select("*")
+        .from("campaigns")
+        .where({
+          user_id: req.params["user"],
+          id: req.query["id"],
+        })
+        .first();
+      console.log("😎", campaigns);
+      return {
+        id: campaigns.id,
+        userId: campaigns.user_id,
+        campaignName: campaigns.campaign_name,
+        notes: campaigns.notes,
+      };
+    }
+    res.status(201).json(campaignObj);
+  } catch (err) {
+    res.status(500).json("something went wrong");
+  }
+};
+
 const editCampaigns = async (req, res) => {
   try {
     const { campaignName, notes } = req.body;
@@ -97,4 +124,5 @@ module.exports = {
   getCampaigns,
   editCampaigns,
   deleteCampaigns,
+  getCampaignById,
 };

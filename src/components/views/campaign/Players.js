@@ -1,10 +1,11 @@
 import axios from "axios";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 import ClassDrop from "./CharacterDropDowns/ClassDrop";
 import RaceDrop from "./CharacterDropDowns/RaceDrop";
-import "../css/player.css";
+import "./player.css";
 
 import { useState, useEffect } from "react";
 
@@ -29,6 +30,7 @@ const Players = (props) => {
 
   const [classList, setClassList] = useState(null);
   const [raceList, setRaceList] = useState(null);
+  const [campaign, setCampaign] = useState(null);
 
   const [player, setPlayer] = useState([]);
   const [playerSwitch, setPlayerSwitch] = useState(true);
@@ -37,28 +39,47 @@ const Players = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { auth } = useAuth();
+  const campaignId = Number(location.pathname.slice(9));
+
+  //for use in other page
+  // useEffect(() => {
+  //   const getCampaignById = async () => {
+  //     try {
+  //       const response = await axiosPrivate.get(
+  //         `/db/${auth.id}/campaigns?id=${campaignId}`
+  //       );
+  //       console.log(response.data);
+  //       setCampaign(response.data);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+  //   getCampaignById();
+  // }, []);
+
   useEffect(() => {
-    // axios
-    //   .get("/api/classes")
-    //   .then((response) => {
-    //     setClassList(response.data);
-    //     setDisableButonClass(false);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get("/api/classes")
+      .then((response) => {
+        setClassList(response.data);
+        setDisableButonClass(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   useEffect(() => {
-    // axios
-    //   .get("/api/races")
-    //   .then((response) => {
-    //     setRaceList(response.data);
-    //     setDisableButonRace(false);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get("/api/races")
+      .then((response) => {
+        setRaceList(response.data);
+        setDisableButonRace(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -80,79 +101,85 @@ const Players = (props) => {
   }, [name, playerClass, race, level, maxHp, dex, int, cha, str, con, wis]);
 
   const resetInputs = () => {
-    setName("");
+    setName(undefined);
     setPlayerClass("choose");
     setRace("choose");
-    setLevel("");
-    setMaxHp("");
-    setDex("");
-    setWis("");
-    setCon("");
-    setInt("");
-    setStr("");
-    setCha("");
+    setLevel(undefined);
+    setMaxHp(undefined);
+    setDex(undefined);
+    setWis(undefined);
+    setCon(undefined);
+    setInt(undefined);
+    setStr(undefined);
+    setCha(undefined);
   };
 
-  //get request
   useEffect(() => {
-    // let isMounted = true;
-    // const controller = new AbortController();
-    // const getPlayers = async () => {
-    //   try {
-    //     const response = await axiosPrivate.get("/db/pc", {
-    //       signal: controller.signal,
-    //     });
-    //     isMounted && setPlayer(response.data);
-    //   } catch (err) {
-    //     navigate("/login", { state: { from: location }, replace: true });
-    //   }
-    //   controller.abort();
-    // };
-    // getPlayers();
-    // return () => {
-    //   isMounted = false;
-    //   resetInputs();
-    // };
+    {
+      let isMounted = true;
+      const getPlayers = async () => {
+        try {
+          const response = await axiosPrivate.get(
+            `/db/${auth.id}/${campaignId}/pc`
+          );
+          isMounted && setPlayer(response.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      getPlayers();
+      return () => {
+        isMounted = false;
+        resetInputs();
+      };
+    }
   }, [playerSwitch]);
 
-  //post request
   const postPlayerObject = async () => {
-    // const controller = new AbortController();
-    // const playerObject = {
-    //   name,
-    //   playerClass,
-    //   race,
-    //   level: Number(level),
-    //   maxHp: Number(maxHp),
-    //   dex: Number(dex),
-    //   int: Number(int),
-    //   cha: Number(cha),
-    //   str: Number(str),
-    //   con: Number(con),
-    //   wis: Number(wis),
-    // };
-    // try {
-    //   await axiosPrivate.post(`/db/pc`, playerObject, {
-    //     signal: controller.signal,
-    //   });
-    //   setPlayerSwitch(!playerSwitch);
-    // } catch (err) {
-    //   console.error(err);
-    //   controller.abort();
-    // }
+    console.log(campaign);
+    const playerObject = {
+      name,
+      playerClass,
+      race,
+      level: Number(level),
+      maxHp: Number(maxHp),
+      dex: Number(dex),
+      int: Number(int),
+      cha: Number(cha),
+      str: Number(str),
+      con: Number(con),
+      wis: Number(wis),
+    };
+    try {
+      const response = await axiosPrivate.post(
+        `/db/${auth.id}/${campaign.id}/pc`,
+        playerObject
+      );
+      setPlayerSwitch(!playerSwitch);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const check = (item) => {
+    const answer = window.confirm(
+      `Are you sure you want to delete ${item.name}`
+    );
+    return answer;
   };
 
   const deletePlayerObject = async (item) => {
-    // const controller = new AbortController();
-    // try {
-    //   await axiosPrivate.delete(`/db/pc?id=${item.id}`, {
-    //     signal: controller.signal,
-    //   });
-    //   setPlayerSwitch(!playerSwitch);
-    // } catch (err) {
-    //   console.error(err);
-    //   controller.abort();
-    // }
+    const answer = check(item);
+    if (answer) {
+      try {
+        await axiosPrivate.delete(
+          `/db/${auth.id}/${campaign.id}/pc?id=${item.id}`
+        );
+        setPlayerSwitch(!playerSwitch);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   };
 
   return (

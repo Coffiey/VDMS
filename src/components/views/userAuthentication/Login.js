@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import "./register.css";
 import jwt_decode from "jwt-decode";
 

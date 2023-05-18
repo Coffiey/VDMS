@@ -1,5 +1,5 @@
 import axios from "axios";
-import "./css/displayMonster.css";
+import "./displayMonster.css";
 import { useState, useEffect } from "react";
 
 const DisplayMonster = (props) => {
