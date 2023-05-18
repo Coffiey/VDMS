@@ -4,7 +4,7 @@ import Players from "./Players";
 import EncounterList from "./EncounterList";
 import EncounterNotes from "./EncounterNotes";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const CampaignDisplay = () => {
@@ -13,7 +13,8 @@ const CampaignDisplay = () => {
   const location = useLocation();
 
   const { auth } = useAuth();
-  const campaignId = Number(location.pathname.slice(9));
+  const parameter = useParams();
+  const campaignId = parameter.campaign;
 
   const [textState, setTextState] = useState(true);
   const [campaignText, setCampaignText] = useState("");

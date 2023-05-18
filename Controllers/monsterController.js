@@ -14,15 +14,14 @@ const verifyEncounters = async (campaigns, id) => {
 
 const createMonsterDB = async (req, res) => {
   try {
-    const { monsterName, health, monsterReference, index, url, encountersId } =
-      req.body;
+    const { monsterName, health, monsterReference, index, url } = req.body;
     const verify = await verifyEncounters(
       req.params["campaigns"],
       req.params["encounters"]
     );
     if (verify) {
       await knex("monster").insert({
-        encounters_id: encountersId,
+        encounters_id: Number(req.params["encounters"]),
         monster_name: monsterName,
         health,
         monster_reference: monsterReference,
@@ -105,7 +104,7 @@ const deleteMonsterDB = async (req, res) => {
     );
     if (verify) {
       await knex("monster")
-        .where({ encounters_id: req.params["encounters"] })
+        .where({ id: req.query["id"], encounters_id: req.params["encounters"] })
         .del();
       res.status(201).json("Deleted monster");
     } else {

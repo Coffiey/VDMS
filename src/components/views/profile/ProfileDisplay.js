@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../../App.css";
-import CombatPlayers from "../Combat/CombatPlayer";
+import CombatPlayers from "../Encounter/prep/CombatPlayer";
 import CampaignList from "./CampaignList";
 import CombatLists from "./CombatsList";
 

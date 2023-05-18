@@ -1,6 +1,6 @@
 import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 import ClassDrop from "./CharacterDropDowns/ClassDrop";
@@ -39,7 +39,8 @@ const Players = () => {
   const location = useLocation();
 
   const { auth } = useAuth();
-  const campaignId = Number(location.pathname.slice(9));
+  const params = useParams();
+  const campaignId = params.campaign;
 
   useEffect(() => {
     axios

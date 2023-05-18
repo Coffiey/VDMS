@@ -1,8 +1,8 @@
-import "../Encounter/enemy.css";
+import "../Encounter/prep/enemy.css";
 import "../../../App.css";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const EncounterList = (props) => {
@@ -16,7 +16,7 @@ const EncounterList = (props) => {
     setName,
     encounterList,
     setEncounterList,
-    campaignFocus,
+    encounterFocus,
     campaign,
     setEncounterFocus,
   } = props;
@@ -27,7 +27,8 @@ const EncounterList = (props) => {
   const location = useLocation();
 
   const id = auth?.id;
-  const campaignId = Number(location.pathname.slice(9));
+  const parameter = useParams();
+  const campaignId = parameter.campaign;
 
   useEffect(() => {
     let isMounted = true;
@@ -102,11 +103,11 @@ const EncounterList = (props) => {
   const navigateToEncounters = (object) => {
     if (object) {
       auth.campaign = { id: object.id, name: object.campaignName };
-      navigate(`/profile/${object.id}`);
+      navigate(`/profile/${campaignId}/${object.id}`);
     } else {
-      if (campaignFocus) {
+      if (encounterFocus) {
         auth.campaign = { id: object.id, name: object.campaignName };
-        navigate(`/profile/${campaignFocus.id}`);
+        navigate(`/profile/${campaignId}/${encounterFocus.id}`);
       } else {
         window.alert("please select a Campaign");
       }
@@ -121,9 +122,7 @@ const EncounterList = (props) => {
             <strong>Round: 9</strong>
           </p>
           {campaign && <p>{campaign.campaignName}</p>}
-          <button
-          //   onClick={() => navigateToEncounters(false)}
-          >
+          <button onClick={() => navigateToEncounters(false)}>
             Go to encounters
           </button>
         </div>

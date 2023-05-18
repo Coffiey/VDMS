@@ -1,4 +1,4 @@
-import "../Encounter/enemy.css";
+import "../Encounter/prep/enemy.css";
 import "../../../App.css";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
@@ -51,19 +51,12 @@ const CampaignList = (props) => {
   }, [campaignSwitch]);
 
   const postCampaign = async () => {
-    const controller = new AbortController();
     if (id && name.length > 0) {
       try {
-        await axiosPrivate.post(
-          `/db/${id}`,
-          {
-            campaignName: name,
-            notes: text,
-          },
-          {
-            signal: controller.signal,
-          }
-        );
+        await axiosPrivate.post(`/db/${id}`, {
+          campaignName: name,
+          notes: text,
+        });
         setCampaignSwitch(!campaignSwitch);
         setName("");
       } catch (err) {

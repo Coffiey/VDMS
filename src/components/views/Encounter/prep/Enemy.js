@@ -1,8 +1,9 @@
 import "./enemy.css";
 import DropdownItem from "./DropdownItem";
 import axios from "axios";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import useAuth from "../../../hooks/useAuth";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Enemy = (props) => {
@@ -11,7 +12,7 @@ const Enemy = (props) => {
     search,
     disableInput,
     monsterObj,
-    setmonsterObj,
+    setMonsterObj,
     display,
     list,
     combatState,
@@ -21,109 +22,114 @@ const Enemy = (props) => {
   } = props;
 
   const [monster, setMonster] = useState(true);
+  const [monsterName, setMonsterName] = useState("");
+  const [monsterID, setMonsterID] = useState();
   const [health, setHealth] = useState(0);
   const [monsterReference, setMonsterReference] = useState("");
   const [Customhealth, setCustomhealth] = useState(0);
   const [monsterArray, setMonsterArray] = useState([]);
-  const [monsterObj2, setMonsterObj2] = useState(0);
 
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+  const { auth } = useAuth();
 
+  const { campaign, encounter } = useParams();
+  const userId = auth.id;
+
+  //resets inputs
   const reset = () => {
     setSearch("");
-    setmonsterObj(null);
     setHealth(0);
     setMonsterReference("");
     setCustomhealth(0);
-    setMonsterObj2(0);
-    setMonsterArray([]);
+    setMonsterName("");
   };
-  const createMon = (monster, health, index, Reference, url) => {
+  //creates monster obj to be saved in database
+  const createMon = () => {
     const obj = {
-      monsterName: monster,
-      health: health,
-      index,
-      monsterReference: Reference,
-      url,
+      monsterName: monsterName,
+      health,
+      index: monsterObj?.index,
+      monsterReference,
+      url: monsterObj?.url,
     };
     return obj;
   };
-
+  //gets all saved enemys
   useEffect(() => {
-    // let isMounted = true;
-    // const controller = new AbortController();
-    // const getEnemy = async () => {
-    //   try {
-    //     const response = await axiosPrivate.get("/db/enemy", {
-    //       signal: controller.signal,
-    //     });
-    //     isMounted && setMonsterArray(response.data);
-    //   } catch (err) {
-    //     console.error(err);
-    //     navigate("/login", { state: { from: location }, replace: true });
-    //     controller.abort();
-    //   }
-    // };
-    // getEnemy();
-    // reset();
-    // return () => {
-    //   isMounted = false;
-    // };
+    let isMounted = true;
+    const getEnemy = async () => {
+      try {
+        const response = await axiosPrivate.get(
+          `/db/${userId}/${campaign}/${encounter}/enemy`
+        );
+        console.log(response.data[0]);
+        isMounted && setMonsterArray(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getEnemy();
+    reset();
+    return () => {
+      isMounted = false;
+    };
   }, [monster]);
 
+  // creates enemy
   const postEnemy = async (object) => {
-    // const controller = new AbortController();
-    // try {
-    //   await axiosPrivate.post(`/db/enemy`, object, {
-    //     signal: controller.signal,
-    //   });
-    //   setMonster(!monster);
-    // } catch (err) {
-    //   console.error(err);
-    //   controller.abort();
-    // }
-  };
-
-  const deleteEnemy = async (index) => {
-    const controller = new AbortController();
+    const monsterDB = createMon();
+    console.log(monsterDB);
     try {
-      await axiosPrivate.delete(
-        `/db/enemy?monsterReference=${index.monsterReference}`,
-        {
-          signal: controller.signal,
-        }
+      await axiosPrivate.post(
+        `/db/${userId}/${campaign}/${encounter}/enemy`,
+        monsterDB
       );
       setMonster(!monster);
     } catch (err) {
       console.error(err);
-      controller.abort();
+    }
+  };
+
+  const check = async (index) => {
+    const answer = window.confirm(
+      `Are you sure you want to delete ${index.monsterReference}`
+    );
+    return answer;
+  };
+
+  const deleteEnemy = async (index) => {
+    const checked = await check(index);
+    if (checked) {
+      try {
+        await axiosPrivate.delete(
+          `/db/${userId}/${campaign}/${encounter}/enemy?id=${index.id}`
+        );
+        setMonster(!monster);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
   useEffect(() => {
-    // if (monsterObj2) {
-    //   setmonsterObj(monsterObj2);
-    // }
-  }, [monsterObj2]);
+    if (monsterID) {
+      axios
+        .get(`/api/monster/object?url=${monsterID}`)
+        .then((response) => {
+          setMonsterObj(response.data);
+        })
+        .catch(function (error) {});
+    }
+  }, [monsterID]);
 
-  useEffect(() => {
-    // if (monsterArray.length !== 0) {
-    //   let [item] = list.filter((monster) => {
-    //     return monster.name === monsterArray[0].monsterName;
-    //   });
-    //   axios
-    //     .get(`/api/monster/object?url=${item.url}`)
-    //     .then((response) => {
-    //       setmonsterObj(response.data);
-    //     })
-    //     .catch(function (error) {});
-    // }
-  }, [disableInput]);
+  const changeObj = (info) => {
+    setMonsterID(info.url);
+  };
 
   const navigateToCombat = () => {
-    navigate("/combat", { replace: true });
+    navigate(`/profile/${campaign}/${encounter}/combat`);
   };
   return (
     <>
@@ -146,11 +152,9 @@ const Enemy = (props) => {
                 ) : (
                   <h1>{monsterReference}</h1>
                 )}
-                {monsterObj !== null ? (
+                {monsterName !== "" ? (
                   <>
-                    <h2 onClick={() => setmonsterObj(null)}>
-                      {monsterObj.name}
-                    </h2>
+                    <h2 onClick={() => reset()}>{monsterObj.name}</h2>
                     <p>
                       HP:{" "}
                       {!health ? (
@@ -190,28 +194,7 @@ const Enemy = (props) => {
                       />
                       <button
                         disabled={!health}
-                        onClick={() => {
-                          setMonster();
-                          setMonsterArray([
-                            ...monsterArray,
-                            createMon(
-                              monsterObj?.name,
-                              health,
-                              monsterObj?.index,
-                              monsterReference,
-                              monsterObj?.url
-                            ),
-                          ]);
-                          postEnemy(
-                            createMon(
-                              monsterObj?.name,
-                              health,
-                              monsterObj?.index,
-                              monsterReference,
-                              monsterObj?.url
-                            )
-                          );
-                        }}
+                        onClick={postEnemy}
                       >
                         Create Monster
                       </button>
@@ -227,6 +210,7 @@ const Enemy = (props) => {
                         onChange={(e) => {
                           setSearch(e.target.value);
                         }}
+                        hidden={disableInput}
                       ></input>
                       {seeList && (
                         <ul>
@@ -234,8 +218,9 @@ const Enemy = (props) => {
                             setList={setList}
                             combatState={combatState}
                             dropdown={dropdown}
-                            setMonsterObj2={setMonsterObj2}
                             setSearch={setSearch}
+                            setMonsterID={setMonsterID}
+                            setMonsterName={setMonsterName}
                           />
                         </ul>
                       )}
@@ -250,7 +235,10 @@ const Enemy = (props) => {
         <div>
           {monsterArray.map((info, index) => {
             return (
-              <div className='enemyDiv'>
+              <div
+                className='enemyDiv'
+                onClick={() => changeObj(info)}
+              >
                 <div className='enemyTop'>
                   <h1>{info.monsterReference}</h1>
                   <h6 className='enemyName'>{info.monsterName}</h6>

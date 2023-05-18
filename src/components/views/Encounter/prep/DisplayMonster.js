@@ -5,10 +5,6 @@ import { useState, useEffect } from "react";
 const DisplayMonster = (props) => {
   const { monsterObj, setmonsterObj } = props;
 
-  // useEffect(() => {
-  //   setmonsterObj(monster);
-  // }, []);
-
   const getArrayOfKeys = (object) => {
     return Object.getOwnPropertyNames(object);
   };
