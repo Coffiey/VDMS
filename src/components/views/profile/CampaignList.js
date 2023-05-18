@@ -123,7 +123,7 @@ const CampaignList = (props) => {
             <strong>Round: 9</strong>
           </p>
           <button onClick={() => navigateToEncounters(false)}>
-            Encounters
+            go to Campaigns
           </button>
         </div>
         <div

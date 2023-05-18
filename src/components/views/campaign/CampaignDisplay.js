@@ -1,38 +1,81 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../../App.css";
 import Players from "./Players";
-import CampaignList from "../profile/CampaignList";
-import CombatLists from "../profile/CombatsList";
+import EncounterList from "./EncounterList";
+import EncounterNotes from "./EncounterNotes";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useNavigate, useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const CampaignDisplay = () => {
-  const [text, setText] = useState("");
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { auth } = useAuth();
+  const campaignId = Number(location.pathname.slice(9));
+
+  const [textState, setTextState] = useState(true);
+  const [campaignText, setCampaignText] = useState("");
+  const [encounterText, setEncounterText] = useState("");
   const [name, setName] = useState("");
-  const [campaignFocus, setCampaignFocus] = useState({});
-  const [campaignList, setCampaignList] = useState([]);
-  const [campaignSwitch, setCampaignSwitch] = useState(true);
+  const [campaign, setCampaign] = useState(null);
+  const [campaignSwitch, setCampaignSwitch] = useState(null);
+  const [encounterList, setEncounterList] = useState([]);
+  const [encounterSwitch, setEncounterSwitch] = useState(true);
+  const [encounterFocus, setEncounterFocus] = useState(null);
+
+  useEffect(() => {
+    const getCampaignById = async () => {
+      try {
+        const response = await axiosPrivate.get(
+          `/db/${auth.id}/campaigns?id=${campaignId}`
+        );
+        setCampaign(response.data);
+        setCampaignText(response.data.notes);
+        console.log(response.data);
+      } catch (err) {
+        console.error(err);
+        navigate("/profile", { replace: true });
+      }
+    };
+    getCampaignById();
+    console.log(campaign);
+  }, [campaignSwitch]);
+
   return (
     <>
       <Players />
-      <CampaignList
-        text={text}
-        setText={setText}
-        setName={setName}
+      <EncounterList
+        campaign={campaign}
         name={name}
-        setCampaignList={setCampaignList}
-        campaignList={campaignList}
-        setCampaignFocus={setCampaignFocus}
-        setCampaignSwitch={setCampaignSwitch}
-        campaignSwitch={campaignSwitch}
+        setName={setName}
+        encounterList={encounterList}
+        setEncounterList={setEncounterList}
+        encounterText={encounterText}
+        textState={textState}
+        setTextState={setTextState}
+        setEncounterSwitch={setEncounterSwitch}
+        encounterSwitch={encounterSwitch}
+        setEncounterText={setEncounterText}
+        setEncounterFocus={setEncounterFocus}
+        encounterFocus={encounterFocus}
       />
       <div className='DisplayMonster'>
-        <CombatLists
-          text={text}
-          setText={setText}
-          campaignFocus={campaignFocus}
-          setCampaignList={setCampaignList}
-          campaignList={campaignList}
+        <EncounterNotes
+          campaignText={campaignText}
+          setCampaignText={setCampaignText}
+          encounterText={encounterText}
+          setEncounterText={setEncounterText}
+          setEncounterList={setEncounterList}
           setCampaignSwitch={setCampaignSwitch}
-          campaignSwitch={campaignSwitch}
+          campaign={campaign}
+          textState={textState}
+          setTextState={setTextState}
+          name={name}
+          encounterFocus={encounterFocus}
+          setEncounterSwitch={setEncounterSwitch}
+          encounterSwitch={encounterSwitch}
         />
       </div>
     </>

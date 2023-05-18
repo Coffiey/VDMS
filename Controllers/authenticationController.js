@@ -36,7 +36,6 @@ const createUser = async (req, res) => {
 };
 
 const getUserByUsername = async (req, res) => {
-  console.log(req.body);
   const { userName, password } = req.body;
   try {
     const userObj = await knex.select("*").from("user").where({

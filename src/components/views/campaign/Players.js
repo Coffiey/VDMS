@@ -1,6 +1,6 @@
 import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 import ClassDrop from "./CharacterDropDowns/ClassDrop";
@@ -9,7 +9,7 @@ import "./player.css";
 
 import { useState, useEffect } from "react";
 
-const Players = (props) => {
+const Players = () => {
   const [name, setName] = useState(undefined);
   const [playerClass, setPlayerClass] = useState("choose");
   const [race, setRace] = useState("choose");
@@ -30,33 +30,16 @@ const Players = (props) => {
 
   const [classList, setClassList] = useState(null);
   const [raceList, setRaceList] = useState(null);
-  const [campaign, setCampaign] = useState(null);
 
   const [player, setPlayer] = useState([]);
   const [playerSwitch, setPlayerSwitch] = useState(true);
 
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
+
   const location = useLocation();
 
   const { auth } = useAuth();
   const campaignId = Number(location.pathname.slice(9));
-
-  //for use in other page
-  // useEffect(() => {
-  //   const getCampaignById = async () => {
-  //     try {
-  //       const response = await axiosPrivate.get(
-  //         `/db/${auth.id}/campaigns?id=${campaignId}`
-  //       );
-  //       console.log(response.data);
-  //       setCampaign(response.data);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-  //   getCampaignById();
-  // }, []);
 
   useEffect(() => {
     axios
@@ -136,7 +119,6 @@ const Players = (props) => {
   }, [playerSwitch]);
 
   const postPlayerObject = async () => {
-    console.log(campaign);
     const playerObject = {
       name,
       playerClass,
@@ -152,7 +134,7 @@ const Players = (props) => {
     };
     try {
       const response = await axiosPrivate.post(
-        `/db/${auth.id}/${campaign.id}/pc`,
+        `/db/${auth.id}/${campaignId}/pc`,
         playerObject
       );
       setPlayerSwitch(!playerSwitch);
@@ -173,7 +155,7 @@ const Players = (props) => {
     if (answer) {
       try {
         await axiosPrivate.delete(
-          `/db/${auth.id}/${campaign.id}/pc?id=${item.id}`
+          `/db/${auth.id}/${campaignId}/pc?id=${item.id}`
         );
         setPlayerSwitch(!playerSwitch);
       } catch (err) {

@@ -39,7 +39,6 @@ const getCampaigns = async (req, res) => {
         user_id: req.params["user"],
       });
       const campaignObj = await campaigns.map((item) => {
-        console.log(item);
         return {
           id: item.id,
           userId: item.user_id,
@@ -55,7 +54,6 @@ const getCampaigns = async (req, res) => {
 };
 
 const getCampaignById = async (req, res) => {
-  console.log("test");
   try {
     const verify = await verifyUser(req.params["user"]);
     if (verify) {
@@ -67,15 +65,14 @@ const getCampaignById = async (req, res) => {
           id: req.query["id"],
         })
         .first();
-      console.log("😎", campaigns);
-      return {
+      const campaignObj = {
         id: campaigns.id,
         userId: campaigns.user_id,
         campaignName: campaigns.campaign_name,
         notes: campaigns.notes,
       };
+      res.status(201).json(campaignObj);
     }
-    res.status(201).json(campaignObj);
   } catch (err) {
     res.status(500).json("something went wrong");
   }
@@ -108,7 +105,6 @@ const deleteCampaigns = async (req, res) => {
   try {
     const verify = await verifyUser(req.params["user"]);
     if (verify) {
-      console.log("test");
       await knex("campaigns").where({ id: req.query["id"] }).del();
       res.status(201).json("Deleted campaigns");
     } else {
