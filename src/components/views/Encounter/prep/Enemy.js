@@ -64,7 +64,6 @@ const Enemy = (props) => {
         const response = await axiosPrivate.get(
           `/db/${userId}/${campaign}/${encounter}/enemy`
         );
-        console.log(response.data[0]);
         isMounted && setMonsterArray(response.data);
       } catch (err) {
         console.error(err);

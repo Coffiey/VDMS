@@ -12,6 +12,7 @@ const CombatArray = (props) => {
 
   const [playerArray, setPlayerArray] = useState([]);
   const [monsterArray, setMonsterArray] = useState([]);
+  const [saveFile, setSaveFile] = useState(null);
   const [combatArray, SetCombatArray] = useState([]);
   const [sorted, setSorted] = useState(true);
   const [monsterUrl, setMonsterUrl] = useState(null);
@@ -28,6 +29,26 @@ const CombatArray = (props) => {
   const { campaign, encounter } = useParams();
 
   useEffect(() => {
+    const getSaveFile = async () => {
+      const savedObj = await JSON.parse(
+        localStorage.getItem(`local/${auth.id}/${campaign}/${encounter}/enemy`)
+      );
+      if (savedObj) {
+        SetCombatArray(savedObj);
+        setSaveFile(savedObj);
+      }
+    };
+    getSaveFile();
+  }, []);
+
+  useEffect(() => {
+    if (saveFile && sorted) {
+      // SetCombatArray(saveFile);
+      setIntiative();
+    }
+  }, [saveFile]);
+
+  useEffect(() => {
     if (combatArray[0]?.monsterName) {
       setMonsterUrl(combatArray[0].url);
     } else {
@@ -41,7 +62,6 @@ const CombatArray = (props) => {
         const response = await axiosPrivate.get(
           `/db/${auth.id}/${campaign}/pc`
         );
-        console.log(response.data);
         isMounted && setPlayerArray(response.data);
       } catch (err) {
         console.log(err);
@@ -60,7 +80,6 @@ const CombatArray = (props) => {
         const response = await axiosPrivate.get(
           `/db/${auth.id}/${campaign}/${encounter}/enemy`
         );
-        console.log(response.data);
         isMounted && setMonsterArray(response.data);
       } catch (err) {
         console.error(err);
@@ -73,7 +92,7 @@ const CombatArray = (props) => {
   }, []);
 
   useEffect(() => {
-    if (playerArray.length > 0 && monsterArray.length > 0) {
+    if (playerArray.length > 0 && monsterArray.length > 0 && !saveFile) {
       const combat = playerArray.concat(monsterArray);
       const combat2 = JSON.parse(JSON.stringify(combat));
       SetCombatArray(combat2);
@@ -220,13 +239,17 @@ const CombatArray = (props) => {
     let obj = combatArray.shift();
     combatArray.push(obj);
     SetCombatArray([...combatArray]);
+
     if (!sorted) {
       if (turn < combatArray.length) {
         setTurn(turn + 1);
-        console.log(turn);
       } else {
         setTurn(1);
       }
+      localStorage.setItem(
+        `local/${auth.id}/${campaign}/${encounter}/enemy`,
+        JSON.stringify(combatArray)
+      );
     }
   };
 
@@ -234,6 +257,7 @@ const CombatArray = (props) => {
     const check = combatArray.every((item) => {
       return typeof item.initative === "number";
     });
+    console.log(check);
     if (check) {
       let combat = combatArray.sort((a, b) => {
         if (a.initative > b.initative) {
@@ -246,19 +270,15 @@ const CombatArray = (props) => {
       });
       SetCombatArray([...combat]);
       setSorted(false);
-      if (combatArray[0].monsterName) {
-        console.log("Its a monster");
-      } else {
-        console.log("its a player");
-      }
     }
   };
 
   const resetIntiative = () => {
     setSorted(true);
   };
-  const navigateToGame = () => {
-    navigate("/game", { replace: true });
+  const navigateToPrep = () => {
+    localStorage.removeItem(`local/${auth.id}/${campaign}/${encounter}/enemy`);
+    navigate(`/profile/${campaign}/${encounter}/prep`);
   };
 
   return (
@@ -277,7 +297,7 @@ const CombatArray = (props) => {
             <strong>Round: {round}</strong>
           </p>
         )}
-        <button onClick={navigateToGame}>End Combat</button>
+        <button onClick={navigateToPrep}>End Combat</button>
       </div>
       {combatArray.map((object, index) => {
         if (object.name) {
