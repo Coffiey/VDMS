@@ -1,7 +1,7 @@
 import "./css/enemy.css";
-import DropdownItem from "./DropdownItem";
+import DropdownItem from "../DropdownItem";
 import axios from "axios";
-import useAxiosPrivate from "./hooks/useAxiosPrivate";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 

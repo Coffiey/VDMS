@@ -1,10 +1,10 @@
 import axios from "axios";
-import useAxiosPrivate from "./hooks/useAxiosPrivate";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import ClassDrop from "./CharacterDropDowns/ClassDrop";
 import RaceDrop from "./CharacterDropDowns/RaceDrop";
-import "./css/player.css";
+import "../css/player.css";
 
 import { useState, useEffect } from "react";
 

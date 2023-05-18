@@ -1,6 +1,5 @@
 import "../css/enemy.css";
 import "../../App.css";
-import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -85,40 +84,6 @@ const CampaignList = (props) => {
     setText(object.notes);
   };
 
-  //   const deleteEnemy = async (index) => {
-  //     const controller = new AbortController();
-  //     try {
-  //       await axiosPrivate.delete(
-  //         `/db/enemy?monsterReference=${index.monsterReference}`,
-  //         {
-  //           signal: controller.signal,
-  //         }
-  //       );
-  //     } catch (err) {
-  //       console.error(err);
-  //       controller.abort();
-  //     }
-  //   };
-
-  // useEffect(() => {
-  //   // if (monsterObj2) {
-  //   //   setmonsterObj(monsterObj2);
-  //   // }
-  // }, [monsterObj2]);
-
-  // useEffect(() => {
-  //   // if (monsterArray.length !== 0) {
-  //   //   let [item] = list.filter((monster) => {
-  //   //     return monster.name === monsterArray[0].monsterName;
-  //   //   });
-  //   //   axios
-  //   //     .get(`/api/monster/object?url=${item.url}`)
-  //   //     .then((response) => {
-  //   //       setmonste-rObj(response.data);
-  //   //     })
-  //   //     .catch(function (error) {});
-  //   // }
-  // }, [disableInput]);
   const check = async () => {
     const answer = window.confirm(
       "Are you sure you want to delete the campaign"
@@ -138,20 +103,17 @@ const CampaignList = (props) => {
     }
   };
 
-  const navigateToCombat = () => {
-    navigate("/combat", { replace: true });
+  const navigateToEncounters = () => {
+    navigate("/campaign", { replace: true });
   };
   return (
     <>
       <div className='Enemy'>
         <div className='combatBanner'>
-          <button>Set Initative</button>
-          <p>Initative Set</p>
-          <button>Next Turn</button>
           <p>
             <strong>Round: 9</strong>
           </p>
-          <button onClick={navigateToCombat}>Begin Combat</button>
+          <button onClick={navigateToEncounters}>Encounters</button>
         </div>
         <div
           className='enemyDiv'

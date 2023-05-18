@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "../../App.css";
-import CombatPlayers from "../CombatPlayer";
-import CampaignList from "../profile/CampaignList";
-import CombatLists from "../profile/CombatsList";
+import CombatPlayers from "../Combat/CombatPlayer";
+import CampaignList from "./CampaignList";
+import CombatLists from "./CombatsList";
 
 const ProfileDisplay = () => {
   const [text, setText] = useState("");
@@ -10,7 +10,6 @@ const ProfileDisplay = () => {
   const [campaignFocus, setCampaignFocus] = useState({});
   const [campaignList, setCampaignList] = useState([]);
   const [campaignSwitch, setCampaignSwitch] = useState(true);
-
   return (
     <>
       <CombatPlayers />
@@ -22,7 +21,6 @@ const ProfileDisplay = () => {
         setCampaignList={setCampaignList}
         campaignList={campaignList}
         setCampaignFocus={setCampaignFocus}
-        campaignFocus
         setCampaignSwitch={setCampaignSwitch}
         campaignSwitch={campaignSwitch}
       />

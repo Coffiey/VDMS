@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CombatPlayers from "../CombatPlayer";
-import CombatArray from "../CombatArray";
-import DisplayMonster from "../DisplayMonster";
+import CombatPlayers from "./CombatPlayer";
+import CombatArray from "./CombatArray";
+import DisplayMonster from "../Encounter/DisplayMonster";
 
 const CombatDisplay = () => {
   const [monsterObj, setmonsterObj] = useState(null);
