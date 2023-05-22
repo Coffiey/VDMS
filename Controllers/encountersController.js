@@ -71,18 +71,20 @@ const getEncounterById = async (req, res) => {
     );
 
     if (verify) {
-      const encounter = await knex.select("*").from("encounters").where({
-        id: req.params["encounters"],
-        campaigns_id: req.params["campaigns"],
-      });
-      const encounterObj = await encounter.map((item) => {
-        return {
-          id: item.id,
-          campaignId: item.campaigns_id,
-          encounterName: item.encounter_name,
-          notes: item.notes,
-        };
-      });
+      const encounter = await knex
+        .select("*")
+        .from("encounters")
+        .where({
+          id: req.params["encounters"],
+          campaigns_id: req.params["campaigns"],
+        })
+        .first();
+      const encounterObj = {
+        id: encounter.id,
+        campaignId: encounter.campaigns_id,
+        encounterName: encounter.encounter_name,
+        notes: encounter.notes,
+      };
       res.status(201).json(encounterObj);
     } else {
       res.status(409).json("User Error");

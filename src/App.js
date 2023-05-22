@@ -11,6 +11,10 @@ import RequireAuth from "./components/views/userAuthentication/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 import PersistLogin from "./components/views/userAuthentication/PersistLogin";
 import EncounterPlayerDisplay from "./components/views/Encounter/EncounterPlayerDisplay";
+import DisplayMonster from "./components/views/Encounter/prep/DisplayMonster";
+import EncounterNotes from "./components/views/campaign/EncounterNotes";
+import HomeDisplay from "./components/views/home/HomeDisplay";
+import HomePlayer from "./components/views/home/HomePlayer";
 
 function App() {
   return (
@@ -22,12 +26,27 @@ function App() {
           element={<Layout />}
         >
           <Route
-            path='/login'
-            element={<Login />}
-          />
+            path='/'
+            element={<HomeDisplay />}
+          >
+            <Route
+              path='/'
+              element={<DisplayMonster />}
+            />
+          </Route>
           <Route
-            path='/register'
-            element={<Register />}
+            path='/login'
+            element={[
+              <HomePlayer />,
+              <div className='Outlet'>
+                <div className='Enemy'>
+                  <Login />
+                </div>
+                <div className='DisplayMonster'>
+                  <Register />
+                </div>
+              </div>,
+            ]}
           />
           {/*  protected */}
           <Route element={<PersistLogin />}>
@@ -39,19 +58,42 @@ function App() {
               <Route
                 path='/profile/:campaign'
                 element={<CampaignDisplay />}
-              />
+              >
+                <Route
+                  path='/profile/:campaign/'
+                  element={<EncounterNotes />}
+                />
+              </Route>
               <Route
                 path='/profile/:campaign/:encounter'
                 element={<EncounterPlayerDisplay />}
               >
                 <Route
-                  path='/profile/:campaign/:encounter/prep'
+                  path='/profile/:campaign/:encounter'
                   element={<EncounterDisplay />}
-                />
+                >
+                  <Route
+                    path='/profile/:campaign/:encounter/'
+                    element={<DisplayMonster />}
+                  />
+                  <Route
+                    path='/profile/:campaign/:encounter/notes'
+                    element={<EncounterNotes />}
+                  />
+                </Route>
                 <Route
                   path='/profile/:campaign/:encounter/combat'
                   element={<CombatDisplay />}
-                />
+                >
+                  <Route
+                    path='/profile/:campaign/:encounter/combat/'
+                    element={<DisplayMonster />}
+                  />
+                  <Route
+                    path='/profile/:campaign/:encounter/combat/notes'
+                    element={<EncounterNotes />}
+                  />
+                </Route>
               </Route>
             </Route>
           </Route>

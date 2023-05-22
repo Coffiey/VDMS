@@ -3,8 +3,6 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useLocation, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
-import ClassDrop from "./CharacterDropDowns/ClassDrop";
-import RaceDrop from "./CharacterDropDowns/RaceDrop";
 import "./player.css";
 
 import { useState, useEffect } from "react";
@@ -85,17 +83,18 @@ const Players = () => {
   }, [name, playerClass, race, level, maxHp, dex, int, cha, str, con, wis]);
 
   const resetInputs = () => {
-    setName(undefined);
+    setDisableCreate(true);
+    setName("");
     setPlayerClass("choose");
     setRace("choose");
-    setLevel(undefined);
-    setMaxHp(undefined);
-    setDex(undefined);
-    setWis(undefined);
-    setCon(undefined);
-    setInt(undefined);
-    setStr(undefined);
-    setCha(undefined);
+    setLevel("");
+    setMaxHp("");
+    setDex("");
+    setWis("");
+    setCon("");
+    setInt("");
+    setStr("");
+    setCha("");
   };
 
   useEffect(() => {
@@ -171,7 +170,9 @@ const Players = () => {
         return (
           <div className='pc'>
             <div className='top'>
-              <h2 className='pcName'>{item.name}</h2>
+              <h2 className='pcName'>
+                Name: <span id='pcName'>{item.name}</span>
+              </h2>
               <h2 className='pcHp'>
                 HP: <span className='hp'>{item.max_hp}</span>
               </h2>
@@ -182,33 +183,48 @@ const Players = () => {
                 <h1 className='level'>Level {item.level}:</h1>
                 <h2 className='pcClass'>{item.player_class} </h2>
               </div>
-              <h2 className='pcRace'>{item.race}</h2>
+              <div className='levelDiv'>
+                <h1 className='level'>Race:</h1>
+                <h2 className='pcClass'>{item.race}</h2>
+              </div>
             </div>
 
             <div className='stats'>
               <p className='pcSave'>Saving Throws</p>
               <span className='statsNum'>
-                DEX: <br />+{item.dex}
+                DEX: <br />
+                {item.dex > 0 && <span>+</span>}
+                {item.dex}
               </span>
               <span className='statsNum'>
-                INT: <br />+{item.int}
+                INT: <br />
+                {item.int > 0 && <span>+</span>}
+                {item.int}
               </span>
               <span className='statsNum'>
-                CHA: <br />+{item.cha}
+                CHA: <br />
+                {item.cha > 0 && <span>+</span>}
+                {item.cha}
               </span>
               <span className='statsNum'>
-                STR: <br />+{item.str}
+                STR: <br />
+                {item.str > 0 && <span>+</span>}
+                {item.str}
               </span>
               <span className='statsNum'>
-                CON: <br />+{item.con}
+                CON: <br />
+                {item.con > 0 && <span>+</span>}
+                {item.con}
               </span>
               <span className='statsNum'>
-                WIS: <br />+{item.wis}
+                WIS: <br />
+                {item.wis > 0 && <span>+</span>}
+                {item.wis}
               </span>
             </div>
             <button
+              className='PlayerDelete'
               onClick={() => {
-                console.log(item);
                 deletePlayerObject(item);
               }}
             >
@@ -246,39 +262,58 @@ const Players = () => {
           <h2 className='pcClass'>
             Class:{" "}
             {
-              <button
-                onClick={() => setViewClass(true)}
-                disabled={disableButonClass}
-              >
-                {playerClass}
-              </button>
+              <ul className='raceList'>
+                <li
+                  className='races'
+                  onClick={() => setViewClass(true)}
+                  disabled={disableButonClass}
+                >
+                  {playerClass}
+                </li>
+                {viewClass &&
+                  classList.map((classObj) => {
+                    return (
+                      <li
+                        className='races'
+                        onClick={() => {
+                          setPlayerClass(classObj.name);
+                          setViewClass(false);
+                        }}
+                      >
+                        {classObj.name}
+                      </li>
+                    );
+                  })}
+              </ul>
             }
           </h2>
-          {viewClass && (
-            <ClassDrop
-              classList={classList}
-              setPlayerClass={setPlayerClass}
-              setViewClass={setViewClass}
-            />
-          )}
-
-          <h2 className='pcRace'>
+          <h2 className='pcClass'>
             Race:{" "}
-            <button
-              onClick={() => setViewRace(true)}
-              disabled={disableButonRace}
-            >
-              {race}
-            </button>
+            <ul className='raceList'>
+              <ui
+                className='races'
+                onClick={() => setViewRace(true)}
+                disabled={disableButonRace}
+              >
+                {race}
+              </ui>
+              {viewRace &&
+                raceList.map((raceObj) => {
+                  return (
+                    <li
+                      className='races'
+                      onClick={() => {
+                        setRace(raceObj.name);
+                        setViewRace(false);
+                      }}
+                    >
+                      {raceObj.name}
+                    </li>
+                  );
+                })}
+            </ul>
           </h2>
-          {viewRace && (
-            <RaceDrop
-              raceList={raceList}
-              setRace={setRace}
-              setViewRace={setViewRace}
-            />
-          )}
-          <h2 className='pcRace'>
+          <h2 className='Level'>
             Level:{" "}
             <input
               value={level}

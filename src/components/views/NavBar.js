@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../../App.css";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+import "./NavBar.css";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -16,22 +17,45 @@ const NavBar = () => {
       console.log(err);
     }
     setAuth({});
+    navigate("/");
   };
   return (
     <div className='NavBar'>
-      <button onClick={() => navigate("/")}>Home</button>
-      <button>My games</button>
-      <p>Combat Dragon</p>
-      <button onClick={() => navigate("/campaign")}>Combat</button>
-      {auth.user ? (
-        <>
-          <p>{auth.user}</p>
-          <p>{auth.id}</p>
-        </>
-      ) : (
-        <button onClick={() => navigate("/login")}>login</button>
-      )}
-      <button onClick={logOut}>logout</button>
+      <div className='left'></div>
+      <div
+        onClick={() => navigate("/")}
+        className='ImageDiv'
+      >
+        <img
+          className='NavImg'
+          src='./CombatDragon.png'
+        />
+      </div>
+      <div className='ButtonDiv'>
+        {auth.user ? (
+          <>
+            <p
+              className='NavUser'
+              onClick={() => navigate("/profile")}
+            >
+              {auth.user}
+            </p>
+            <button
+              className='NavButton NavLogout'
+              onClick={logOut}
+            >
+              logout
+            </button>
+          </>
+        ) : (
+          <button
+            className='NavButton NavLogout'
+            onClick={() => navigate("/login")}
+          >
+            Sign In / Sign Up
+          </button>
+        )}
+      </div>
     </div>
   );
 };

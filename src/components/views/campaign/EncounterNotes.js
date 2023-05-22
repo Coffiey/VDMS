@@ -1,29 +1,31 @@
+import "../../../App.css";
+import "./player.css";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams, useOutletContext } from "react-router-dom";
 
 const CombatLists = (props) => {
   const {
-    name,
     textState,
     setTextState,
     campaignText,
     setCampaignText,
     encounterText,
     setEncounterText,
-    campaign,
+    campaignObj,
     setCampaignSwitch,
     campaignSwitch,
     encounterFocus,
     encounterSwitch,
     setEncounterSwitch,
-  } = props;
+    name,
+  } = useOutletContext();
 
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
   const { auth } = useAuth();
   const userId = auth?.id;
-  const campaignId = Number(location.pathname.slice(9));
+  const params = useParams();
 
   const addText = (e) => {
     if (textState) {
@@ -36,8 +38,8 @@ const CombatLists = (props) => {
   const putCampaign = async () => {
     if (userId) {
       try {
-        await axiosPrivate.put(`/db/${userId}?id=${campaignId}`, {
-          campaignName: campaign.campaignName,
+        await axiosPrivate.put(`/db/${userId}?id=${params.campaign}`, {
+          campaignName: campaignObj.campaignName,
           notes: campaignText,
         });
         setCampaignSwitch(!campaignSwitch);
@@ -51,7 +53,7 @@ const CombatLists = (props) => {
     if (encounterFocus) {
       try {
         await axiosPrivate.put(
-          `/db/${userId}/${campaign.id}?id=${encounterFocus.id}`,
+          `/db/${userId}/${campaignObj.id}?id=${encounterFocus.id}`,
           {
             encounterName: encounterFocus.encounterName,
             notes: encounterText,
@@ -63,18 +65,54 @@ const CombatLists = (props) => {
       }
     }
   };
-  //textState treu means its the campaing and false is encounters
+  //textState true means its the campaing and false is encounters
   return (
-    <>
-      <div>
-        <button onClick={() => setTextState(true)}>Campaign Notes</button>
-        <button onClick={() => setTextState(false)}>Encounter Notes</button>
-      </div>
-      {}
+    <div className='textDiv'>
+      {!params["*"].includes("notes") ? (
+        <div className='notesDiv'>
+          <button
+            className='notesButton'
+            onClick={() => setTextState(true)}
+          >
+            Campaign Notes
+          </button>
+          {textState ? (
+            <p className='textTitle'>
+              Campaign: <strong>{campaignObj?.campaignName}</strong>
+            </p>
+          ) : encounterFocus ? (
+            <p className='textTitle'>
+              Encounter: <strong>{encounterFocus?.encounterName}</strong>
+            </p>
+          ) : (
+            <p className='textTitle'>
+              Encounter: <strong>{name}</strong>
+            </p>
+          )}
+          <button
+            className='notesButton'
+            onClick={() => setTextState(false)}
+          >
+            Encounter Notes
+          </button>
+        </div>
+      ) : (
+        <>
+          {textState ? (
+            <p className='textTitle'>
+              Campaign: <strong>{campaignObj?.campaignName}</strong>
+            </p>
+          ) : (
+            <p className='textTitle'>
+              Encounter: <strong>{encounterFocus?.encounterName}</strong>
+            </p>
+          )}
+        </>
+      )}
       {textState ? (
         <>
-          <p>Campaign: {campaign?.campaignName}</p>
           <textarea
+            className='textInfo'
             onBlur={putCampaign}
             onChange={addText}
             value={campaignText}
@@ -82,21 +120,15 @@ const CombatLists = (props) => {
         </>
       ) : (
         <>
-          {encounterFocus?.encounterName ? (
-            <p>Encounter: {encounterFocus.encounterName}</p>
-          ) : name?.length > 0 ? (
-            <p>Encounter: {name}</p>
-          ) : (
-            <p>Create A Encounter</p>
-          )}
           <textarea
+            className='textInfo'
             onBlur={putEncounter}
             onChange={addText}
             value={encounterText}
           ></textarea>
         </>
       )}
-    </>
+    </div>
   );
 };
 

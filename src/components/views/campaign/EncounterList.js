@@ -17,7 +17,7 @@ const EncounterList = (props) => {
     encounterList,
     setEncounterList,
     encounterFocus,
-    campaign,
+    campaignObj,
     setEncounterFocus,
   } = props;
   const { auth } = useAuth();
@@ -113,50 +113,71 @@ const EncounterList = (props) => {
       }
     }
   };
-
+  // () => navigate(`/profile`)
   return (
     <>
       <div className='Enemy'>
         <div className='combatBanner'>
-          <p>
-            <strong>Round: 9</strong>
-          </p>
-          {campaign && <p>{campaign.campaignName}</p>}
-          <button onClick={() => navigateToEncounters(false)}>
-            Go to encounters
+          <img
+            onClick={() => navigate(`/profile`)}
+            className='listTitle'
+            id='campaignImg'
+            src='/campaign.png'
+          />
+          {campaignObj && (
+            <p className='listAnswer'>{campaignObj.campaignName}</p>
+          )}
+          <button
+            className='bannerButton'
+            onClick={() => navigateToEncounters(false)}
+          >
+            Select Encounter
           </button>
         </div>
         <div
-          className='enemyDiv'
+          className='encounterCreateDiv'
           onClick={() => {
             setTextState(false);
             setEncounterText("");
             setEncounterFocus(null);
           }}
         >
-          {name?.length > 0 ? <h1>{name}</h1> : <h1>Create A Encounter</h1>}
-          <p>
+          {name?.length > 0 ? (
+            <h1 className='encounterItem'>{name}</h1>
+          ) : (
+            <h1 className='encounterItem'>Create A Encounter</h1>
+          )}
+          <p className='encounterItem'>
             Give it a Name{" "}
             <input
               onChange={addName}
               value={name}
             ></input>
+            <button
+              className='encounterButton'
+              onClick={postEncounter}
+            >
+              Create
+            </button>
           </p>
-          <button onClick={postEncounter}>+</button>
         </div>
         {encounterList &&
           encounterList.map((encounter) => {
             return (
               <div
-                className='enemyDiv'
+                className='encounterDiv'
                 onClick={() => setNotes(encounter)}
                 onDoubleClick={() => navigateToEncounters(encounter)}
               >
-                <h1>{encounter.encounterName}</h1>
-                <p>Add some Campaign notes on the left</p>
-                <p>
-                  Delete Campaign:{" "}
-                  <button onClick={() => deleteEncounter(encounter)}>
+                <h1 className='encounterItem'>{encounter.encounterName}</h1>
+                <p className='encounterItem'>
+                  Add some Campaign notes on the left
+                </p>
+                <p className='encounterItem'>
+                  <button
+                    className='deleteButton'
+                    onClick={() => deleteEncounter(encounter)}
+                  >
                     Delete
                   </button>
                 </p>

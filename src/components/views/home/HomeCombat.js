@@ -1,18 +1,14 @@
 import axios from "axios";
-import "./combatArray.css";
-import "../prep/enemy.css";
-import useAuth from "../../../hooks/useAuth";
+import "../Encounter/Combat/combatArray.css";
+import "../Encounter/prep/enemy.css";
 
 import { useEffect, useState } from "react";
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const CombatArray = (props) => {
-  const { setmonsterObj, monsterObj } = props;
+const HomeCombat = (props) => {
+  const { setmonsterObj, monsterObj, setCombatSwitch, player, enemyList } =
+    props;
 
-  const [playerArray, setPlayerArray] = useState([]);
-  const [monsterArray, setMonsterArray] = useState([]);
-  const [saveFile, setSaveFile] = useState(null);
   const [combatArray, SetCombatArray] = useState([]);
   const [sorted, setSorted] = useState(true);
   const [monsterUrl, setMonsterUrl] = useState(null);
@@ -20,33 +16,6 @@ const CombatArray = (props) => {
   const [turn, setTurn] = useState(0);
 
   const [hpChange, setHpchange] = useState(0);
-
-  const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const { auth } = useAuth();
-  const { campaign, encounter } = useParams();
-
-  useEffect(() => {
-    const getSaveFile = async () => {
-      const savedObj = await JSON.parse(
-        localStorage.getItem(`local/${auth.id}/${campaign}/${encounter}/enemy`)
-      );
-      if (savedObj) {
-        SetCombatArray(savedObj);
-        setSaveFile(savedObj);
-      }
-    };
-    getSaveFile();
-  }, []);
-
-  useEffect(() => {
-    if (saveFile && sorted) {
-      SetCombatArray(saveFile);
-      setIntiative();
-    }
-  }, [saveFile]);
 
   useEffect(() => {
     if (combatArray[0]?.monsterName) {
@@ -56,44 +25,8 @@ const CombatArray = (props) => {
   }, [combatArray]);
 
   useEffect(() => {
-    let isMounted = true;
-    const getPlayers = async () => {
-      try {
-        const response = await axiosPrivate.get(
-          `/db/${auth.id}/${campaign}/pc`
-        );
-        isMounted && setPlayerArray(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getPlayers();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    let isMounted = true;
-    const getEnemy = async () => {
-      try {
-        const response = await axiosPrivate.get(
-          `/db/${auth.id}/${campaign}/${encounter}/enemy`
-        );
-        isMounted && setMonsterArray(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getEnemy();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (playerArray.length > 0 && monsterArray.length > 0 && !saveFile) {
-      const combat = playerArray.concat(monsterArray);
+    if (player.length > 0 && enemyList.length > 0) {
+      const combat = player.concat(enemyList);
       const combat2 = JSON.parse(JSON.stringify(combat));
       SetCombatArray(combat2);
       setHpchange(
@@ -102,7 +35,7 @@ const CombatArray = (props) => {
         })
       );
     }
-  }, [playerArray, monsterArray]);
+  }, [player, enemyList]);
 
   useEffect(() => {
     if (combatArray.length !== 0) {
@@ -163,12 +96,12 @@ const CombatArray = (props) => {
     SetCombatArray(
       combatArray.map((object, i) => {
         if (i === index) {
-          if (object.max_hp) {
-            if (object.max_hp - Number(hpChange[index]) < 0) {
-              object.max_hp = 0;
+          if (object.maxHp) {
+            if (object.maxHp - Number(hpChange[index]) < 0) {
+              object.maxHp = 0;
               return object;
             }
-            object.max_hp -= Number(hpChange[index]);
+            object.maxHp -= Number(hpChange[index]);
             return object;
           }
           if (object.health) {
@@ -196,19 +129,18 @@ const CombatArray = (props) => {
   const healClick = (index) => {
     SetCombatArray(
       combatArray.map((object, i) => {
-        let [player] = playerArray.filter((x) => x.name === object.name);
-        let [monster] = monsterArray.filter(
+        let [playerobj] = player.filter((x) => x.name === object.name);
+        let [monster] = enemyList.filter(
           (x) => x.monsterReference === object.monsterReference
         );
-        console.log(player);
-        console.log(monster);
+
         if (i === index) {
-          if (typeof object?.max_hp === "number") {
-            if (object.max_hp + Number(hpChange[index]) > player.max_hp) {
-              object.max_hp = player.max_hp;
+          if (typeof object?.maxHp === "number") {
+            if (object.maxHp + Number(hpChange[index]) > playerobj.maxHp) {
+              object.maxHp = playerobj.maxHp;
               return object;
             }
-            object.max_hp += Number(hpChange[index]);
+            object.maxHp += Number(hpChange[index]);
             return object;
             // }
           }
@@ -246,10 +178,6 @@ const CombatArray = (props) => {
       } else {
         setTurn(1);
       }
-      localStorage.setItem(
-        `local/${auth.id}/${campaign}/${encounter}/enemy`,
-        JSON.stringify(combatArray)
-      );
     }
   };
 
@@ -277,8 +205,7 @@ const CombatArray = (props) => {
     setSorted(true);
   };
   const navigateToPrep = () => {
-    localStorage.removeItem(`local/${auth.id}/${campaign}/${encounter}/enemy`);
-    navigate(`/profile/${campaign}/${encounter}`);
+    //add a swtich effect
   };
 
   return (
@@ -294,9 +221,8 @@ const CombatArray = (props) => {
           </button>
         ) : (
           <img
-            onClick={() => navigate(`/profile/${campaign}/${encounter}`)}
             className='listTitle'
-            src='/combat.png'
+            src='/demoCombat.png'
           />
         )}
         {!sorted && (
@@ -315,7 +241,7 @@ const CombatArray = (props) => {
         <button
           className='bannerButton'
           id='endCombat'
-          onClick={navigateToPrep}
+          onClick={() => setCombatSwitch(false)}
         >
           End Combat
         </button>
@@ -342,12 +268,12 @@ const CombatArray = (props) => {
                   </h3>
                 )}
                 <h1 className='enemyName'>{object.name}</h1>
-                <p>{object.player_class}</p>
+                <p>{object.playerClass}</p>
                 <p>{object.race}</p>
 
-                {object.max_hp > 0 ? (
+                {object.maxHp > 0 ? (
                   <h1 className='enemyHp'>
-                    HP: <span className='health'>{object.max_hp}</span>
+                    HP: <span className='health'>{object.maxHp}</span>
                   </h1>
                 ) : (
                   <h1>You Dead</h1>
@@ -376,13 +302,15 @@ const CombatArray = (props) => {
                   </span>
                 </div>
                 <div>
-                  <button
-                    onClick={() => {
-                      damageClick(index);
-                    }}
-                  >
-                    hit:
-                  </button>
+                  {object.maxHp > 0 && (
+                    <button
+                      onClick={() => {
+                        damageClick(index);
+                      }}
+                    >
+                      hit:
+                    </button>
+                  )}
                   <button
                     onClick={() => {
                       healClick(index);
@@ -434,13 +362,15 @@ const CombatArray = (props) => {
               </div>
               <div className='enemyBot'>
                 <div>
-                  <button
-                    onClick={() => {
-                      damageClick(index);
-                    }}
-                  >
-                    hit:
-                  </button>
+                  {object.health > 0 && (
+                    <button
+                      onClick={() => {
+                        damageClick(index);
+                      }}
+                    >
+                      hit:
+                    </button>
+                  )}
                   <button
                     onClick={() => {
                       healClick(index);
@@ -466,4 +396,4 @@ const CombatArray = (props) => {
   );
 };
 
-export default CombatArray;
+export default HomeCombat;

@@ -1,4 +1,11 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .pc {
+  position: relative;
   background-color: rgb(120, 75, 8);
   opacity: 80%;
   border-style: solid;
@@ -8,16 +15,25 @@
   flex-direction: column;
   justify-content: space-around;
   width: 20%;
+  max-width: 350px;
+  min-width: 310px;
   border-radius: 10%;
   height: 90%;
+  min-height: 200px;
 }
 
 .top {
+  margin-top: 4px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 0%;
+  justify-content: space-between;
+  margin-bottom: 4px;
   padding: 0%;
+  background-color: rgb(171, 106, 7);
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  border-radius: 10px;
 }
 
 .mid {
@@ -25,24 +41,29 @@
   justify-content: space-around;
   margin-top: 0%;
   padding: 0%;
-  max-width: 95%;
+  background-color: rgb(171, 106, 7);
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  min-width: 300px;
+  border-radius: 10px;
+  height: 23%;
 }
 
 .pcName {
-  font-size: 1.5vh;
+  font-size: 1em;
   margin-top: 0%;
   padding-top: 1%;
   padding-bottom: 2%;
   margin-bottom: 0%;
   width: 50%;
-  background-color: rgb(171, 106, 7);
   border-radius: 5px;
   text-align: center;
   height: max-content;
 }
 
 .pcHp {
-  font-size: 1.5vh;
+  font-size: 1em;
   margin-top: 0%;
   padding-top: 1%;
   padding-bottom: 2%;
@@ -59,52 +80,58 @@
 }
 
 .pcClass {
-  font-size: 1.5vh;
+  font-size: 1em;
   margin-top: 0%;
   padding-left: 3%;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 0%;
+  padding-bottom: 0%;
   padding-right: 3%;
   margin-bottom: 0%;
   background-color: rgb(171, 106, 7);
   border-radius: 10%;
   text-align: center;
-  width: max-content;
+  min-width: 65px;
   padding-left: 2%;
 }
 
-.pcRace {
-  font-size: 1.5vh;
+.Level {
+  font-size: 1em;
   padding-right: 3%;
   padding-left: 3%;
-  margin-top: 0%;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  margin-bottom: 0%;
-  margin-left: 5%;
-  margin-right: 1%;
-  background-color: rgb(171, 106, 7);
+  margin-top: auto;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  margin-bottom: auto;
   border-radius: 10%;
   text-align: center;
-  height: max-content;
+  min-width: 70px;
 }
 
 .pcSave {
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: bolder;
   margin-top: 0%;
   margin-bottom: 0%;
   border-radius: 5px;
   width: 100%;
   align-self: flex-start;
+  display: flex;
+  justify-content: space-between;
 }
 
 .statsNum {
+  background-color: rgb(142, 90, 12);
+  font-weight: bold;
   margin-right: 2%;
-  font-size: 1.2vh;
-  background-color: rgb(171, 106, 7);
+  font-size: 0.8em;
   border-radius: 5px;
-  margin-right: 2%;
+  margin-left: 2%;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  height: 55%;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 .stats {
@@ -115,11 +142,16 @@
   text-align: center;
   width: 95%;
   margin-bottom: 0px;
-  height: 20%;
+  height: 30%;
+  min-height: 60px;
+  background-color: rgb(171, 106, 7);
+  border-radius: 10px;
+  padding-bottom: 5px;
 }
 
 .statinput {
   width: 50%;
+  border-radius: 5px;
 }
 
 .levelDiv {
@@ -129,23 +161,18 @@
 }
 
 .level {
-  font-size: 0.8vh;
+  font-size: 0.7em;
   margin: 0%;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .statCreate {
   margin-top: 0%;
   margin-bottom: 0%;
-  margin-top: 0%;
   display: flex;
   flex-direction: row;
   align-self: center;
+  width: 95%;
+  border-radius: 10px;
 }
 
 .inputP {
@@ -157,13 +184,7 @@ input::-webkit-inner-spin-button {
 
 .txt {
   width: 40%;
-}
-
-.createPlayer {
-  font-size: 1vh;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  border-radius: 5px;
 }
 
 .statCreate {
@@ -171,4 +192,154 @@ input::-webkit-inner-spin-button {
   width: 98%;
   padding-bottom: 2%;
   border-radius: 5px;
+}
+
+.PlayerDelete {
+  font-size: 1em;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  border-color: #111;
+  color: white;
+  background: linear-gradient(180deg, #555 0%, #222 49%, #000 51%, #222 100%);
+  border-radius: 5px;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.createPlayer {
+  font-size: 1em;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #fea 0%, #dc8 49%, #a95 51%, #dc8 100%);
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.createPlayer:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+#pcName {
+  color: darkblue;
+  padding: 0px 4px 4px 4px;
+  border-radius: 5px;
+  letter-spacing: 1.2px;
+}
+
+.races {
+  position: relative;
+  list-style-type: none;
+  margin: 0%;
+  z-index: 9999;
+  /* width: 90%; */
+  margin: auto;
+}
+
+.raceList {
+  border-radius: 5px;
+  list-style-type: none;
+  position: relative;
+  background-color: white;
+  margin: 0%;
+  z-index: 9999;
+  font-size: 0.8em;
+  padding-left: 0%;
+  padding: 1px 3px 1px 3px;
+  max-height: 125px;
+  width: fit-content;
+  overflow-x: visible;
+  overflow-y: scroll;
+  margin: auto;
+}
+
+.raceList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.raceList::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.raceList::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.textDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.textTitle {
+  font-size: 1.5em;
+  padding-top: 0px;
+  margin: 10px auto 5px auto;
+  font-family: monospace;
+}
+
+.textInfo {
+  font-size: 1em;
+  width: 96%;
+  height: 90%;
+  margin: auto auto 10px auto;
+  resize: none;
+  font-family: cursive;
+}
+
+.rounds {
+  margin: auto 10px auto 10px;
+}
+.notesDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 45px;
+  min-height: 45px;
+  background-color: orange;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+  padding: 5px;
+  margin-bottom: 0px;
+}
+
+.notesButton {
+  color: white;
+  border-color: transparent;
+  margin: auto 10px auto 10px;
+  border-radius: 7px;
+  height: 70%;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#a95),
+    to(#fea)
+  );
+}
+
+.CampaignCreateDiv {
+  padding: 5px 5px 5px 5px;
+  border-color: black;
+  border-style: solid;
+  margin: 5px auto 5px auto;
+  border-radius: 10px;
+  background-color: rgb(216, 135, 14);
+  opacity: 80%;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 95%;
 }

@@ -1,4 +1,30 @@
-.enemyDiv {
+.textDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.textTitle {
+  font-size: 1.5em;
+  padding-top: 0px;
+  margin: 10px auto 5px auto;
+  font-family: monospace;
+}
+
+.textInfo {
+  font-size: 1em;
+  width: 96%;
+  height: 90%;
+  margin: 10px auto 10px auto;
+  resize: none;
+  font-family: cursive;
+}
+
+.rounds {
+  margin: auto 10px auto 10px;
+}
+
+.CampaignCreateDiv {
   padding: 5px 5px 5px 5px;
   border-color: black;
   border-style: solid;
@@ -11,65 +37,7 @@
   width: 95%;
 }
 
-.playerDiv {
-  padding: 5px 5px 5px 5px;
-  border-color: black;
-  border-style: solid;
-  margin: 5px auto 5px auto;
-  border-radius: 10px;
-  background-color: rgb(139, 88, 11);
-  opacity: 80%;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 95%;
-}
-
-.enemyTop {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 0%;
-  padding: 0%;
-}
-
-.enemyBot {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-bottom: 1%;
-  padding: 0% 5% 0.5% 5%;
-}
-
-.enemyName {
-  font-size: 2vw;
-  margin-top: 0%;
-  margin-bottom: 0%;
-}
-
-.enemyHp {
-  font-size: 2vw;
-  margin-top: 0%;
-  margin-bottom: 0%;
-}
-
-.health {
-  color: green;
-}
-
-.encounterCreateDiv {
-  padding: 5px 5px 5px 5px;
-  border-color: black;
-  border-style: solid;
-  margin: 5px auto 5px auto;
-  border-radius: 10px;
-  background-color: rgb(216, 135, 14);
-  opacity: 80%;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 95%;
-}
-
-.encounterDiv {
+.CampaignDiv {
   padding: 5px 5px 5px 5px;
   border-color: black;
   border-style: solid;
@@ -97,7 +65,7 @@
   );
 }
 
-.encounterItem {
+.campaignItem {
   width: 70%;
   margin-left: auto;
   margin-right: auto;
@@ -105,7 +73,7 @@
   font-weight: bold;
 }
 
-.encounterButton {
+.campaignButton {
   color: white;
   border-color: transparent;
   margin: auto 35px auto 8px;

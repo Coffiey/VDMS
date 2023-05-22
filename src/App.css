@@ -3,9 +3,22 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  width: 100%;
+  position: relative;
+}
+
+.title {
+  color: rgb(83, 6, 6);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding-bottom: 0px;
+  margin-bottom: auto;
+  margin-top: auto;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .NavBar {
+  min-width: 1300px;
   position: relative;
   background-color: orange;
   width: 98%;
@@ -18,10 +31,12 @@ body {
   border-top-right-radius: 25px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Player {
+  min-width: 1300px;
   position: relative;
   background-color: bisque;
   width: 98%;
@@ -31,10 +46,112 @@ body {
   display: flex;
   flex-direction: row;
   height: 25vh;
-  min-height: 200px;
+  min-height: 240px;
+  overflow: scroll;
+  overflow-y: hidden;
+}
+.CombatPlayer {
+  min-width: 1300px;
+  position: relative;
+  background-color: bisque;
+  width: 98%;
+  margin-top: 5px;
+  margin-left: 1%;
+  margin-right: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 25vh;
+  min-height: 240px;
+  overflow: scroll;
+  overflow-y: hidden;
 }
 
+.combatBanner {
+  background-color: orange;
+  margin: 0px 0px 0px 0px;
+  padding: 5px;
+  width: 100%;
+  min-height: 40px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#campaignImg {
+  margin-right: 5px;
+}
+#encounterImg {
+  margin-right: 5px;
+}
+
+.listTitle {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  height: 80%;
+  padding: 0px 0px 0px 0px;
+  margin-left: 20px;
+  max-width: 40%;
+}
+
+.listTitle:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+}
+.listTitle:hover:active {
+  transform: scale(1);
+}
+.listAnswer {
+  margin: auto auto auto 5px;
+  font-weight: bold;
+  font-size: 1.2em;
+  font-family: sans-serif;
+  text-decoration: underline;
+}
+
+.bannerButton {
+  color: white;
+  border-color: transparent;
+  margin: auto 35px auto auto;
+  border-radius: 7px;
+  height: 70%;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#a95),
+    to(#fea)
+  );
+}
+
+#setInitative {
+  min-height: 30px;
+  margin-left: 25px;
+  margin-right: auto;
+}
+
+#endCombat {
+  min-height: 30px;
+  border-color: #981121;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#69000d),
+    to(#ffe6e9)
+  );
+}
+
+.Outlet {
+  display: flex;
+  flex-direction: row;
+  min-width: 1300px;
+}
 .Enemy {
+  min-width: 644px;
   padding: 0px 5px 5px 0px;
   position: relative;
   background-color: bisque;
@@ -43,6 +160,7 @@ body {
   margin-left: 1%;
   margin-right: 0%;
   display: flex;
+  flex-direction: row;
   float: left;
   flex-direction: column;
   height: 63vh;
@@ -52,6 +170,7 @@ body {
 }
 
 .DisplayMonster {
+  min-width: 645px;
   z-index: 1;
   position: relative;
   background-color: bisque;
@@ -61,6 +180,7 @@ body {
   margin-left: 0.5%;
   margin-right: 1%;
   display: flex;
+  flex-direction: column;
   height: 63.5vh;
   min-height: 400px;
   overflow: scroll;

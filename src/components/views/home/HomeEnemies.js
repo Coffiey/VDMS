@@ -1,9 +1,9 @@
-import "./enemy.css";
-import DropdownItem from "./DropdownItem";
+import "../Encounter/prep/enemy.css";
+import DropdownItem from "../Encounter/prep/DropdownItem";
 import axios from "axios";
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import useAuth from "../../../hooks/useAuth";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Enemy = (props) => {
@@ -15,23 +15,21 @@ const Enemy = (props) => {
     setMonsterObj,
     dropdown,
     seeList,
-    encounterFocus,
+    enemyList,
+    setEnemyList,
+    setCombatSwitch,
   } = props;
 
-  const [monster, setMonster] = useState(true);
+  const [monsterSwitch, setMonsterSwitch] = useState(true);
   const [monsterName, setMonsterName] = useState("");
-  const [monsterID, setMonsterID] = useState();
+  const [monsterID, setMonsterID] = useState(null);
   const [health, setHealth] = useState(0);
   const [monsterReference, setMonsterReference] = useState("");
   const [Customhealth, setCustomhealth] = useState(0);
-  const [monsterArray, setMonsterArray] = useState([]);
 
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const { auth } = useAuth();
-
-  const { campaign, encounter } = useParams();
-  const userId = auth.id;
 
   const reset = () => {
     setSearch("");
@@ -52,40 +50,22 @@ const Enemy = (props) => {
     return obj;
   };
 
-  useEffect(() => {
-    let isMounted = true;
-    const getEnemy = async () => {
-      try {
-        const response = await axiosPrivate.get(
-          `/db/${userId}/${campaign}/${encounter}/enemy`
-        );
-        isMounted && setMonsterArray(response.data);
-        changeObj(response.data[0]);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getEnemy();
+  const postEnemy = async () => {
+    const monster = createMon();
+    setEnemyList([...enemyList, monster]);
     reset();
-    return () => {
-      isMounted = false;
-    };
-  }, [monster]);
-
-  const postEnemy = async (object) => {
-    const monsterDB = createMon();
-    console.log(monsterDB);
-    try {
-      await axiosPrivate.post(
-        `/db/${userId}/${campaign}/${encounter}/enemy`,
-        monsterDB
-      );
-      setMonster(!monster);
-    } catch (err) {
-      console.error(err);
-    }
   };
-  console.log(encounterFocus);
+
+  useEffect(() => {
+    if (monsterID) {
+      axios
+        .get(`/api/monster/object?url=${monsterID}`)
+        .then((response) => {
+          setMonsterObj(response.data);
+        })
+        .catch(function (error) {});
+    }
+  }, [monsterID]);
 
   const check = async (index) => {
     const answer = window.confirm(
@@ -94,17 +74,11 @@ const Enemy = (props) => {
     return answer;
   };
 
-  const deleteEnemy = async (index) => {
+  const deleteEnemy = async (info, index) => {
     const checked = await check(index);
     if (checked) {
-      try {
-        await axiosPrivate.delete(
-          `/db/${userId}/${campaign}/${encounter}/enemy?id=${index.id}`
-        );
-        setMonster(!monster);
-      } catch (err) {
-        console.error(err);
-      }
+      enemyList.splice(index, 1);
+      setEnemyList([...enemyList]);
     }
   };
 
@@ -129,16 +103,11 @@ const Enemy = (props) => {
         <div className='combatBanner'>
           <img
             className='listTitle'
-            id='encounterImg'
-            onClick={() => navigate(`/profile/${campaign}`)}
-            src='/Encounter.png'
+            src='/demoCombat.png'
           />
-          {encounterFocus && (
-            <p className='listAnswer'>{encounterFocus.encounterName}</p>
-          )}
           <button
             className='bannerButton'
-            onClick={() => navigate(`/profile/${campaign}/${encounter}/combat`)}
+            onClick={() => setCombatSwitch(true)}
           >
             Begin Combat
           </button>
@@ -227,24 +196,21 @@ const Enemy = (props) => {
         </div>
 
         <div>
-          {monsterArray.map((info, index) => {
+          {enemyList.map((info, index) => {
             return (
               <div
                 className='enemyDiv'
                 onClick={() => changeObj(info)}
               >
                 <div className='enemyTop'>
-                  <h1>{info.monsterReference}</h1>
-                  <h6 className='enemyName'>{info.monsterName}</h6>
+                  <h1>{info?.monsterReference}</h1>
+                  <h6 className='enemyName'>{info?.monsterName}</h6>
                   <h1 className='enemyHp'>
-                    HP: <span className='health'>{info.health}</span>
+                    HP: <span className='health'>{info?.health}</span>
                   </h1>
                 </div>
                 <div className='enemyBot'>
-                  {/* <button onClick={() => console.log(info)}>
-                    Edit Monster
-                  </button> */}
-                  <button onClick={() => deleteEnemy(info)}>
+                  <button onClick={() => deleteEnemy(info, index)}>
                     Delete Monster
                   </button>
                 </div>

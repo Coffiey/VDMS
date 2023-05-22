@@ -1,5 +1,6 @@
 import "../Encounter/prep/enemy.css";
 import "../../../App.css";
+import "./profile.css";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -23,7 +24,6 @@ const CampaignList = (props) => {
 
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     let isMounted = true;
@@ -98,7 +98,6 @@ const CampaignList = (props) => {
       auth.campaign = { id: object.id, name: object.campaignName };
       navigate(`/profile/${object.id}`);
     } else {
-      console.log(typeof campaignFocus);
       if (campaignFocus) {
         auth.campaign = { id: object.id, name: object.campaignName };
         navigate(`/profile/${campaignFocus.id}`);
@@ -112,43 +111,60 @@ const CampaignList = (props) => {
     <>
       <div className='Enemy'>
         <div className='combatBanner'>
-          <p>
-            <strong>Round: 9</strong>
-          </p>
-          <button onClick={() => navigateToEncounters(false)}>
-            go to Campaigns
+          <img
+            className='listTitle'
+            src='/profile.png'
+          />
+          <button
+            className='bannerButton'
+            onClick={() => navigateToEncounters(false)}
+          >
+            {campaignFocus?.campaignName
+              ? campaignFocus.campaignName
+              : "Select Campaign"}
           </button>
         </div>
         <div
-          className='enemyDiv'
+          className='CampaignCreateDiv'
           onClick={() => {
             setText("");
             setCampaignFocus(null);
           }}
         >
-          {name.length > 0 ? <h1>{name}</h1> : <h1>Create A Campaign</h1>}
-          <p>
+          {name.length > 0 ? (
+            <h1 className='campaignItem'>{name}</h1>
+          ) : (
+            <h1 className='campaignItem'>Create A Campaign</h1>
+          )}
+          <p className='campaignItem'>
             Give it a Name{" "}
             <input
               onChange={addName}
               value={name}
             ></input>
+            <button
+              className='campaignButton'
+              onClick={postCampaign}
+            >
+              Create
+            </button>
           </p>
-          <button onClick={postCampaign}>+</button>
         </div>
         {campaignList &&
           campaignList.map((campaign) => {
             return (
               <div
-                className='enemyDiv'
+                className='CampaignDiv'
                 onClick={() => setNotes(campaign)}
                 onDoubleClick={() => navigateToEncounters(campaign)}
               >
-                <h1>{campaign.campaignName}</h1>
-                <p>Add some Campaign notes on the left</p>
-                <p>
-                  Delete Campaign:{" "}
-                  <button onClick={() => deleteCampaign(campaign)}>
+                <h1 class='campaignItem'>{campaign.campaignName}</h1>
+                <p class='campaignItem'>Add some Campaign notes on the left.</p>
+                <p class='campaignItem'>
+                  <button
+                    className='deleteButton'
+                    onClick={() => deleteCampaign(campaign)}
+                  >
                     Delete
                   </button>
                 </p>
