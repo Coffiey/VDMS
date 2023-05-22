@@ -10,7 +10,7 @@ exports.up = function (knex) {
       .references("campaigns.id")
       .notNullable()
       .onDelete("CASCADE");
-    table.string("encounter_name").notNullable().unique();
+    table.string("encounter_name").notNullable();
     table.text("notes").notNullable();
   });
 };

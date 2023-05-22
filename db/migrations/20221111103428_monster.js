@@ -5,8 +5,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable("monster", (table) => {
     table.increments("id").primary();
-    table.string("monster_id").notNullable().unique();
-    table.string("monster_name").notNullable().unique();
+    table.string("monster_id").notNullable();
+    table.string("monster_name").notNullable();
     table.integer("health").defaultTo(null);
   });
 };
