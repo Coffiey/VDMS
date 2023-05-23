@@ -250,142 +250,99 @@ const HomeCombat = (props) => {
         if (object.name) {
           return (
             <div
-              className='playerDiv'
+              className='combatPlayerDiv'
               id={index}
             >
-              <div className='enemyTop'>
+              <div className='combatPlayerTop'>
                 {sorted ? (
-                  <input
-                    placeholder='initative'
-                    onChange={(e) => {
-                      addIntiative(e, index);
-                    }}
-                  ></input>
+                  <p className='intiative'>
+                    Initative:{" "}
+                    {
+                      <input
+                        className='setInitiative'
+                        placeholder='initative'
+                        onChange={(e) => {
+                          addIntiative(e, index);
+                        }}
+                      ></input>
+                    }
+                  </p>
                 ) : (
-                  <h3>
-                    Initative: <br />
-                    {object.initative}
-                  </h3>
+                  <p className='intiative'>Initative: {object.initative}</p>
                 )}
-                <h1 className='enemyName'>{object.name}</h1>
-                <p>{object.playerClass}</p>
-                <p>{object.race}</p>
-
-                {object.maxHp > 0 ? (
-                  <h1 className='enemyHp'>
-                    HP: <span className='health'>{object.maxHp}</span>
-                  </h1>
-                ) : (
-                  <h1>You Dead</h1>
-                )}
+                <h1 className='playerTItle'>{object.name}</h1>
+                <div className='centeringDiv'></div>
               </div>
-              <div className='enemyBot'>
-                <div className='stats'>
-                  <p className='pcSave'>Saving Throws</p>
-                  <span className='statsNum'>
+              <div className='combatPlayerMid'>
+                <div className='classDiv'>
+                  <p className='combatlvlRef'>Level {object.level}:</p>
+                  <p className='combatTitleRef'>{object.playerClass} </p>
+                </div>
+                <div className='classDiv'>
+                  <p className='combatlvlRef'>Race:</p>
+                  <p className='combatTitleRef'>{object.race}</p>
+                </div>
+              </div>
+              <div className='combatPlayerBot'>
+                <div className='combatSavingThrowsDiv'>
+                  <p className='combatStats'>Saving Throws</p>
+                  <span className='combatStatNum'>
                     DEX: <br />+{object.dex}
                   </span>
-                  <span className='statsNum'>
+                  <span className='combatStatNum'>
                     INT: <br />+{object.int}
                   </span>
-                  <span className='statsNum'>
+                  <span className='combatStatNum'>
                     CHA: <br />+{object.cha}
                   </span>
-                  <span className='statsNum'>
+                  <span className='combatStatNum'>
                     STR: <br />+{object.str}
                   </span>
-                  <span className='statsNum'>
+                  <span className='combatStatNum'>
                     CON: <br />+{object.con}
                   </span>
-                  <span className='statsNum'>
+                  <span className='combatStatNum'>
                     WIS: <br />+{object.wis}
                   </span>
                 </div>
-                <div>
-                  {object.maxHp > 0 && (
+                <div className='heathDiv'>
+                  {object.maxHp > 0 ? (
+                    <h1 className='enemyHp'>
+                      HP: <span className='health'>{object.maxHp}</span>
+                    </h1>
+                  ) : (
+                    <h1 className='enemyHp'>Dead</h1>
+                  )}
+                  <div>
+                    {object.maxHp > 0 && (
+                      <button
+                        className='hitButton'
+                        onClick={() => {
+                          damageClick(index);
+                        }}
+                      >
+                        hit:
+                      </button>
+                    )}
+
                     <button
+                      className='healButton'
                       onClick={() => {
-                        damageClick(index);
+                        healClick(index);
                       }}
                     >
-                      hit:
+                      heal:
                     </button>
-                  )}
-                  <button
-                    onClick={() => {
-                      healClick(index);
-                    }}
-                  >
-                    heal:
-                  </button>
-                  <input
-                    type='Number'
-                    name='message'
-                    onChange={(e) => {
-                      handleChange(e, index);
-                    }}
-                    value={hpChange[index]}
-                  ></input>
-                </div>
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div
-              className='enemyDiv'
-              id={index}
-            >
-              <div className='enemyTop'>
-                {sorted ? (
-                  <input
-                    placeholder='initative'
-                    onChange={(e) => {
-                      addIntiative(e, index);
-                    }}
-                  ></input>
-                ) : (
-                  <h3>
-                    Initative: <br />
-                    {object.initative}
-                  </h3>
-                )}
-                <h1>{object.monsterReference}</h1>
-                <h6 className='enemyName'>{object.monsterName}</h6>
-                {object.health > 0 ? (
-                  <h1 className='enemyHp'>
-                    HP: <span className='health'>{object.health}</span>
-                  </h1>
-                ) : (
-                  <h1>Dead</h1>
-                )}
-              </div>
-              <div className='enemyBot'>
-                <div>
-                  {object.health > 0 && (
-                    <button
-                      onClick={() => {
-                        damageClick(index);
+
+                    <input
+                      type='Number'
+                      name='message'
+                      onChange={(e) => {
+                        handleChange(e, index);
                       }}
-                    >
-                      hit:
-                    </button>
-                  )}
-                  <button
-                    onClick={() => {
-                      healClick(index);
-                    }}
-                  >
-                    heal:
-                  </button>
-                  <input
-                    type='Number'
-                    name='message'
-                    onChange={(e) => {
-                      handleChange(e, index);
-                    }}
-                    value={hpChange[index]}
-                  ></input>
+                      value={hpChange[index]}
+                    ></input>
+                  </div>
                 </div>
               </div>
             </div>

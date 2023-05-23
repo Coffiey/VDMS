@@ -146,14 +146,20 @@ const Enemy = (props) => {
         <div>
           <div className='enemyDiv'>
             {monsterReference === "" ? (
-              <h1>Create an enemy</h1>
+              <h1 className='encounterItem'>Create an enemy</h1>
             ) : (
-              <h1>{monsterReference}</h1>
+              <h1 className='encounterItem'>{monsterReference}</h1>
             )}
             {monsterName !== "" ? (
               <>
-                <h2 onClick={() => reset()}>{monsterObj?.name}</h2>
-                <p>
+                <h2
+                  className='encounterItem'
+                  id='nameClick'
+                  onClick={() => reset()}
+                >
+                  {monsterObj?.name}
+                </h2>
+                <p className='enemyItem'>
                   HP:{" "}
                   {!health ? (
                     <>
@@ -164,6 +170,8 @@ const Enemy = (props) => {
                         }}
                       ></input>
                       <button
+                        className='encounterButton'
+                        id='customButton'
                         onClick={() => {
                           setHealth(Customhealth);
                         }}
@@ -171,6 +179,8 @@ const Enemy = (props) => {
                         custom
                       </button>
                       <button
+                        id='defaultButton'
+                        className='encounterButton'
                         onClick={() => {
                           setHealth(monsterObj.hit_points);
                         }}
@@ -182,7 +192,7 @@ const Enemy = (props) => {
                     <span>{health}</span>
                   )}
                 </p>
-                <p>
+                <p className='enemyItem'>
                   Set Name:
                   <input
                     value={monsterReference}
@@ -191,6 +201,7 @@ const Enemy = (props) => {
                     }}
                   />
                   <button
+                    className='encounterButton'
                     disabled={!health}
                     onClick={postEnemy}
                   >
@@ -200,7 +211,7 @@ const Enemy = (props) => {
               </>
             ) : (
               <>
-                <p>
+                <p className='encounterItem'>
                   Serach:{" "}
                   <input
                     value={search}
@@ -211,7 +222,7 @@ const Enemy = (props) => {
                     hidden={disableInput}
                   ></input>
                   {seeList && (
-                    <ul>
+                    <ul className='DropListWrap'>
                       <DropdownItem
                         dropdown={dropdown}
                         setSearch={setSearch}
@@ -234,19 +245,19 @@ const Enemy = (props) => {
                 onClick={() => changeObj(info)}
               >
                 <div className='enemyTop'>
-                  <h1>{info.monsterReference}</h1>
-                  <h6 className='enemyName'>{info.monsterName}</h6>
+                  <h6 className='enemyName'>{info?.monsterName}</h6>
+                </div>
+                <div className='enemyBot'>
+                  <h1 className='monsterRef'>{info?.monsterReference}</h1>
+                  <button
+                    className='deleteMonster'
+                    onClick={() => deleteEnemy(info)}
+                  >
+                    Delete Monster
+                  </button>
                   <h1 className='enemyHp'>
                     HP: <span className='health'>{info.health}</span>
                   </h1>
-                </div>
-                <div className='enemyBot'>
-                  {/* <button onClick={() => console.log(info)}>
-                    Edit Monster
-                  </button> */}
-                  <button onClick={() => deleteEnemy(info)}>
-                    Delete Monster
-                  </button>
                 </div>
               </div>
             );

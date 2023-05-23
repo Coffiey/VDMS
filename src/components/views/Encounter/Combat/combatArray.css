@@ -1,0 +1,161 @@
+.combatPlayerDiv {
+  padding: 5px 5px 5px 5px;
+  border-color: black;
+  border-style: solid;
+  margin: 5px auto 5px auto;
+  border-radius: 10px;
+  background-color: rgb(139, 88, 11);
+  opacity: 80%;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 95%;
+}
+
+.combatPlayerTop {
+  display: flex;
+  margin: 0px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0%;
+  padding: 0%;
+}
+
+.setInitiative {
+  width: 50px;
+}
+
+.intiative {
+  font-weight: bold;
+  margin: auto 10px auto 10px;
+  width: 130px;
+}
+.centeringDiv {
+  margin: auto 10px auto 10px;
+  width: 130px;
+}
+.playerTItle {
+  font-size: 1.5em;
+  margin: auto 10px auto 10px;
+  text-decoration: underline;
+  height: fit-content;
+}
+
+.combatPlayerMid {
+  width: 50%;
+  margin: 5px auto 5px auto;
+  border-radius: 10px;
+  background-color: rgb(171, 106, 7);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0%;
+}
+
+.combatlvlRef {
+  font-size: 0.7em;
+  margin: 5px auto 0px auto;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.combatTitleRef {
+  margin: 0px auto 10px auto;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.combatPlayerBot {
+  background-color: rgb(171, 106, 7);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 10px 10px 10px;
+  min-height: 75px;
+  height: fit-content;
+  padding: 0% 5% 0% 5%;
+  border-radius: 15px;
+}
+
+.combatSavingThrowsDiv {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-self: center;
+  text-align: center;
+  width: fit-content;
+  margin-bottom: 0px;
+  height: 30%;
+  min-height: 60px;
+  background-color: rgb(171, 106, 7);
+  border-radius: 10px;
+  padding-bottom: 5px;
+}
+
+.combatStats {
+  font-size: 0.8em;
+  font-weight: bolder;
+  margin: auto auto 3px 5px;
+  border-radius: 5px;
+  width: 100%;
+  align-self: flex-start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.combatStatNum {
+  background-color: rgb(142, 90, 12);
+  font-weight: bold;
+  margin-right: 2%;
+  font-size: 0.6em;
+  border-radius: 5px;
+  margin-left: 2%;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  height: 55%;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.hitButton {
+  background-color: rgb(142, 28, 28);
+  margin: auto 2px auto 2px;
+}
+
+.healButton {
+  background-color: rgb(31, 181, 31);
+  margin: auto 2px auto 2px;
+}
+
+.combatEnemyDiv {
+  padding: 5px 5px 5px 5px;
+  border-color: black;
+  border-style: solid;
+  margin: 5px auto 5px auto;
+  border-radius: 10px;
+  background-color: rgb(216, 135, 14);
+  opacity: 80%;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 95%;
+}
+
+.combatEnemyTop {
+  display: flex;
+  margin: 0px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0%;
+  padding: 0%;
+}
+
+.combatEnemyBot {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 10px 10px 10px;
+  min-height: 75px;
+  height: fit-content;
+  padding: 0% 5% 0% 5%;
+  border-radius: 15px;
+}

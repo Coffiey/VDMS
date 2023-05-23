@@ -28,7 +28,7 @@ const NavBar = () => {
       >
         <img
           className='NavImg'
-          src='./CombatDragon.png'
+          src='/CombatDragon.png'
         />
       </div>
       <div className='ButtonDiv'>

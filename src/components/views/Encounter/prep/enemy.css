@@ -35,21 +35,32 @@
 .enemyBot {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 1%;
+  min-height: 75px;
+  height: fit-content;
   padding: 0% 5% 0.5% 5%;
 }
 
 .enemyName {
-  font-size: 2vw;
+  font-size: 1.5em;
   margin-top: 0%;
   margin-bottom: 0%;
+  text-decoration: underline;
+  height: fit-content;
 }
 
 .enemyHp {
   font-size: 2vw;
-  margin-top: 0%;
+  margin: auto auto 0px auto;
+  width: fit-content;
+}
+
+.monsterRef {
+  font-size: 2vw;
+  margin-top: auto;
   margin-bottom: 0%;
+  min-width: 20%;
 }
 
 .health {
@@ -83,6 +94,24 @@
 }
 
 .deleteButton {
+  margin: auto;
+  max-height: 30px;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.8),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-color: #111;
+  color: #555;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 1);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#000),
+    to(#333)
+  );
+}
+.deleteMonster {
+  margin: auto auto 0px auto;
+  max-height: 30px;
   box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.8),
     0px 1px 3px rgba(0, 0, 0, 0.3);
   border-color: #111;
@@ -104,6 +133,13 @@
   text-align: center;
   font-weight: bold;
 }
+.enemyItem {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  font-weight: bold;
+}
 
 .encounterButton {
   color: white;
@@ -117,4 +153,33 @@
     from(#a95),
     to(#fea)
   );
+}
+.DropListWrap {
+  padding: 0px;
+}
+.DropList {
+  list-style-type: none;
+  text-align: center;
+  width: 300px;
+  margin: 5px auto 0px auto;
+}
+.DropList:hover {
+  color: darkblue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#customButton {
+  margin-right: 3px;
+}
+
+#defaltButton {
+  margin-right: 3px;
+  margin-left: auto;
+}
+
+#nameClick:hover {
+  color: maroon;
+  text-decoration: line-through;
+  cursor: pointer;
 }
