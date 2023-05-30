@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://vdms.onrender.com/";
 
 export const axiosPrivate = axios.create({
   baseURL: BASE_URL,

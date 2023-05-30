@@ -4,7 +4,6 @@ const fetch = (...args) =>
 const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
-// requre("dotenv").config();
 
 const createUser = async (req, res) => {
   const { userName, password } = req.body;
