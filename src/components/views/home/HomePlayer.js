@@ -22,8 +22,8 @@ const HomePlayer = (props) => {
 
   const [viewClass, setViewClass] = useState(false);
   const [viewRace, setViewRace] = useState(false);
-  const [disableButonClass, setDisableButonClass] = useState(true);
-  const [disableButonRace, setDisableButonRace] = useState(true);
+  const [disableButonClass, setDisableButonClass] = useState(false);
+  const [disableButonRace, setDisableButonRace] = useState(false);
 
   const [classList, setClassList] = useState(null);
   const [raceList, setRaceList] = useState(null);
@@ -33,7 +33,7 @@ const HomePlayer = (props) => {
       .get("/api/classes")
       .then((response) => {
         setClassList(response.data);
-        setDisableButonClass(false);
+        setDisableButonClass(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -45,7 +45,7 @@ const HomePlayer = (props) => {
       .get("/api/races")
       .then((response) => {
         setRaceList(response.data);
-        setDisableButonRace(false);
+        setDisableButonRace(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -117,6 +117,18 @@ const HomePlayer = (props) => {
       player.splice(index, 1);
       console.log(player);
       setPlayer([...player]);
+    }
+  };
+
+  const raceClick = () => {
+    if (disableButonRace) {
+      setViewRace(!viewRace);
+    }
+  };
+
+  const classClick = () => {
+    if (disableButonClass) {
+      setViewClass(!viewClass);
     }
   };
 
@@ -219,11 +231,14 @@ const HomePlayer = (props) => {
             <h2 className='pcClass'>
               Class:{" "}
               {
-                <ul className='raceList'>
+                <ul
+                  className='raceList'
+                  onClick={classClick}
+                  onBlur={() => setViewClass(false)}
+                  tabindex={0}
+                >
                   <li
                     className='races'
-                    onClick={() => setViewClass(true)}
-                    onBlur={() => setViewClass(false)}
                     disabled={disableButonClass}
                   >
                     {playerClass}
@@ -247,15 +262,13 @@ const HomePlayer = (props) => {
             </h2>
             <h2 className='pcClass'>
               Race:{" "}
-              <ul className='raceList'>
-                <ui
-                  className='races'
-                  onClick={() => setViewRace(true)}
-                  onBlur={() => setViewClass(false)}
-                  disabled={disableButonRace}
-                >
-                  {race}
-                </ui>
+              <ul
+                className='raceList'
+                onClick={raceClick}
+                onBlur={() => setViewRace(false)}
+                tabindex={0}
+              >
+                <ui className='races'>{race}</ui>
                 {viewRace &&
                   raceList.map((raceObj) => {
                     return (
