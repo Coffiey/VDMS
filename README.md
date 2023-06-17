@@ -14,18 +14,17 @@
 
 ## Table Of Contents
 
-* [About the Project](#about-the-project)
-* [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Deployment](#Deployment)
+- [About the Project](#about-the-project)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Deployment](#Deployment)
 <!-- * [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license) -->
-* [Author](#author)
+- [Contributing](#contributing)
+- [License](#license) -->
+- [Author](#author)
 <!-- * [Acknowledgements](#acknowledgements) -->
-
 
 ## About The Project
 
@@ -40,14 +39,11 @@ When its time, select the 'Begin Combat' button.
 Input the iniative roles and the app will auto assign intiative order.
 From here just play, The app tracks HP and it will rotate through the combat order through the next turn button.
 
-
 ## Built With
 
 The application has been built using React in the frontend. node with Express have been used for the backend.
-Finally.
+With PostgreSQL as a database.
 </br>
-
-
 
 <table align="center">
   <tr>
@@ -61,20 +57,13 @@ Finally.
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
     </td>
     <td align="center">
-    <a href="https://https://mui.com//" target="_blank" rel="noreferrer"> 
-      <img src="https://user-images.githubusercontent.com/67497636/217686777-1302937e-51e8-4d8b-8905-8796c4911b88.png" alt="react" width="40" height="40"/> </a>
-    </td>
-    <td align="center">
-      <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a>
+      <a href="https://knexjs.org/knex-logo.png" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a>
     </td>
     <td align="center">
       <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a>
     </td>
   </tr>
   <tr>
-    <td align="center">
-    <a href="https://www.python.org" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>
-    </td>
     <td align="center">
       <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>
     </td>
@@ -103,76 +92,79 @@ If you are a developer and want to use our application, follow the steps below.
 ### Prerequisites
 
 Download python, it is not needed for the app to run but there are add-ons that require it.
-install postgreSQL, if you need help with this follow the guide here: 
+install postgreSQL, if you need help with this follow the guide here:
 
 ### Installation
 
-1. clone the app 
-    ```sh 
-    git clone https://github.com/coffiey/VDSM
-    create migration command
-    npm run migrate-create --name=<migration Name>
-    ```
+1. clone the app
+   ```sh
+   git clone https://github.com/coffiey/VDSM
+   create migration command
+   npm run migrate-create --name=<migration Name>
+   ```
 2. install all the packages
-    ```sh
-    useing the postgreSQL terminal create a database for the server to use.
-    npm install
-    npm run migrate-latest
-    ```
+   ```sh
+   useing the postgreSQL terminal create a database for the server to use.
+   npm install
+   npm run migrate-latest
+   ```
 3. Create a .env.local file. Add the following to the file:
-    ```sh
-    DB_USER = [your PSQL username]
-    DB_PASSWORD = [your PSQL Password]
-    DB_NAME = [your PSQL Database Name]
 
-    NODE_ENV = development
-    ```
-  
+   ```sh
+   DB_USER = [your PSQL username]
+   DB_PASSWORD = [your PSQL Password]
+   DB_NAME = [your PSQL Database Name]
+
+   NODE_ENV = development
+   ```
+
 4. start the server:
-    ```sh
-    cd into working directory
-    npm run serve
-    (this will start nodemon which allows for hot reloading od the server)
-    ```
+   ```sh
+   cd into working directory
+   npm run serve
+   (this will start nodemon which allows for hot reloading od the server)
+   ```
 5. In a new Terminal start the React Virtial DOM
-    ```sh
-    npX react-scripts start
-    (this allows for hot reloading on the frontend)
-    ```
-  
+
+   ```sh
+   npX react-scripts start
+   (this allows for hot reloading on the frontend)
+   ```
+
 6. Enjoy the app! Please play around all you want and any bugs you find let me know.
 
 ## Deployment
 
 You can find a up to date version of the app already deployed at ###### so feel free to sign up there and enjoy the website there. However if you want to deploy it yourself as a test or to have a private server for you own game I have no problem with doing that. Please just dont try to sell this service, it is against the licencing agreement and also just a bad faith thing to do. But if you just like a fast response time, or a just really really really far away from singapore I want users to have that option.
 
+1. Create a Database Through your deployment
 
-1. Create a Database Through your deployment 
-    ```sh
-    save appropriate database Url.
-    ```
+   ```sh
+   save appropriate database Url.
+   ```
 
 2. set up Deployment Enviroment Variables
-    ```sh
-    DB_URL = [Provided by Deployment]
-    NODE_ENV = deployment
-    generate random key
-    require("crypto").randomBytes(64).toString('hex')
-    ```
+   ```sh
+   DB_URL = [Provided by Deployment]
+   NODE_ENV = deployment
+   generate random key
+   require("crypto").randomBytes(64).toString('hex')
+   ```
 3. Run deployment setup command
-    ```sh
-    npm run build
-    (this will install, build and migrate for you)
-    ```
 
- 4. start Server
-    ```sh
-    npm run serve
-    (the static build file is served by the root directory of the server, so running the command will load both front and backend.)
-    ``` 
+   ```sh
+   npm run build
+   (this will install, build and migrate for you)
+   ```
 
+4. start Server
+   ```sh
+   npm run serve
+   (the static build file is served by the root directory of the server, so running the command will load both front and backend.)
+   ```
 
 ## Author
+
 <table align="center">
   <tr>
     <th>
