@@ -226,6 +226,7 @@ const HomePlayer = (props) => {
                   <li
                     className='races'
                     onClick={() => setViewClass(true)}
+                    onBlur={() => setViewClass(false)}
                     disabled={disableButonClass}
                   >
                     {playerClass}
@@ -253,6 +254,7 @@ const HomePlayer = (props) => {
                 <ui
                   className='races'
                   onClick={() => setViewRace(true)}
+                  onBlur={() => setViewClass(false)}
                   disabled={disableButonRace}
                 >
                   {race}
