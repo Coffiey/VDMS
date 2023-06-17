@@ -58,7 +58,7 @@ With PostgreSQL as a database.
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
     </td>
     <td align="center">
-      <a href="https://knexjs.org/knex-logo.png" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a>
+      <a href="https://knexjs.org/knex-logo.png" target="_blank" rel="noreferrer"> <img src="https://knexjs.org/knex-logo.png" alt="knex" width="40" height="40"/> </a>
     </td>
  <td align="center">
       <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>
