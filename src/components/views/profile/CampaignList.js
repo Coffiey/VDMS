@@ -3,8 +3,8 @@ import "../../../App.css";
 import "./profile.css";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const CampaignList = (props) => {
   const {
@@ -26,7 +26,6 @@ const CampaignList = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let isMounted = true;
     const getCampaign = async () => {
       try {
         const response = await axiosPrivate.get(`/db/${id}`);
@@ -45,9 +44,6 @@ const CampaignList = (props) => {
       }
     };
     getCampaign();
-    return () => {
-      isMounted = false;
-    };
   }, [campaignSwitch]);
 
   const postCampaign = async () => {

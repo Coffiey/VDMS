@@ -3,7 +3,7 @@ import DropdownItem from "./DropdownItem";
 import axios from "axios";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Enemy = (props) => {

@@ -3,7 +3,7 @@ import DropdownItem from "../Encounter/prep/DropdownItem";
 import axios from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Enemy = (props) => {
@@ -20,16 +20,11 @@ const Enemy = (props) => {
     setCombatSwitch,
   } = props;
 
-  const [monsterSwitch, setMonsterSwitch] = useState(true);
   const [monsterName, setMonsterName] = useState("");
   const [monsterID, setMonsterID] = useState(null);
   const [health, setHealth] = useState(0);
   const [monsterReference, setMonsterReference] = useState("");
   const [Customhealth, setCustomhealth] = useState(0);
-
-  const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const { auth } = useAuth();
 
   const reset = () => {
     setSearch("");

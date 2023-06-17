@@ -10,8 +10,6 @@ const CombatPlayers = () => {
   const [player, setPlayer] = useState([]);
 
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const { auth } = useAuth();
   const params = useParams();

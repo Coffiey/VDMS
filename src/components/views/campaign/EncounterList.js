@@ -24,14 +24,12 @@ const EncounterList = (props) => {
 
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const id = auth?.id;
   const parameter = useParams();
   const campaignId = parameter.campaign;
 
   useEffect(() => {
-    let isMounted = true;
     const getEncounter = async () => {
       try {
         const response = await axiosPrivate.get(`/db/${id}/${campaignId}`);
@@ -50,9 +48,6 @@ const EncounterList = (props) => {
       }
     };
     getEncounter();
-    return () => {
-      isMounted = false;
-    };
   }, [encounterSwitch]);
 
   const postEncounter = async () => {
@@ -99,7 +94,7 @@ const EncounterList = (props) => {
       }
     }
   };
-  //to fix
+
   const navigateToEncounters = (object) => {
     if (object) {
       auth.campaign = { id: object.id, name: object.campaignName };
@@ -113,7 +108,7 @@ const EncounterList = (props) => {
       }
     }
   };
-  // () => navigate(`/profile`)
+
   return (
     <>
       <div className='Enemy'>

@@ -1,31 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import HomePlayer from "./HomePlayer";
 import HomeEnemies from "./HomeEnemies";
 import HomeCombat from "./HomeCombat";
 import "../../../App.css";
 
 const HomeDisplay = () => {
-  // New stuff
-  //old stuff
-
   const [monsterObj, setMonsterObj] = useState(null);
   const [search, setSearch] = useState("");
   const [disableInput, setDisableInput] = useState(true);
   const [list, setList] = useState([]);
   const [dropdown, setDropdown] = useState([]);
   const [seeList, setSeeList] = useState(false);
-  const [name, setName] = useState(null);
-  const [textState, setTextState] = useState(true);
-  const [campaignText, setCampaignText] = useState("");
-  const [encounterText, setEncounterText] = useState("");
-  const [campaignObj, setCampaignObj] = useState(null);
   const [enemyList, setEnemyList] = useState([]);
   const [combatSwitch, setCombatSwitch] = useState(false);
-
-  //stuff i added
   const [player, setPlayer] = useState([]);
 
   useEffect(() => {

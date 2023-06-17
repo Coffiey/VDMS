@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
@@ -8,7 +7,6 @@ import "./NavBar.css";
 const NavBar = () => {
   const navigate = useNavigate();
   const { setAuth, auth } = useAuth();
-  //   const location = useLocation();
 
   const logOut = async () => {
     try {

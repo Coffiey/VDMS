@@ -3,11 +3,9 @@ import "../Encounter/Combat/combatArray.css";
 import "../Encounter/prep/enemy.css";
 
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 
 const HomeCombat = (props) => {
-  const { setmonsterObj, monsterObj, setCombatSwitch, player, enemyList } =
-    props;
+  const { setmonsterObj, setCombatSwitch, player, enemyList } = props;
 
   const [combatArray, SetCombatArray] = useState([]);
   const [sorted, setSorted] = useState(true);
@@ -199,13 +197,6 @@ const HomeCombat = (props) => {
       SetCombatArray([...combat]);
       setSorted(false);
     }
-  };
-
-  const resetIntiative = () => {
-    setSorted(true);
-  };
-  const navigateToPrep = () => {
-    //add a swtich effect
   };
 
   return (

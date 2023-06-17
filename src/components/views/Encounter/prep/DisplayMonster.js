@@ -1,7 +1,7 @@
 import "./displayMonster.css";
 import { useOutletContext } from "react-router-dom";
 
-const DisplayMonster = (props) => {
+const DisplayMonster = () => {
   const { monsterObj } = useOutletContext();
 
   const getArrayOfKeys = (object) => {

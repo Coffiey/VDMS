@@ -39,7 +39,6 @@ const CombatDisplay = () => {
   }, [campaignSwitch]);
 
   useEffect(() => {
-    let isMounted = true;
     const getEncounterById = async () => {
       try {
         const response = await axiosPrivate.get(
@@ -52,9 +51,6 @@ const CombatDisplay = () => {
       }
     };
     getEncounterById();
-    return () => {
-      isMounted = false;
-    };
   }, [encounterSwitch]);
 
   return (

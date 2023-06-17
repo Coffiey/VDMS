@@ -5,10 +5,10 @@ import useAuth from "../../../hooks/useAuth";
 
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CombatArray = (props) => {
-  const { setmonsterObj, monsterObj } = props;
+  const { setmonsterObj } = props;
 
   const [playerArray, setPlayerArray] = useState([]);
   const [monsterArray, setMonsterArray] = useState([]);
@@ -23,7 +23,6 @@ const CombatArray = (props) => {
 
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const { auth } = useAuth();
   const { campaign, encounter } = useParams();
@@ -273,9 +272,6 @@ const CombatArray = (props) => {
     }
   };
 
-  const resetIntiative = () => {
-    setSorted(true);
-  };
   const navigateToPrep = () => {
     localStorage.removeItem(`local/${auth.id}/${campaign}/${encounter}/enemy`);
     navigate(`/profile/${campaign}/${encounter}`);

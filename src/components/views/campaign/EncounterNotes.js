@@ -2,9 +2,9 @@ import "../../../App.css";
 import "./player.css";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useLocation, useParams, useOutletContext } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 
-const CombatLists = (props) => {
+const CombatLists = () => {
   const {
     textState,
     setTextState,
@@ -22,7 +22,6 @@ const CombatLists = (props) => {
   } = useOutletContext();
 
   const axiosPrivate = useAxiosPrivate();
-  const location = useLocation();
   const { auth } = useAuth();
   const userId = auth?.id;
   const params = useParams();

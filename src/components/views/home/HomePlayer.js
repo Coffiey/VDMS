@@ -1,7 +1,4 @@
 import axios from "axios";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useLocation, useParams } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 
 import "../campaign/player.css";
 

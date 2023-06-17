@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import "../../../App.css";
 import Players from "./Players";
 import EncounterList from "./EncounterList";
-import EncounterNotes from "./EncounterNotes";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation, useParams, Outlet } from "react-router-dom";
+import { useNavigate, useParams, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const CampaignDisplay = () => {
