@@ -52,6 +52,7 @@ With PostgreSQL as a database.
     <th>Framework</th>
     <th>Database</th>
   </tr>
+
   <tr>
     <td align="center">
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
@@ -59,28 +60,11 @@ With PostgreSQL as a database.
     <td align="center">
       <a href="https://knexjs.org/knex-logo.png" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a>
     </td>
-    <td align="center">
-      <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
+ <td align="center">
       <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>
     </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    </td>
     <td align="center">
-    <a href="https://jwt.io/" target="_blank" rel="noreferrer"> <img src="https://user-images.githubusercontent.com/67497636/217804934-d450c024-a02d-4649-bc7d-d606788afe29.png" alt="jwt" width="70" height="40"/> </a>
-    </td>
-    <td>
-    </td>
-    <td>
+      <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a>
     </td>
   </tr>
 <table>
