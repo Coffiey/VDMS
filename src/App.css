@@ -161,6 +161,7 @@ body {
   min-width: 1300px;
 }
 .Enemy {
+  margin-top: 10px;
   min-width: 644px;
   padding: 0px 5px 5px 0px;
   position: relative;
@@ -178,6 +179,7 @@ body {
 }
 
 .DisplayMonster {
+  margin-top: 10px;
   min-width: 645px;
   z-index: 1000;
   position: relative;
