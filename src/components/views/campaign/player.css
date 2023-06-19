@@ -19,6 +19,8 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 5px;
   height: 90%;
   min-height: 200px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .top {
