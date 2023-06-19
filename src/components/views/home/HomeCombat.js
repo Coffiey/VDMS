@@ -26,6 +26,7 @@ const HomeCombat = (props) => {
     if (player.length > 0 && enemyList.length > 0) {
       const combat = player.concat(enemyList);
       const combat2 = JSON.parse(JSON.stringify(combat));
+      console.log("hello: ", combat2);
       SetCombatArray(combat2);
       setHpchange(
         combatArray.map((x) => {
@@ -334,6 +335,74 @@ const HomeCombat = (props) => {
                       value={hpChange[index]}
                     ></input>
                   </div>
+                </div>
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div
+              className='combatEnemyDiv'
+              id={index}
+            >
+              <div className='combatEnemyTop'>
+                {sorted ? (
+                  <p className='intiative'>
+                    Initative:{" "}
+                    {
+                      <input
+                        className='setInitiative'
+                        placeholder='initative'
+                        onChange={(e) => {
+                          addIntiative(e, index);
+                        }}
+                      ></input>
+                    }
+                  </p>
+                ) : (
+                  <p className='intiative'>Initative: {object.initative}</p>
+                )}
+
+                <h6 className='playerTItle'>{object.monsterName}</h6>
+                <div className='centeringDiv'></div>
+              </div>
+              <div className='combatEnemyBot'>
+                <h1 className='playerTitle'>{object.monsterReference}</h1>
+
+                <div>
+                  {object.health > 0 ? (
+                    <h1 className='enemyHp'>
+                      HP: <span className='health'>{object.health}</span>
+                    </h1>
+                  ) : (
+                    <h1>Dead</h1>
+                  )}
+                  {object.health > 0 && (
+                    <button
+                      className='hitButton'
+                      onClick={() => {
+                        damageClick(index);
+                      }}
+                    >
+                      hit:
+                    </button>
+                  )}
+                  <button
+                    className='healButton'
+                    onClick={() => {
+                      healClick(index);
+                    }}
+                  >
+                    heal:
+                  </button>
+                  <input
+                    type='Number'
+                    name='message'
+                    onChange={(e) => {
+                      handleChange(e, index);
+                    }}
+                    value={hpChange[index]}
+                  ></input>
                 </div>
               </div>
             </div>

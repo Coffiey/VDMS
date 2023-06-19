@@ -6,10 +6,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .pc {
   position: relative;
-  background-color: rgb(120, 75, 8);
+  background-color: rgba(183, 142, 20, 0.808);
   opacity: 80%;
-  border-style: solid;
-  border-color: black;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
   margin: 7px;
   display: flex;
   flex-direction: column;
@@ -17,36 +16,37 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 20%;
   max-width: 350px;
   min-width: 310px;
-  border-radius: 10%;
+  border-radius: 5px;
   height: 90%;
   min-height: 200px;
 }
 
 .top {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   margin-top: 4px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 4px;
   padding: 0%;
-  background-color: rgb(171, 106, 7);
+  background-color: rgb(214, 175, 56);
   margin-left: auto;
   margin-right: auto;
   width: 95%;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .mid {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-around;
   margin-top: 0%;
   padding: 0%;
-  background-color: rgb(171, 106, 7);
+  background-color: rgb(214, 175, 56);
   margin-left: auto;
   margin-right: auto;
   width: 95%;
-  min-width: 300px;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 23%;
 }
 
@@ -68,7 +68,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-top: 1%;
   padding-bottom: 2%;
   margin-bottom: 0%;
-  background-color: rgb(171, 106, 7);
+  background-color: rgb(214, 175, 56);
   border-radius: 5px;
   text-align: center;
   height: max-content;
@@ -81,13 +81,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .pcClass {
   font-size: 1em;
-  margin-top: 0%;
+  padding-right: 3%;
   padding-left: 3%;
+  margin-top: auto;
+  margin-bottom: auto;
   padding-top: 0%;
   padding-bottom: 0%;
-  padding-right: 3%;
-  margin-bottom: 0%;
-  background-color: rgb(171, 106, 7);
+  border-radius: 10%;
+  background-color: rgb(214, 175, 56);
   border-radius: 10%;
   text-align: center;
   min-width: 65px;
@@ -99,9 +100,9 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-right: 3%;
   padding-left: 3%;
   margin-top: auto;
+  margin-bottom: auto;
   padding-top: 0%;
   padding-bottom: 0%;
-  margin-bottom: auto;
   border-radius: 10%;
   text-align: center;
   min-width: 70px;
@@ -117,24 +118,30 @@ input[type="number"]::-webkit-outer-spin-button {
   align-self: flex-start;
   display: flex;
   justify-content: space-between;
+  margin-left: 5%;
 }
 
-.statsNum {
-  background-color: rgb(142, 90, 12);
+.statsNum,
+.inputP {
+  background-color: rgba(183, 142, 20, 0.808);
   font-weight: bold;
   margin-right: 2%;
   font-size: 0.8em;
   border-radius: 5px;
   margin-left: 2%;
-  border-style: solid;
-  border-color: black;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   border-width: 1px;
   height: 55%;
   padding-left: 3px;
   padding-right: 3px;
 }
 
+.inputP {
+  padding-bottom: 4px;
+}
+
 .stats {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -144,14 +151,15 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 0px;
   height: 30%;
   min-height: 60px;
-  background-color: rgb(171, 106, 7);
-  border-radius: 10px;
+  background-color: rgb(214, 175, 56);
+  border-radius: 5px;
   padding-bottom: 5px;
 }
 
 .statinput {
-  width: 50%;
+  width: 1vw;
   border-radius: 5px;
+  margin-left: 5px;
 }
 
 .levelDiv {
@@ -165,33 +173,25 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0%;
 }
 
-.statCreate {
-  margin-top: 0%;
-  margin-bottom: 0%;
-  display: flex;
-  flex-direction: row;
-  align-self: center;
-  width: 95%;
-  border-radius: 10px;
-}
-
-.inputP {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
 .txt {
   width: 40%;
   border-radius: 5px;
 }
 
 .statCreate {
-  background-color: rgb(171, 106, 7);
+  background-color: rgb(214, 175, 56);
   width: 98%;
   padding-bottom: 2%;
   border-radius: 5px;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  width: 90%;
+  border-radius: 10px;
 }
 
 .PlayerDelete {
@@ -309,7 +309,7 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-content: space-between;
   height: 45px;
   min-height: 45px;
-  background-color: orange;
+  background-color: #cbb279;
   border-bottom-style: solid;
   border-bottom-color: black;
   padding: 5px;

@@ -314,7 +314,8 @@ const Players = () => {
             </ul>
           </h2>
           <h2 className='Level'>
-            Level:{" "}
+            Level:
+            <br />
             <input
               value={level}
               className='statinput'

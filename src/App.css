@@ -1,10 +1,11 @@
 body {
-  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/f17f2d94900513.5e8a7dade6408.jpg);
-  background-repeat: no-repeat;
+  /* background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/f17f2d94900513.5e8a7dade6408.jpg); */
+  background-color: #e1d4bb;
+  /* background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   width: 100%;
-  position: relative;
+  position: relative; */
 }
 
 .title {
@@ -20,15 +21,10 @@ body {
 .NavBar {
   min-width: 1300px;
   position: relative;
-  background-color: orange;
-  width: 98%;
+  background-color: #cbb279;
+  width: 100%;
   min-height: 40px;
   height: 5vh;
-  margin-top: 10px;
-  margin-left: 1%;
-  margin-right: 1%;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,36 +35,31 @@ body {
   min-width: 1300px;
   position: relative;
   background-color: bisque;
-  width: 98%;
-  margin-top: 5px;
-  margin-left: 1%;
-  margin-right: 1%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   height: 25vh;
   min-height: 240px;
-  overflow: scroll;
+  overflow: auto;
   overflow-y: hidden;
 }
 .CombatPlayer {
   min-width: 1300px;
   position: relative;
   background-color: bisque;
-  width: 98%;
-  margin-top: 5px;
-  margin-left: 1%;
-  margin-right: 1%;
+  /* background-color: #e1d4bb; */
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   height: 25vh;
   min-height: 240px;
-  overflow: scroll;
+  overflow: auto;
   overflow-y: hidden;
 }
 
 .combatBanner {
-  background-color: orange;
+  background-color: #cbb279;
   margin: 0px 0px 0px 0px;
   padding: 5px;
   width: 100%;
@@ -155,17 +146,17 @@ body {
   padding: 0px 5px 5px 0px;
   position: relative;
   background-color: bisque;
-  width: 48%;
-  margin-top: 10px;
+  width: 49%;
+  /* margin-top: 10px; */
   margin-left: 1%;
   margin-right: 0%;
   display: flex;
   flex-direction: row;
   float: left;
   flex-direction: column;
-  height: 63vh;
+  height: 65vh;
   min-height: 400px;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
 }
 
@@ -173,20 +164,40 @@ body {
   min-width: 645px;
   z-index: 1;
   position: relative;
+  /* background-image: url("../public/Monster2.jpg"); */
   background-color: bisque;
   width: 49%;
   float: right;
-  margin-top: 10px;
-  margin-left: 0.5%;
+  /* margin-top: 10px; */
+  margin-left: 2%;
   margin-right: 1%;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  height: 63.5vh;
+  height: 65.5vh;
   min-height: 400px;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
 }
 
 .basic {
   background-color: bisque;
+}
+
+.Enemy::-webkit-scrollbar,
+.DisplayMonster::-webkit-scrollbar {
+  width: 12px;
+}
+
+.Enemy::-webkit-scrollbar-track,
+.DisplayMonster::-webkit-scrollbar-track {
+  /* border-radius: 8px; */
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.Enemy::-webkit-scrollbar-thumb,
+.DisplayMonster::-webkit-scrollbar-thumb {
+  /* border-radius: 8px; */
+  background-color: #537188;
 }

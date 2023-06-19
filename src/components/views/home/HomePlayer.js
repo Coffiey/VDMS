@@ -261,7 +261,8 @@ const HomePlayer = (props) => {
               }
             </h2>
             <h2 className='pcClass'>
-              Race:{" "}
+              Race:
+              <br />
               <ul
                 className='raceList'
                 onClick={raceClick}
@@ -286,7 +287,7 @@ const HomePlayer = (props) => {
               </ul>
             </h2>
             <h2 className='Level'>
-              Level:{" "}
+              Level: <br />
               <input
                 value={level}
                 className='statinput'
