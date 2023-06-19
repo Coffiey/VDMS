@@ -36,7 +36,10 @@ const CombatLists = (props) => {
   return (
     <div className='textDiv'>
       <div className='notesDiv'>
-        <p className='textTitle'>
+        <p
+          id='campaignTitle'
+          className='textTitle'
+        >
           Campaign:{" "}
           {campaignFocus?.campaignName ? (
             <strong>{campaignFocus.campaignName}</strong>

@@ -330,21 +330,21 @@ input[type="number"]::-webkit-outer-spin-button {
   border-bottom: hidden;
 }
 #encounter-notes {
-  background-color: #cbb279;
+  background-color: #dabb72;
   border-bottom: 3px solid black;
 }
 
 #stat-block {
-  background-color: #cbb279;
+  background-color: #dabb72;
   border-bottom: 3px solid black;
 }
 #combat-stat-block {
-  background-color: #cbb279;
+  background-color: #dabb72;
   border-bottom: 3px solid black;
 }
 
 #campaign-notes {
-  background-color: #cbb279;
+  background-color: #dabb72;
   border-bottom: 3px solid black;
 }
 

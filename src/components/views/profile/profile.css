@@ -11,6 +11,10 @@
   font-family: monospace;
 }
 
+#campaignTitle {
+  margin: auto;
+}
+
 .textInfo {
   font-size: 1em;
   width: 96%;
