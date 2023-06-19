@@ -85,7 +85,6 @@ const Enemy = (props) => {
       console.error(err);
     }
   };
-  console.log(encounterFocus);
 
   const check = async (index) => {
     const answer = window.confirm(

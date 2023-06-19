@@ -15,7 +15,6 @@ const DisplayMonster = () => {
   if (monsterObj) {
     return (
       <div className='div'>
-        {/* <div id='top'></div> */}
         <div
           class='break'
           id='join'

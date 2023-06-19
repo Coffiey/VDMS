@@ -67,13 +67,81 @@ const CombatLists = () => {
   //textState true means its the campaing and false is encounters
   return (
     <div className='textDiv'>
+      {/* <button
+            id={
+              params["*"].includes("notes") && textState
+                ? null
+                : "campaign-notes"
+            }
+            className='notesTabs'
+            onClick={() => {
+              setTextState(true);
+              navigate("notes");
+            }}
+          >
+            <img
+              className='buttonImg'
+              src='/campaign.png'
+            />
+          </button>
+          <button
+            id={
+              params["*"].includes("notes") && !textState
+                ? null
+                : "encounter-notes"
+            }
+            className='notesTabs'
+            onClick={() => {
+              setTextState(false);
+              navigate("notes");
+            }}
+          >
+            <img
+              className='buttonImg'
+              src='/Encounter.png'
+            />
+          </button>
+          <button
+            id={params["*"].includes("notes") ? "stat-block" : null}
+            className='notesTabs'
+            onClick={() => {
+              if (params["*"].includes("combat")) {
+                navigate(`/profile/${campaign}/${encounter}/combat`);
+              } else {
+                navigate(`/profile/${campaign}/${encounter}`);
+              }
+            }}
+          >
+            <img
+              className='buttonImg'
+              src='/Stat-Block.png'
+            />
+          </button> */}
       {!params["*"].includes("notes") ? (
         <div className='notesDiv'>
           <button
-            className='notesButton'
-            onClick={() => setTextState(true)}
+            id={textState ? null : "campaign-notes"}
+            className='notesTabs'
+            onClick={() => {
+              setTextState(true);
+            }}
           >
-            Campaign Notes
+            <img
+              className='buttonImg'
+              src='/campaign.png'
+            />
+          </button>
+          <button
+            id={!textState ? null : "encounter-notes"}
+            className='notesTabs'
+            onClick={() => {
+              setTextState(false);
+            }}
+          >
+            <img
+              className='buttonImg'
+              src='/Encounter.png'
+            />
           </button>
           {textState ? (
             <p className='textTitle'>
@@ -88,12 +156,6 @@ const CombatLists = () => {
               Encounter: <strong>{name}</strong>
             </p>
           )}
-          <button
-            className='notesButton'
-            onClick={() => setTextState(false)}
-          >
-            Encounter Notes
-          </button>
         </div>
       ) : (
         <>

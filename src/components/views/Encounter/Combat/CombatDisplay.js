@@ -62,16 +62,42 @@ const CombatDisplay = () => {
       <div className='DisplayMonster'>
         <div className='notesDiv'>
           <button
-            className='notesButton'
+            id={
+              params["*"].includes("notes") && textState
+                ? null
+                : "campaign-notes"
+            }
+            className='notesTabs'
             onClick={() => {
               setTextState(true);
               navigate("notes");
             }}
           >
-            Campaign Notes
+            <img
+              className='buttonImg'
+              src='/campaign.png'
+            />
           </button>
           <button
-            className='notesButton'
+            id={
+              params["*"].includes("notes") && !textState
+                ? null
+                : "encounter-notes"
+            }
+            className='notesTabs'
+            onClick={() => {
+              setTextState(false);
+              navigate("notes");
+            }}
+          >
+            <img
+              className='buttonImg'
+              src='/Encounter.png'
+            />
+          </button>
+          <button
+            id={params["*"].includes("notes") ? "combat-stat-block" : null}
+            className='notesTabs'
             onClick={() => {
               if (params["*"].includes("combat")) {
                 navigate(`/profile/${campaign}/${encounter}/combat`);
@@ -80,16 +106,10 @@ const CombatDisplay = () => {
               }
             }}
           >
-            Stat Block
-          </button>
-          <button
-            className='notesButton'
-            onClick={() => {
-              setTextState(false);
-              navigate("notes");
-            }}
-          >
-            Encounter Notes
+            <img
+              className='buttonImg'
+              src='/Stat-Block.png'
+            />
           </button>
         </div>
         <Outlet
