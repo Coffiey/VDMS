@@ -275,13 +275,6 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 100%;
 }
 
-.textTitle {
-  font-size: 1.5em;
-  padding-top: 0px;
-  margin: 10px auto 5px auto;
-  font-family: monospace;
-}
-
 .textInfo {
   font-size: 1em;
   width: 96%;

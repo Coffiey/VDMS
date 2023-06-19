@@ -19,7 +19,7 @@ const NavBar = () => {
   };
   return (
     <div className='NavBar'>
-      <div className='playerTitle'>
+      <div className='playerTab'>
         <img
           className='playImg'
           src='/players.png'
