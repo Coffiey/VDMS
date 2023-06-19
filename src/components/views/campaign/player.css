@@ -140,8 +140,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .inputP {
   padding-bottom: 4px;
+  margin-top: 5px;
 }
 
+.statCreate,
 .stats {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -152,10 +154,13 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 95%;
   margin-bottom: 0px;
   height: 30%;
-  min-height: 60px;
+  /* min-height: 60px; */
   background-color: rgb(214, 175, 56);
   border-radius: 5px;
   padding-bottom: 5px;
+}
+
+.statCreate {
 }
 
 .statinput {
@@ -178,22 +183,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .txt {
   width: 40%;
   border-radius: 5px;
-}
-
-.statCreate {
-  background-color: rgb(214, 175, 56);
-  width: 98%;
-  padding-bottom: 2%;
-  border-radius: 5px;
-  margin-top: 0%;
-  margin-bottom: 0%;
-  margin-left: 5%;
-  margin-right: 5%;
-  display: flex;
-  flex-direction: row;
-  align-self: center;
-  width: 90%;
-  border-radius: 10px;
 }
 
 .PlayerDelete {

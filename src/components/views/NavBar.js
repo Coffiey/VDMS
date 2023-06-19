@@ -19,6 +19,12 @@ const NavBar = () => {
   };
   return (
     <div className='NavBar'>
+      <div className='playerTitle'>
+        <img
+          className='playImg'
+          src='/players.png'
+        />
+      </div>
       <div className='left'></div>
       <div
         onClick={() => navigate("/")}

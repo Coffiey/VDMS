@@ -299,10 +299,11 @@ const HomePlayer = (props) => {
             </h2>
           </div>
 
-          <h2 className='pcSave'>Saving throws</h2>
           <div className='statCreate'>
+            <h2 className='pcSave'>Saving throws</h2>
             <p className='inputP'>
-              DEX:{" "}
+              DEX:
+              <br />
               <input
                 value={dex}
                 className='statinput'
@@ -313,7 +314,8 @@ const HomePlayer = (props) => {
               ></input>
             </p>
             <p className='inputP'>
-              WIS:{" "}
+              WIS:
+              <br />
               <input
                 value={wis}
                 className='statinput'
@@ -324,7 +326,8 @@ const HomePlayer = (props) => {
               ></input>
             </p>
             <p className='inputP'>
-              CON:{" "}
+              CON:
+              <br />
               <input
                 value={con}
                 className='statinput'
@@ -335,7 +338,8 @@ const HomePlayer = (props) => {
               ></input>
             </p>
             <p className='inputP'>
-              INT:{" "}
+              INT:
+              <br />
               <input
                 value={int}
                 className='statinput'
@@ -346,7 +350,8 @@ const HomePlayer = (props) => {
               ></input>
             </p>
             <p className='inputP'>
-              STR:{" "}
+              STR:
+              <br />
               <input
                 value={str}
                 className='statinput'
@@ -357,7 +362,8 @@ const HomePlayer = (props) => {
               ></input>
             </p>
             <p className='inputP'>
-              CHA:{" "}
+              CHA:
+              <br />
               <input
                 value={cha}
                 className='statinput'
