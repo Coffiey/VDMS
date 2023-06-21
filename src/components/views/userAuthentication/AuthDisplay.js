@@ -22,7 +22,7 @@ const AuthDisplay = () => {
             >
               <img
                 className='buttonImg'
-                src='/login.png'
+                src='/logIn.png'
               />
             </button>
             <button
