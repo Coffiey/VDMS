@@ -8,13 +8,14 @@ import CombatDisplay from "./components/views/Encounter/Combat/CombatDisplay";
 import EncounterDisplay from "./components/views/Encounter/prep/EncounterDisplay";
 import ProfileDisplay from "./components/views/profile/ProfileDisplay";
 import RequireAuth from "./components/views/userAuthentication/RequireAuth";
-import { Routes, Route } from "react-router-dom";
 import PersistLogin from "./components/views/userAuthentication/PersistLogin";
 import EncounterPlayerDisplay from "./components/views/Encounter/EncounterPlayerDisplay";
 import DisplayMonster from "./components/views/Encounter/prep/DisplayMonster";
 import EncounterNotes from "./components/views/campaign/EncounterNotes";
 import HomeDisplay from "./components/views/home/HomeDisplay";
 import HomePlayer from "./components/views/home/HomePlayer";
+import AuthDisplay from "./components/views/userAuthentication/AuthDisplay";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -36,6 +37,19 @@ function App() {
           </Route>
           <Route
             path='/login'
+            element={<AuthDisplay />}
+          >
+            <Route
+              path='/login'
+              element={<Login />}
+            />
+            <Route
+              path='/login/register'
+              element={<Register />}
+            />
+          </Route>
+          {/* <Route
+            path='/login'
             element={[
               <HomePlayer />,
               <div className='Outlet'>
@@ -47,7 +61,7 @@ function App() {
                 </div>
               </div>,
             ]}
-          />
+          /> */}
 
           {/*  protected */}
           <Route element={<PersistLogin />}>

@@ -87,7 +87,6 @@ const Register = (props) => {
 
   return (
     <>
-      <div className='combatBanner'></div>
       <div class='login'>
         <p
           ref={errRef}
