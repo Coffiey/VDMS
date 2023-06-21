@@ -90,89 +90,92 @@ const Login = () => {
   }, [persist]);
 
   return (
-    <div class='login'>
-      <p
-        ref={errRef}
-        className={errMsg ? "errmsg" : "offscreen"}
-        aria-live='assertive'
-      >
-        {errMsg}
-      </p>
-      <div className='diceDiv'>
-        <img
-          className='dice'
-          src='./d20.png'
-        />
-        <div className='loginTitle'>
-          <img src='/logIn.png' />
-        </div>
-        <img
-          className='dice'
-          src='./d20.png'
-        />
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className='pair'>
-          {" "}
-          <label
-            className='label'
-            htmlFor='username'
-          >
-            Username:
-          </label>
-          <input
-            className='loginInput'
-            type='text'
-            id='username'
-            ref={userRef}
-            autoComplete='off'
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
-            required
-          />
-        </div>
-
-        <div className='pair'>
-          {" "}
-          <label
-            className='label'
-            htmlFor='password'
-          >
-            Password:
-          </label>
-          <p className='showPassword'>
-            <input
-              className='showPassword'
-              type='checkBox'
-              value={showPassword}
-              onChange={(e) => setShowPassword(!showPassword)}
-            />
-            Show Password
-          </p>
-          <input
-            className='loginInput'
-            type={showPassword ? "text" : "password"}
-            id='password'
-            onChange={(e) => setPwd(e.target.value)}
-            value={pwd}
-            required
-          />
-        </div>
-
-        <div className='pair'>
-          <button className='loginButton'>Sign In</button>
-          <div className='persist'>
-            <input
-              type='checkbox'
-              id='persist'
-              onChange={togglePersist}
-              checked={persist}
-            />
-            <label htmlFor='persist'>Keep me Logged in</label>
+    <>
+      <div className='combatBanner'></div>
+      <div class='login'>
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live='assertive'
+        >
+          {errMsg}
+        </p>
+        <div className='diceDiv'>
+          {/* <img
+            className='dice'
+            src='./d20.png'
+          /> */}
+          <div className='loginTitle'>
+            <img src='/logIn.png' />
           </div>
+          {/* <img
+            className='dice'
+            src='./d20.png'
+          /> */}
         </div>
-      </form>
-    </div>
+        <form onSubmit={handleSubmit}>
+          <div className='pair'>
+            {" "}
+            <label
+              className='label'
+              htmlFor='username'
+            >
+              Username:
+            </label>
+            <input
+              className='loginInput'
+              type='text'
+              id='username'
+              ref={userRef}
+              autoComplete='off'
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              required
+            />
+          </div>
+
+          <div className='pair'>
+            {" "}
+            <label
+              className='label'
+              htmlFor='password'
+            >
+              Password:
+            </label>
+            <p className='showPassword'>
+              <input
+                className='showPassword'
+                type='checkBox'
+                value={showPassword}
+                onChange={(e) => setShowPassword(!showPassword)}
+              />
+              Show Password
+            </p>
+            <input
+              className='loginInput'
+              type={showPassword ? "text" : "password"}
+              id='password'
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+              required
+            />
+          </div>
+
+          <div className='pair'>
+            <button className='loginButton'>Sign In</button>
+            <div className='persist'>
+              <input
+                type='checkbox'
+                id='persist'
+                onChange={togglePersist}
+                checked={persist}
+              />
+              <label htmlFor='persist'>Keep me Logged in</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

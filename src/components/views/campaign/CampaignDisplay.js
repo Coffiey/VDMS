@@ -32,7 +32,6 @@ const CampaignDisplay = () => {
         );
         setCampaignObj(response.data);
         setCampaignText(response.data.notes);
-        console.log(response.data);
       } catch (err) {
         console.error(err);
         navigate("/profile", { replace: true });

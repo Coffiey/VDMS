@@ -175,7 +175,12 @@
   margin-left: auto;
 }
 
+#nameClick {
+  font-size: 1.6em;
+  transition: 0.5s ease;
+}
 #nameClick:hover {
+  font-size: 1.8em;
   color: maroon;
   text-decoration: line-through;
   cursor: pointer;

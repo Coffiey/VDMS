@@ -48,6 +48,7 @@ function App() {
               </div>,
             ]}
           />
+
           {/*  protected */}
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth />}>
