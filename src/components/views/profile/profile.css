@@ -30,24 +30,22 @@
 
 .CampaignCreateDiv {
   padding: 5px 5px 5px 5px;
-  border-color: black;
-  border-style: solid;
   margin: 5px auto 5px auto;
   border-radius: 10px;
-  background-color: rgb(216, 135, 14);
   opacity: 80%;
   flex-direction: column;
   justify-content: space-around;
   width: 95%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  background-color: rgba(175, 139, 49, 0.807);
 }
 
 .CampaignDiv {
   padding: 5px 5px 5px 5px;
-  border-color: black;
-  border-style: solid;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  background-color: rgba(175, 139, 49, 0.807);
   margin: 5px auto 5px auto;
   border-radius: 10px;
-  background-color: rgb(216, 135, 14);
   opacity: 80%;
   flex-direction: column;
   justify-content: space-between;

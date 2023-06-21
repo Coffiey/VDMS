@@ -327,6 +327,7 @@ const HomeCombat = (props) => {
                     </button>
 
                     <input
+                      className='healthInput'
                       type='Number'
                       name='message'
                       onChange={(e) => {
@@ -363,7 +364,7 @@ const HomeCombat = (props) => {
                   <p className='intiative'>Initative: {object.initative}</p>
                 )}
 
-                <h6 className='playerTItle'>{object.monsterName}</h6>
+                <h6 className='monsterTItle'>{object.monsterName}</h6>
                 <div className='centeringDiv'></div>
               </div>
               <div className='combatEnemyBot'>
@@ -396,6 +397,7 @@ const HomeCombat = (props) => {
                     heal:
                   </button>
                   <input
+                    className='healthInput'
                     type='Number'
                     name='message'
                     onChange={(e) => {

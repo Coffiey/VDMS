@@ -1,10 +1,9 @@
 .combatPlayerDiv {
   padding: 5px 5px 5px 5px;
-  border-color: black;
-  border-style: solid;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
   margin: 5px auto 5px auto;
   border-radius: 10px;
-  background-color: rgb(139, 88, 11);
+  background-color: rgba(183, 142, 20, 0.808);
   opacity: 80%;
   flex-direction: column;
   justify-content: space-around;
@@ -21,7 +20,13 @@
 }
 
 .setInitiative {
+  border-radius: 3px;
   width: 50px;
+}
+
+.healthInput {
+  border-radius: 3px;
+  width: 45px;
 }
 
 .intiative {
@@ -35,16 +40,24 @@
 }
 .playerTItle {
   font-size: 1.5em;
+  color: darkblue;
   margin: auto 10px auto 10px;
-  text-decoration: underline;
   height: fit-content;
+}
+
+.monsterTItle {
+  font-size: 1.5em;
+  margin: auto 10px auto 10px;
+  height: fit-content;
+  text-decoration: underline;
 }
 
 .combatPlayerMid {
   width: 50%;
   margin: 5px auto 5px auto;
   border-radius: 10px;
-  background-color: rgb(171, 106, 7);
+  background-color: rgb(214, 175, 56);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -65,7 +78,8 @@
 }
 
 .combatPlayerBot {
-  background-color: rgb(171, 106, 7);
+  background-color: rgb(214, 175, 56);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -86,7 +100,6 @@
   margin-bottom: 0px;
   height: 30%;
   min-height: 60px;
-  background-color: rgb(171, 106, 7);
   border-radius: 10px;
   padding-bottom: 5px;
 }
@@ -103,41 +116,44 @@
 }
 
 .combatStatNum {
-  background-color: rgb(142, 90, 12);
+  background-color: rgba(183, 142, 20, 0.808);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   font-weight: bold;
   margin-right: 2%;
   font-size: 0.6em;
   border-radius: 5px;
   margin-left: 2%;
-  border-style: solid;
-  border-color: black;
   border-width: 1px;
   height: 55%;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 3px 3px 3px 3px;
 }
 
 .hitButton {
   background-color: rgb(142, 28, 28);
   margin: auto 2px auto 2px;
+  width: 45px;
 }
 
 .healButton {
   background-color: rgb(31, 181, 31);
   margin: auto 2px auto 2px;
+  width: 45px;
 }
 
 .combatEnemyDiv {
   padding: 5px 5px 5px 5px;
-  border-color: black;
-  border-style: solid;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  background-color: rgba(230, 175, 35, 0.807);
   margin: 5px auto 5px auto;
   border-radius: 10px;
-  background-color: rgb(216, 135, 14);
   opacity: 80%;
   flex-direction: column;
   justify-content: space-around;
   width: 95%;
+}
+
+.monsterReference {
+  font-size: 1.4em;
 }
 
 .combatEnemyTop {
@@ -158,4 +174,6 @@
   height: fit-content;
   padding: 0% 5% 0% 5%;
   border-radius: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: rgba(219, 180, 51, 0.808);
 }

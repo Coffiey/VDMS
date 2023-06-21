@@ -1,9 +1,6 @@
 import "../Encounter/prep/enemy.css";
 import DropdownItem from "../Encounter/prep/DropdownItem";
 import axios from "axios";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Enemy = (props) => {
@@ -58,7 +55,9 @@ const Enemy = (props) => {
         .then((response) => {
           setMonsterObj(response.data);
         })
-        .catch(function (error) {});
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   }, [monsterID]);
 

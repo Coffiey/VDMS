@@ -405,6 +405,7 @@ const CombatArray = (props) => {
                     </button>
 
                     <input
+                      className='healthInput'
                       type='Number'
                       name='message'
                       onChange={(e) => {
@@ -441,11 +442,11 @@ const CombatArray = (props) => {
                   <p className='intiative'>Initative: {object.initative}</p>
                 )}
 
-                <h6 className='playerTItle'>{object.monsterName}</h6>
+                <h6 className='monsterTItle'>{object.monsterName}</h6>
                 <div className='centeringDiv'></div>
               </div>
               <div className='combatEnemyBot'>
-                <h1 className='playerTitle'>{object.monsterReference}</h1>
+                <h1 className='monsterReference'>{object.monsterReference}</h1>
 
                 <div>
                   {object.health > 0 ? (
@@ -474,6 +475,7 @@ const CombatArray = (props) => {
                     heal:
                   </button>
                   <input
+                    className='healthInput'
                     type='Number'
                     name='message'
                     onChange={(e) => {
