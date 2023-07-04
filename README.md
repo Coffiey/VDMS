@@ -106,7 +106,7 @@ install postgreSQL, if you need help with this follow the guide here:
    ```sh
    cd into working directory
    npm run serve
-   (this will start nodemon which allows for hot reloading od the server)
+   (this will start nodemon which allows for hot reloading of the server)
    ```
 5. In a new Terminal start the React Virtial DOM
 
