@@ -175,7 +175,7 @@ const Enemy = (props) => {
             ) : (
               <>
                 <p className='encounterItem'>
-                  Serach:{" "}
+                  Search:{" "}
                   <input
                     value={search}
                     type='text'
