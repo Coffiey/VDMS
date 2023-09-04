@@ -106,7 +106,7 @@ install postgreSQL, if you need help with this follow the guide here:
    ```sh
    cd into working directory
    npm run serve
-   (this will start nodemon which allows for hot reloading od the server)
+   (this will start nodemon which allows for hot reloading of the server)
    ```
 5. In a new Terminal start the React Virtial DOM
 
@@ -167,7 +167,7 @@ You can find a up to date version of the app already deployed at ###### so feel 
 <p align="center">
     <h3>Checkout some of my other work.</h3>
     <p>Tokyo Traders</p>
-    <a href="https://tokyotraders.onrender.com/">Tokyo Traders Website</a>
+    <a href="www.tokyotrader.store">Tokyo Traders Website</a>
     <a href="https://tokyotraders.onrender.com/">Tokyo Traders Git Hub</a>
   </p>
 </p>
