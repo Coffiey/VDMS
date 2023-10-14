@@ -16,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 //build file
-app.use("/", express.static(__dirname + "/.." + "/build"));
+// app.use("/", express.static(__dirname + "/.." + "/build"));
 
 // front end
 app.use(credentials);
