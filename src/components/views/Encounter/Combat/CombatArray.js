@@ -167,7 +167,7 @@ const CombatArray = (props) => {
               object.tempHp -= Number(hpChange[index]);
               return object;
             } else {
-              const num = Number(hpChange[index]) % object.tempHp;
+              const num = Number(hpChange[index]) - object.tempHp;
               console.log(num);
               delete object.tempHp;
               object.max_hp -= num;
