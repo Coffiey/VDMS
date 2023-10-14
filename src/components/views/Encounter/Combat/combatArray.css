@@ -134,6 +134,12 @@
   width: 45px;
 }
 
+.tempButton {
+  background-color: grey;
+  margin: auto 2px auto 2px;
+  width: 45px;
+}
+
 .healButton {
   background-color: rgb(31, 181, 31);
   margin: auto 2px auto 2px;
@@ -176,4 +182,8 @@
   border-radius: 15px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   background-color: rgba(219, 180, 51, 0.808);
+}
+
+.tempText {
+  color: grey;
 }

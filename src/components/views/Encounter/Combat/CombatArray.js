@@ -162,6 +162,18 @@ const CombatArray = (props) => {
     SetCombatArray(
       combatArray.map((object, i) => {
         if (i === index) {
+          if (object.tempHp) {
+            if (Number(hpChange[index]) < object.tempHp) {
+              object.tempHp -= Number(hpChange[index]);
+              return object;
+            } else {
+              const num = Number(hpChange[index]) % object.tempHp;
+              console.log(num);
+              delete object.tempHp;
+              object.max_hp -= num;
+              return object;
+            }
+          }
           if (object.max_hp) {
             if (object.max_hp - Number(hpChange[index]) < 0) {
               object.max_hp = 0;
@@ -219,6 +231,32 @@ const CombatArray = (props) => {
             object.health += Number(hpChange[index]);
             return object;
             // }
+          }
+        } else {
+          return object;
+        }
+      })
+    );
+    setHpchange(
+      hpChange.map((x, i) => {
+        if (i === index) {
+          return "";
+        }
+      })
+    );
+  };
+
+  const setTempHp = (index) => {
+    SetCombatArray(
+      combatArray.map((object, i) => {
+        if (i === index) {
+          if (!object.tempHp) {
+            console.log(object.tempHp);
+            console.log(Number(hpChange[index]));
+            object.tempHp = Number(hpChange[index]);
+            return object;
+          } else {
+            return object;
           }
         } else {
           return object;
@@ -378,12 +416,28 @@ const CombatArray = (props) => {
                 <div className='heathDiv'>
                   {object.max_hp > 0 ? (
                     <h1 className='enemyHp'>
-                      HP: <span className='health'>{object.max_hp}</span>
+                      HP:{" "}
+                      <span className='health'>
+                        {object.max_hp}{" "}
+                        {object.tempHp && (
+                          <span className='tempText'>+ {object.tempHp}</span>
+                        )}
+                      </span>
                     </h1>
                   ) : (
                     <h1 className='enemyHp'>Dead</h1>
                   )}
                   <div>
+                    {object.max_hp > 0 && (
+                      <button
+                        className='tempButton'
+                        onClick={() => {
+                          setTempHp(index);
+                        }}
+                      >
+                        Temp:
+                      </button>
+                    )}
                     {object.max_hp > 0 && (
                       <button
                         className='hitButton'
